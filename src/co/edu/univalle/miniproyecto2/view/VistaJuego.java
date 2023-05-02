@@ -4,6 +4,7 @@
  */
 package co.edu.univalle.miniproyecto2.view;
 
+import java.awt.GridLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -25,12 +26,15 @@ public class VistaJuego extends JFrame {
     private JButton btnPosicion[][];
     private JButton btnPausa;
     
+    private int contadorJ1;
+    private int contadorJ2;
+    
     public VistaJuego() {
         setTitle("Game | Tic Tac Toe");
         setSize(540, 680);
         setLocationRelativeTo(null);
-        setResizable(false);
-        setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
+        setResizable(true);
+        setDefaultCloseOperation(EXIT_ON_CLOSE);
         
         inicializarComponentes();
         setVisible(true);
@@ -38,14 +42,32 @@ public class VistaJuego extends JFrame {
 
     private void inicializarComponentes() {
         jpContenido = new JPanel();
-        jpCuadricula = new JPanel();
+        jpContenido.setLayout(null);
+        jpContenido.setSize(getWidth(),getHeight());
         
-        lblNombre = new JLabel();
-        lblContadorJ1 = new JLabel();
-        lblContadorJ2 = new JLabel();
+        add(jpContenido);
+        
+        jpCuadricula = new JPanel();
+        jpCuadricula.setLayout(new GridLayout(3,3));
+        jpCuadricula.setSize(270,340);
+        jpCuadricula.setBounds((jpContenido.getWidth()/2)-(jpCuadricula.getWidth()/2),(jpContenido.getHeight()/2)-(jpCuadricula.getHeight()/2),jpCuadricula.getWidth(),jpCuadricula.getHeight());
+                     
+        lblNombre = new JLabel("");
+        lblContadorJ1 = new JLabel(""+contadorJ1);
+        lblContadorJ2 = new JLabel(""+contadorJ2);
         
         btnPosicion = new JButton[3][3];
-        btnPausa = new JButton();
+        
+        for(int i=0;i<3;i++) {
+            for(int j=0;j<3;j++) {
+                btnPosicion[i][j] = new JButton("x");
+                jpCuadricula.add(btnPosicion[i][j]);
+            }
+        }
+        
+        jpContenido.add(jpCuadricula);
+        
+        btnPausa = new JButton("Pausa");
     }
     
 }
