@@ -4,6 +4,7 @@
  */
 package co.edu.univalle.miniproyecto2;
 
+import co.edu.univalle.miniproyecto2.view.VistaInicio;
 import co.edu.univalle.miniproyecto2.view.VistaJuego;
 
 /**
@@ -16,7 +17,8 @@ public class Main {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        VistaJuego vistaJuego = new VistaJuego();
+//        VistaJuego vistaJuego = new VistaJuego();
+        VistaInicio vistainicio = new VistaInicio();
     }
     
 }
