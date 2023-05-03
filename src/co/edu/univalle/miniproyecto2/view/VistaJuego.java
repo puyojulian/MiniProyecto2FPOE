@@ -4,11 +4,14 @@
  */
 package co.edu.univalle.miniproyecto2.view;
 
+import java.awt.Color;
+import java.awt.Font;
 import java.awt.GridLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JToggleButton;
 
 /**
  *
@@ -20,8 +23,8 @@ public class VistaJuego extends JFrame {
     private JPanel jpCuadricula;
     
     private JLabel lblNombre;
-    private JLabel lblContadorJ1;
-    private JLabel lblContadorJ2;
+    private JToggleButton btnContadorJ1;
+    private JToggleButton btnContadorJ2;
     
     private JButton btnPosicion[][];
     private JButton btnPausa;
@@ -31,7 +34,7 @@ public class VistaJuego extends JFrame {
     
     public VistaJuego() {
         setTitle("Game | Tic Tac Toe");
-        setSize(540, 680);
+        setSize(544, 680);
         setLocationRelativeTo(null);
         setResizable(true);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -49,12 +52,27 @@ public class VistaJuego extends JFrame {
         
         jpCuadricula = new JPanel();
         jpCuadricula.setLayout(new GridLayout(3,3));
-        jpCuadricula.setSize(270,340);
+        jpCuadricula.setSize(300,300);
         jpCuadricula.setBounds((jpContenido.getWidth()/2)-(jpCuadricula.getWidth()/2),(jpContenido.getHeight()/2)-(jpCuadricula.getHeight()/2),jpCuadricula.getWidth(),jpCuadricula.getHeight());
                      
         lblNombre = new JLabel("");
-        lblContadorJ1 = new JLabel(""+contadorJ1);
-        lblContadorJ2 = new JLabel(""+contadorJ2);
+        
+        btnContadorJ1 = new JToggleButton(""+contadorJ1);
+        btnContadorJ1.setSize(60, 30);
+        btnContadorJ1.setBounds(jpContenido.getWidth()*1/3 - btnContadorJ1.getWidth()/2,jpContenido.getHeight()*5/6,btnContadorJ1.getWidth(),btnContadorJ1.getHeight());
+//        btnContadorJ1.setBackground(Color.GRAY);
+        
+        btnContadorJ2 = new JToggleButton(""+contadorJ2);
+        btnContadorJ2.setSize(60, 30);
+        btnContadorJ2.setBounds(jpContenido.getWidth()*2/3 - btnContadorJ2.getWidth()/2,jpContenido.getHeight()*5/6,btnContadorJ2.getWidth(),btnContadorJ2.getHeight());
+//        btnContadorJ2.setBackground(Color.GREEN);
+        
+        btnPausa = new JButton("Pause");
+        btnPausa.setSize(68,24);
+//        btnPausa.setContentAreaFilled(false);
+        btnPausa.setFont(new Font("Arial", Font.BOLD, 9));
+        btnPausa.setBounds(jpContenido.getWidth()*5/6 - btnPausa.getWidth()/2,jpContenido.getHeight()*1/12 - btnPausa.getHeight()/2,btnPausa.getWidth(),btnPausa.getHeight());
+        
         
         btnPosicion = new JButton[3][3];
         
@@ -66,8 +84,11 @@ public class VistaJuego extends JFrame {
         }
         
         jpContenido.add(jpCuadricula);
+        jpContenido.add(btnContadorJ1);
+        jpContenido.add(btnContadorJ2);
+        jpContenido.add(btnPausa);
         
-        btnPausa = new JButton("Pausa");
+        
     }
     
 }
