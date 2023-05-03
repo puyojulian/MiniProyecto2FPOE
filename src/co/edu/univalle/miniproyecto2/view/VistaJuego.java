@@ -32,6 +32,8 @@ public class VistaJuego extends JFrame {
     private int contadorJ1;
     private int contadorJ2;
     
+    JPanelImage imagenDeFondo1;
+    
     public VistaJuego() {
         setTitle("Game | Tic Tac Toe");
         setSize(544, 680);
@@ -48,8 +50,10 @@ public class VistaJuego extends JFrame {
         jpContenido.setLayout(null);
         jpContenido.setSize(getWidth(),getHeight());
         
-        add(jpContenido);
-        
+        imagenDeFondo1 = new JPanelImage("/co/edu/univalle/miniproyecto2/images/wood1_45.png");
+        imagenDeFondo1.setSize(jpContenido.getWidth(), jpContenido.getHeight());
+        imagenDeFondo1.setBounds(0, 0, jpContenido.getWidth(), jpContenido.getHeight());
+                      
         jpCuadricula = new JPanel();
         jpCuadricula.setLayout(new GridLayout(3,3));
         jpCuadricula.setSize(300,300);
@@ -83,12 +87,14 @@ public class VistaJuego extends JFrame {
             }
         }
         
+        jpContenido.add(imagenDeFondo1);
         jpContenido.add(jpCuadricula);
         jpContenido.add(btnContadorJ1);
         jpContenido.add(btnContadorJ2);
         jpContenido.add(btnPausa);
         
-        
+        add(jpContenido);
+
     }
     
 }
