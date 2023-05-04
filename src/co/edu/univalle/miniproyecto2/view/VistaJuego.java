@@ -87,13 +87,13 @@ public class VistaJuego extends JFrame {
             }
         }
         
-        jpContenido.add(imagenDeFondo1);
         jpContenido.add(jpCuadricula);
         jpContenido.add(btnContadorJ1);
         jpContenido.add(btnContadorJ2);
         jpContenido.add(btnPausa);
         
         add(jpContenido);
+        jpContenido.add(imagenDeFondo1);
 
     }
     

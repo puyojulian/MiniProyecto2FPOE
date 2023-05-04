@@ -6,12 +6,19 @@ package co.edu.univalle.miniproyecto2.view;
 
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import javax.swing.BorderFactory;
 import javax.swing.JFrame;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
+
+import java.applet.AudioClip;
+import javax.swing.JToggleButton;
 /**
  *
  * @author Sebastián
@@ -22,6 +29,10 @@ public class VistaInicio extends JFrame{
     private JLabel lblTitulo;
     private JButton btnJugar;
     private JButton btnAudio;
+    
+    private boolean Musica = true;
+    
+    JPanelImage imagenDeFondo1;
 
     public VistaInicio() {
         setTitle("Menu | Tic Tac Toe");
@@ -32,12 +43,18 @@ public class VistaInicio extends JFrame{
         
         inicializarComponentes();
         setVisible(true);
+        
+        Musica(Musica);
     }
     
     private void inicializarComponentes() {
         jpContenido = new JPanel();
         jpContenido.setLayout(null);
         jpContenido.setSize(getWidth(),getHeight());
+        
+        imagenDeFondo1 = new JPanelImage("/co/edu/univalle/miniproyecto2/images/wood1_45.png");
+        imagenDeFondo1.setSize(jpContenido.getWidth(), jpContenido.getHeight());
+        imagenDeFondo1.setBounds(0, 0, jpContenido.getWidth(), jpContenido.getHeight());
         
         add(jpContenido);
         
@@ -63,6 +80,54 @@ public class VistaInicio extends JFrame{
         jpContenido.add(lblTitulo);
         jpContenido.add(btnJugar);
         jpContenido.add(btnAudio);
+        jpContenido.add(imagenDeFondo1);
+        
+        ManejadorDeEventos manejadorEventos = new ManejadorDeEventos();
+        
+        btnJugar.addActionListener(manejadorEventos);
+        btnAudio.addActionListener(manejadorEventos);
+    }
+
+    private void Musica(boolean Musica){
+        AudioClip sonidoFondo;
+        sonidoFondo = java.applet.Applet.newAudioClip(getClass().getResource("/co/edu/univalle/miniproyecto2/sounds/sonidoFondo.wav"));
+        if (Musica){
+            sonidoFondo.loop();
+        } else {
+            sonidoFondo.stop();
+        }
+    }
+    
+    class ManejadorDeEventos implements ActionListener, KeyListener{
+        @Override
+        public void actionPerformed(ActionEvent evento){
+            if(evento.getSource() == btnJugar){                
+                dispose();
+                VistaOpciones vistaopciones = new VistaOpciones();
+            }
+            if(evento.getSource() == btnAudio){
+                Musica = !Musica;
+                Musica(Musica);
+            }
+        }
+        
+        @Override
+        public void keyReleased(KeyEvent e) {
+           /* System.out.println("Se liberó la tecla " + e.getKeyChar() +
+                    " Con codigo " + e.getKeyCode());*/
+        }
+        
+        @Override
+        public void keyPressed(KeyEvent e) {
+            /*System.out.println("Se presionó la tecla " + e.getKeyChar()+
+                    " Con codigo " + e.getKeyCode());*/
+        }
+        
+        @Override
+        public void keyTyped(KeyEvent e) {
+            /*System.out.println("Se digitó la tecla " + e.getKeyChar()+
+                    " Con codigo " + e.getKeyCode());*/
+        }
     }
     
 }
