@@ -7,6 +7,8 @@ package co.edu.univalle.miniproyecto2.view;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.GridLayout;
+import java.awt.Image;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -15,7 +17,7 @@ import javax.swing.JToggleButton;
 
 /**
  *
- * @author julia
+ * @author Julian Puyo
  */
 public class VistaJuego extends JFrame {
     
@@ -31,8 +33,8 @@ public class VistaJuego extends JFrame {
     
     private int contadorJ1;
     private int contadorJ2;
-    
-    JPanelImage imagenDeFondo1;
+ 
+    private JLabel lblImagenDeFondo1;
     
     public VistaJuego() {
         setTitle("Game | Tic Tac Toe");
@@ -40,7 +42,6 @@ public class VistaJuego extends JFrame {
         setLocationRelativeTo(null);
         setResizable(true);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
-        
         inicializarComponentes();
         setVisible(true);
     }
@@ -49,10 +50,13 @@ public class VistaJuego extends JFrame {
         jpContenido = new JPanel();
         jpContenido.setLayout(null);
         jpContenido.setSize(getWidth(),getHeight());
+
         
-        imagenDeFondo1 = new JPanelImage("/co/edu/univalle/miniproyecto2/images/wood1_45.png");
-        imagenDeFondo1.setSize(jpContenido.getWidth(), jpContenido.getHeight());
-        imagenDeFondo1.setBounds(0, 0, jpContenido.getWidth(), jpContenido.getHeight());
+        ImageIcon imagenDeFondo1 = new ImageIcon(getClass().getResource("/co/edu/univalle/miniproyecto2/images/wood1_45.png"));
+        lblImagenDeFondo1 = new JLabel();
+        lblImagenDeFondo1.setSize(jpContenido.getWidth(), jpContenido.getHeight());
+        lblImagenDeFondo1.setBounds(0, 0, jpContenido.getWidth(), jpContenido.getHeight());
+        lblImagenDeFondo1.setIcon(new ImageIcon(imagenDeFondo1.getImage().getScaledInstance(lblImagenDeFondo1.getWidth(), lblImagenDeFondo1.getHeight(), Image.SCALE_SMOOTH)));
                       
         jpCuadricula = new JPanel();
         jpCuadricula.setLayout(new GridLayout(3,3));
@@ -91,9 +95,9 @@ public class VistaJuego extends JFrame {
         jpContenido.add(btnContadorJ1);
         jpContenido.add(btnContadorJ2);
         jpContenido.add(btnPausa);
-        
+        jpContenido.add(lblImagenDeFondo1);
+            
         add(jpContenido);
-        jpContenido.add(imagenDeFondo1);
 
     }
     
