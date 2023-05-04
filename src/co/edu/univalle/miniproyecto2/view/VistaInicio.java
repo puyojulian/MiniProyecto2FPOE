@@ -18,6 +18,8 @@ import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
 import java.applet.AudioClip;
+import java.awt.Image;
+import javax.swing.ImageIcon;
 import javax.swing.JToggleButton;
 /**
  *
@@ -32,7 +34,7 @@ public class VistaInicio extends JFrame{
     
     private boolean Musica = true;
     
-    JPanelImage imagenDeFondo1;
+    private JLabel lblImagenDeFondo1;
 
     public VistaInicio() {
         setTitle("Menu | Tic Tac Toe");
@@ -52,9 +54,11 @@ public class VistaInicio extends JFrame{
         jpContenido.setLayout(null);
         jpContenido.setSize(getWidth(),getHeight());
         
-        imagenDeFondo1 = new JPanelImage("/co/edu/univalle/miniproyecto2/images/wood1_45.png");
-        imagenDeFondo1.setSize(jpContenido.getWidth(), jpContenido.getHeight());
-        imagenDeFondo1.setBounds(0, 0, jpContenido.getWidth(), jpContenido.getHeight());
+        ImageIcon imagenDeFondo1 = new ImageIcon(getClass().getResource("/co/edu/univalle/miniproyecto2/images/wood1_45.png"));
+        lblImagenDeFondo1 = new JLabel();
+        lblImagenDeFondo1.setSize(jpContenido.getWidth(), jpContenido.getHeight());
+        lblImagenDeFondo1.setBounds(0, 0, jpContenido.getWidth(), jpContenido.getHeight());
+        lblImagenDeFondo1.setIcon(new ImageIcon(imagenDeFondo1.getImage().getScaledInstance(lblImagenDeFondo1.getWidth(), lblImagenDeFondo1.getHeight(), Image.SCALE_SMOOTH)));
         
         add(jpContenido);
         
@@ -80,7 +84,7 @@ public class VistaInicio extends JFrame{
         jpContenido.add(lblTitulo);
         jpContenido.add(btnJugar);
         jpContenido.add(btnAudio);
-        jpContenido.add(imagenDeFondo1);
+        jpContenido.add(lblImagenDeFondo1);
         
         ManejadorDeEventos manejadorEventos = new ManejadorDeEventos();
         

@@ -6,10 +6,13 @@ package co.edu.univalle.miniproyecto2.view;
 
 import java.awt.Color;
 import java.awt.GridLayout;
+import java.awt.Image;
 import javax.swing.BorderFactory;
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JButton;
+import javax.swing.JLabel;
 /**
  *
  * @author Sebastián
@@ -27,7 +30,7 @@ public class VistaOpciones extends JFrame{
     private JButton btnNumRonda3;
     private JButton btnNumRonda4;
     
-    JPanelImage imagenDeFondo1;
+    private JLabel lblImagenDeFondo1;
 
     public VistaOpciones() {
         setTitle("Options | Tic Tac Toe");
@@ -45,9 +48,11 @@ public class VistaOpciones extends JFrame{
         jpContenido.setLayout(null);
         jpContenido.setSize(getWidth(),getHeight());
         
-        imagenDeFondo1 = new JPanelImage("/co/edu/univalle/miniproyecto2/images/wood1_45.png");
-        imagenDeFondo1.setSize(jpContenido.getWidth(), jpContenido.getHeight());
-        imagenDeFondo1.setBounds(0, 0, jpContenido.getWidth(), jpContenido.getHeight());
+        ImageIcon imagenDeFondo1 = new ImageIcon(getClass().getResource("/co/edu/univalle/miniproyecto2/images/wood1_45.png"));
+        lblImagenDeFondo1 = new JLabel();
+        lblImagenDeFondo1.setSize(jpContenido.getWidth(), jpContenido.getHeight());
+        lblImagenDeFondo1.setBounds(0, 0, jpContenido.getWidth(), jpContenido.getHeight());
+        lblImagenDeFondo1.setIcon(new ImageIcon(imagenDeFondo1.getImage().getScaledInstance(lblImagenDeFondo1.getWidth(), lblImagenDeFondo1.getHeight(), Image.SCALE_SMOOTH)));
         
         add(jpContenido);
         
@@ -96,7 +101,7 @@ public class VistaOpciones extends JFrame{
         jpContenido.add(jpBotones);
         jpContenido.add(btnJvsPC);
         jpContenido.add(btnJvsJ);
-        jpContenido.add(imagenDeFondo1);
+        jpContenido.add(lblImagenDeFondo1);
         jpBotones.setBackground(Color.DARK_GRAY);
     }
     
