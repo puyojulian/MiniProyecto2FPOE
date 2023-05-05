@@ -35,7 +35,6 @@ public class VistaJuego extends JFrame {
     private int contadorJ2;
  
     private JLabel lblImagenDeFondo1;
-    private JLabel lblImagenDeFondo2;
     
     public VistaJuego() {
         setTitle("Game | Tic Tac Toe");
@@ -76,12 +75,13 @@ public class VistaJuego extends JFrame {
         btnContadorJ2.setBounds(jpContenido.getWidth()*2/3 - btnContadorJ2.getWidth()/2,jpContenido.getHeight()*5/6,btnContadorJ2.getWidth(),btnContadorJ2.getHeight());
 //        btnContadorJ2.setBackground(Color.GREEN);
         
-        btnPausa = new JButton("Pause");
-        btnPausa.setSize(68,24);
-//        btnPausa.setContentAreaFilled(false);
-        btnPausa.setFont(new Font("Arial", Font.BOLD, 9));
+        ImageIcon btnIconPausa = new ImageIcon(getClass().getResource("/co/edu/univalle/miniproyecto2/images/PauseButton.png"));
+        btnPausa = new JButton();
+        btnPausa.setSize(40,40);
+        btnPausa.setIcon(new ImageIcon(btnIconPausa.getImage().getScaledInstance(btnPausa.getWidth(), btnPausa.getHeight(), Image.SCALE_SMOOTH)));
         btnPausa.setBounds(jpContenido.getWidth()*5/6 - btnPausa.getWidth()/2,jpContenido.getHeight()*1/12 - btnPausa.getHeight()/2,btnPausa.getWidth(),btnPausa.getHeight());
-        
+        btnPausa.setOpaque(false);
+        btnPausa.setContentAreaFilled(false);
         
         btnPosicion = new JButton[3][3];
         
