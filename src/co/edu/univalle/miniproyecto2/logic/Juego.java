@@ -79,74 +79,74 @@ public class Juego {
     
     public int verificarGanador() {
         if(posicion[0][0] == 1 && posicion[0][1] == 1 && posicion[0][2] == 1) {
-            contGanadorJ1++;
+            System.out.println("1A" +  contGanadorJ1++);
             return 1;
         } 
         else if(posicion[1][0] == 1 && posicion[1][1] == 1 && posicion[1][2] == 1) {
-            contGanadorJ1++;
+            System.out.println("2A" +  contGanadorJ1++);
             return 1;
         }
         else if(posicion[2][0] == 1 && posicion[2][1] == 1 && posicion[2][2] == 1) {
-            contGanadorJ1++;
+            System.out.println("3A" +  contGanadorJ1++);
             return 1;
         }
         else if(posicion[0][0] == 1 && posicion[1][0] == 1 && posicion[2][0] == 1) {
-            contGanadorJ1++;
+            System.out.println("4A" +  contGanadorJ1++);
             return 1;
         }
         else if(posicion[0][1] == 1 && posicion[1][1] == 1 && posicion[2][1] == 1) {
-            contGanadorJ1++;
+            System.out.println("5A" +  contGanadorJ1++);
             return 1;
         }
         else if(posicion[0][2] == 1 && posicion[1][2] == 1 && posicion[2][2] == 1) {
-            contGanadorJ1++;
+            System.out.println("6A" +  contGanadorJ1++);
             return 1;
         }
         else if(posicion[0][0] == 1 && posicion[1][1] == 1 && posicion[2][2] == 1) {
-            contGanadorJ1++;
+            System.out.println("7A" +  contGanadorJ1++);
             return 1;
         }
         else if(posicion[2][0] == 1 && posicion[1][1] == 1 && posicion[0][2] == 1) {
-            contGanadorJ1++;
+            System.out.println("8A" +  contGanadorJ1++);
             return 1;
         }
         else if(posicion[0][0] == 2 && posicion[0][1] == 2 && posicion[0][2] == 2) {
-            contGanadorJ2++;
+            System.out.println("1B" +  contGanadorJ2++);
             return 2;
         } 
         else if(posicion[1][0] == 2 && posicion[1][1] == 2 && posicion[1][2] == 2) {
-            contGanadorJ2++;
+            System.out.println("2B" +  contGanadorJ2++);
             return 2;
         }
         else if(posicion[2][0] == 2 && posicion[2][1] == 2 && posicion[2][2] == 2) {
-            contGanadorJ2++;
+            System.out.println("3B" +  contGanadorJ2++);
             return 2;
         }
         else if(posicion[0][0] == 2 && posicion[1][0] == 2 && posicion[2][0] == 2) {
-            contGanadorJ2++;
+            System.out.println("4B" +  contGanadorJ2++);
             return 2;
         }
         else if(posicion[0][1] == 2 && posicion[1][1] == 2 && posicion[2][1] == 2) {
-            contGanadorJ2++;
+            System.out.println("5B" +  contGanadorJ2++);
             return 2;
         }
         else if(posicion[0][2] == 2 && posicion[1][2] == 2 && posicion[2][2] == 2) {
-            contGanadorJ2++;
+            System.out.println("6B" +  contGanadorJ2++);
             return 2;
         }
         else if(posicion[0][0] == 2 && posicion[1][1] == 2 && posicion[2][2] == 2) {
-            contGanadorJ2++;
+            System.out.println("7B" +  contGanadorJ2++);
             return 2;
         }
         else if(posicion[2][0] == 2 && posicion[1][1] == 2 && posicion[0][2] == 2) {
-            contGanadorJ2++;
+            System.out.println("8B" +  contGanadorJ2++);
             return 2;
         }
         return 0;
     }
     
-    public int[][] verificarRonda() {
-        if(verificarGanador() != 0) {
+    public int[][] verificarRonda(int Ganador) {
+        if(Ganador != 0) {
             reiniciarMatriz();
             rondasJugadas++;
         }

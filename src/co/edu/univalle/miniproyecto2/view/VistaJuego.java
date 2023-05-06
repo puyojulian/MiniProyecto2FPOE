@@ -146,7 +146,9 @@ public class VistaJuego extends JFrame {
                     if(e.getSource() == btnPosicion[i][j]) {
                         actualizarBotones(juego.marcarSeleccion(jugadorDeTurno, i, j));
                         
-                        if(juego.verificarGanador() == 1 || juego.verificarGanador() == 2) {
+                        int Ganador = juego.verificarGanador();
+                        
+                        if(Ganador == 1 || Ganador == 2) {
                             JOptionPane.showMessageDialog(null,
                     "¡¡GANASTE!! Jugador: " + jugadorDeTurno+".", 
                     "Resultado",
@@ -162,7 +164,9 @@ public class VistaJuego extends JFrame {
                             }
                         }
                         
-                        actualizarBotones(juego.verificarRonda());
+                        actualizarBotones(juego.verificarRonda(Ganador));
+                        btnContadorJ1.setText("" + juego.getContGanadorJ1());
+                        btnContadorJ2.setText("" + juego.getContGanadorJ2());
                         
                         if(juego.juegoTerminado()){
                             JOptionPane.showMessageDialog(null,
