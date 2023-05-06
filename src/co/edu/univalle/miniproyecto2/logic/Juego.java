@@ -16,22 +16,27 @@ public class Juego {
     private int contGanadorJ2;
     
     private int numeroRondas;
-    private String tipoDeJuego;
+    private String modoDeJuego;
     private int posicion[][];
+    
+    private boolean cambioRealizado;
     
     public Juego(int numeroRondas, String tipoDeJuego) {
         this.numeroRondas = numeroRondas;
-        this.tipoDeJuego = tipoDeJuego;
+        this.modoDeJuego = tipoDeJuego;
         posicion = new int[][] {{0,0,0}, {0,0,0}, {0,0,0}};
         contGanadorJ1 = 0;
         contGanadorJ2 = 0;
+        cambioRealizado = false;
     }
     
     public int[][] marcarSeleccion(int jugador, int fila, int columna) {
         if(posicion[fila][columna] == 0) {
             posicion[fila][columna] = jugador;
+            cambioRealizado = true;
             return posicion;
         }
+        cambioRealizado = false;
         return posicion;
     }
     
@@ -47,9 +52,22 @@ public class Juego {
             int[] posAleatoria = posicionAleatoria();
             if(posicion[posAleatoria[0]][posAleatoria[1]] == 0) {
                 posicion[posAleatoria[0]][posAleatoria[1]] = jugador;
+                cambioRealizado = true;
                 return posicion;
             }
         }
+    }
+
+    public boolean isCambioRealizado() {
+        return cambioRealizado;
+    }
+
+    public void setContGanadorJ1(int contGanadorJ1) {
+        this.contGanadorJ1 = contGanadorJ1;
+    }
+
+    public void setContGanadorJ2(int contGanadorJ2) {
+        this.contGanadorJ2 = contGanadorJ2;
     }
     
     public int verificarGanador() {

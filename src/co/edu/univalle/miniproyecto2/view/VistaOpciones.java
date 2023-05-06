@@ -186,6 +186,7 @@ public class VistaOpciones extends JFrame{
             }
             if(evento.getSource() == btnConfirmar) {
                 if(btnJvsJ.isSelected() && btnNumRonda1.isSelected()) {
+                    
                     dispose();
                 }
                 else if(btnJvsJ.isSelected() && btnNumRonda2.isSelected()) {

@@ -4,6 +4,7 @@
  */
 package co.edu.univalle.miniproyecto2.view;
 
+import co.edu.univalle.miniproyecto2.logic.Juego;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.GridLayout;
@@ -14,6 +15,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JToggleButton;
 
@@ -38,21 +40,38 @@ public class VistaJuego extends JFrame {
  
     private JLabel lblImagenDeFondo1;
     
-    public VistaJuego() {
+    int numeroRondas;
+    String modoDeJuego;
+    
+    private Juego juego;
+    
+    private int jugadorDeTurno;
+    
+    public VistaJuego(int numeroRondas, String modoDeJuego) {
         setTitle("Game | Tic Tac Toe");
         setSize(544, 680);
         setLocationRelativeTo(null);
         setResizable(true);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
+        
+        jugadorDeTurno = 1;
+        
+        this.numeroRondas = numeroRondas;
+        this.modoDeJuego = modoDeJuego;
+        
         inicializarComponentes();
         setVisible(true);
     }
 
     private void inicializarComponentes() {
+        
+        juego = new Juego(numeroRondas, modoDeJuego);
+        
         jpContenido = new JPanel();
         jpContenido.setLayout(null);
         jpContenido.setSize(getWidth(),getHeight());
 
+        ActionEventHandler manejadoraDeEventos = new ActionEventHandler(juego);
         
         ImageIcon imagenDeFondo1 = new ImageIcon(getClass().getResource("/co/edu/univalle/miniproyecto2/images/wood1_45.png"));
         lblImagenDeFondo1 = new JLabel();
@@ -85,15 +104,20 @@ public class VistaJuego extends JFrame {
         btnPausa.setOpaque(false);
         btnPausa.setContentAreaFilled(false);
         btnPausa.setBorderPainted(false);
+        btnPausa.addActionListener(manejadoraDeEventos);
+                
         
         btnPosicion = new JButton[3][3];
         
         for(int i=0;i<3;i++) {
             for(int j=0;j<3;j++) {
-                btnPosicion[i][j] = new JButton("x");
+                btnPosicion[i][j] = new JButton("");
                 btnPosicion[i][j].setOpaque(false);
                 btnPosicion[i][j].setContentAreaFilled(false);
                 btnPosicion[i][j].setBorderPainted(true);
+                
+                btnPosicion[i][j].addActionListener(manejadoraDeEventos);
+                
                 jpCuadricula.add(btnPosicion[i][j]);
             }
         }
@@ -107,12 +131,47 @@ public class VistaJuego extends JFrame {
         add(jpContenido);
     }
     
-//    public class ActionEventHandler implements ActionListener {
-//
-//        @Override
-//        public void actionPerformed(ActionEvent e) {
-//            
-//        }
-//        
-//    }    
+    public class ActionEventHandler implements ActionListener {
+        
+        private Juego juego;
+        
+        public ActionEventHandler(Juego juego) {
+            this.juego = juego;
+        }
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            for(int i = 0; i < 3; i++) {
+                for(int j = 0; j < 3; j++) {
+                    if(e.getSource() == btnPosicion[i][j]) {
+                        actualizarBotones(juego.marcarSeleccion(jugadorDeTurno, i, j));
+                        if(juego.verificarGanador() == 1 || juego.verificarGanador() == 2) {
+                            JOptionPane.showMessageDialog(null,
+                    "¡¡GANASTE!! Jugador: " + jugadorDeTurno+".", 
+                    "Resultado",
+                    JOptionPane.INFORMATION_MESSAGE);
+                        }
+                        if(juego.isCambioRealizado()) {
+                            if(jugadorDeTurno == 1) {
+                                jugadorDeTurno = 2;
+                            }
+                            else if(jugadorDeTurno == 2) {
+                                jugadorDeTurno =1;
+                            }
+                        }                        
+                    }
+                }
+                
+            }
+        }
+
+        private void actualizarBotones(int[][] respPosicion) {
+            for(int i=0;i<3;i++) {
+                for(int j=0;j<3;j++) {
+                    btnPosicion[i][j].setText(""+respPosicion[i][j]);
+                }
+            }
+        }
+        
+    }    
 }
