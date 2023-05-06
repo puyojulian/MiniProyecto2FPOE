@@ -16,6 +16,8 @@ public class Juego {
     private int contGanadorJ2;
     
     private int numeroRondas;
+    private int rondasJugadas;
+    
     private String modoDeJuego;
     private int posicion[][];
     
@@ -28,6 +30,7 @@ public class Juego {
         contGanadorJ1 = 0;
         contGanadorJ2 = 0;
         cambioRealizado = false;
+        rondasJugadas = 0;
     }
     
     public int[][] marcarSeleccion(int jugador, int fila, int columna) {
@@ -62,12 +65,16 @@ public class Juego {
         return cambioRealizado;
     }
 
-    public void setContGanadorJ1(int contGanadorJ1) {
-        this.contGanadorJ1 = contGanadorJ1;
+    public int getContGanadorJ1() {
+        return contGanadorJ1;
     }
 
-    public void setContGanadorJ2(int contGanadorJ2) {
-        this.contGanadorJ2 = contGanadorJ2;
+    public int getContGanadorJ2() {
+        return contGanadorJ2;
+    }
+
+    public int getRondasJugadas() {
+        return rondasJugadas;
     }
     
     public int verificarGanador() {
@@ -136,5 +143,45 @@ public class Juego {
             return 2;
         }
         return 0;
+    }
+    
+    public int[][] verificarRonda() {
+        if(verificarGanador() != 0) {
+            reiniciarMatriz();
+            rondasJugadas++;
+        }
+        else if(matrizLlena()) {
+            reiniciarMatriz();
+            rondasJugadas++;
+        }
+        return posicion;
+    }
+    
+    public boolean juegoTerminado() {
+        if(numeroRondas == rondasJugadas) {
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
+    
+    public boolean matrizLlena() {
+        for(int i=0;i<3;i++) {
+            for(int j=0;j<3;j++) {
+                if(posicion[i][j] == 0) {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+    
+    public void reiniciarMatriz() {
+        for(int i=0;i<3;i++) {
+            for(int j=0;j<3;j++) {
+                posicion[i][j] = 0;
+            }
+        }
     }
 }

@@ -43,6 +43,8 @@ public class VistaOpciones extends JFrame{
     
     ImageIcon btnIconAudio = new ImageIcon(getClass().getResource("/co/edu/univalle/miniproyecto2/images/AudioButton.png"));
     ImageIcon btnIconMute = new ImageIcon(getClass().getResource("/co/edu/univalle/miniproyecto2/images/MuteButton.png"));
+    
+    private VistaJuego vistaJuego;
 
     public VistaOpciones() {
         setTitle("Options | Tic Tac Toe");
@@ -186,28 +188,35 @@ public class VistaOpciones extends JFrame{
             }
             if(evento.getSource() == btnConfirmar) {
                 if(btnJvsJ.isSelected() && btnNumRonda1.isSelected()) {
-                    
+                    vistaJuego = new VistaJuego(1,"JvsJ");
                     dispose();
                 }
                 else if(btnJvsJ.isSelected() && btnNumRonda2.isSelected()) {
+                    vistaJuego = new VistaJuego(2,"JvsJ");
                     dispose();
                 }
                 else if(btnJvsJ.isSelected() && btnNumRonda3.isSelected()) {
+                    vistaJuego = new VistaJuego(3,"JvsJ");
                     dispose();
                 }
                 else if(btnJvsJ.isSelected() && btnNumRonda4.isSelected()) {
+                    vistaJuego = new VistaJuego(4,"JvsJ");
                     dispose();
                 }
                 else if(btnJvsPC.isSelected() && btnNumRonda1.isSelected()) {
+                    vistaJuego = new VistaJuego(1,"JvsPC");
                     dispose();
                 }
                 else if(btnJvsPC.isSelected() && btnNumRonda2.isSelected()) {
+                    vistaJuego = new VistaJuego(2,"JvsPC");
                     dispose();
                 }
                 else if(btnJvsPC.isSelected() && btnNumRonda3.isSelected()) {
+                    vistaJuego = new VistaJuego(3,"JvsPC");
                     dispose();
                 }
                 else if(btnJvsPC.isSelected() && btnNumRonda4.isSelected()) {
+                    vistaJuego = new VistaJuego(4,"JvsPC");
                     dispose();
                 }
                 else {

@@ -19,8 +19,8 @@ public class Main {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-//        VistaInicio vistaInicio = new VistaInicio();
-        VistaJuego vistaJuego = new VistaJuego(1,"Hola");
+        VistaInicio vistaInicio = new VistaInicio();
+//        VistaJuego vistaJuego = new VistaJuego();
 //        VistaEstadisticas vistaEstadisticas = new VistaEstadisticas();
 
     }

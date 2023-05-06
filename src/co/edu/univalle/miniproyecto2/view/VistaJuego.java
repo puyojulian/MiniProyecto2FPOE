@@ -145,12 +145,14 @@ public class VistaJuego extends JFrame {
                 for(int j = 0; j < 3; j++) {
                     if(e.getSource() == btnPosicion[i][j]) {
                         actualizarBotones(juego.marcarSeleccion(jugadorDeTurno, i, j));
+                        
                         if(juego.verificarGanador() == 1 || juego.verificarGanador() == 2) {
                             JOptionPane.showMessageDialog(null,
                     "¡¡GANASTE!! Jugador: " + jugadorDeTurno+".", 
                     "Resultado",
                     JOptionPane.INFORMATION_MESSAGE);
                         }
+                        
                         if(juego.isCambioRealizado()) {
                             if(jugadorDeTurno == 1) {
                                 jugadorDeTurno = 2;
@@ -158,10 +160,18 @@ public class VistaJuego extends JFrame {
                             else if(jugadorDeTurno == 2) {
                                 jugadorDeTurno =1;
                             }
-                        }                        
+                        }
+                        
+                        actualizarBotones(juego.verificarRonda());
+                        
+                        if(juego.juegoTerminado()){
+                            JOptionPane.showMessageDialog(null,
+                    "Juego Terminado.", 
+                    "THE END",
+                    JOptionPane.INFORMATION_MESSAGE);
+                        }  
                     }
                 }
-                
             }
         }
 
