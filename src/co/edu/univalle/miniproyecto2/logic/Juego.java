@@ -51,14 +51,17 @@ public class Juego {
     }
     
     public int[][] respuestaAleatoria(int jugador) {
-        while(true) {
-            int[] posAleatoria = posicionAleatoria();
-            if(posicion[posAleatoria[0]][posAleatoria[1]] == 0) {
-                posicion[posAleatoria[0]][posAleatoria[1]] = jugador;
-                cambioRealizado = true;
-                return posicion;
+        if (!matrizLlena()) {
+            while(true) {
+                int[] posAleatoria = posicionAleatoria();
+                if(posicion[posAleatoria[0]][posAleatoria[1]] == 0) {
+                    posicion[posAleatoria[0]][posAleatoria[1]] = jugador;
+                    cambioRealizado = true;
+                    return posicion;
+                }
             }
         }
+        return posicion;
     }
 
     public boolean isCambioRealizado() {

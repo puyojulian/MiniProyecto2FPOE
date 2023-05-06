@@ -41,11 +41,13 @@ public class VistaJuego extends JFrame {
     private JLabel lblImagenDeFondo1;
     
     int numeroRondas;
-    String modoDeJuego;
+    private String modoDeJuego;
     
     private Juego juego;
     
     private int jugadorDeTurno;
+    
+    private int ganador;
     
     public VistaJuego(int numeroRondas, String modoDeJuego) {
         setTitle("Game | Tic Tac Toe");
@@ -55,6 +57,7 @@ public class VistaJuego extends JFrame {
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         
         jugadorDeTurno = 1;
+        ganador = 0;
         
         this.numeroRondas = numeroRondas;
         this.modoDeJuego = modoDeJuego;
@@ -146,42 +149,40 @@ public class VistaJuego extends JFrame {
                     if(e.getSource() == btnPosicion[i][j]) {
                         if (modoDeJuego == "JvsJ"){
                             actualizarBotones(juego.marcarSeleccion(jugadorDeTurno, i, j));
+                            if(juego.isCambioRealizado()) {
+                                if(jugadorDeTurno == 1) {
+                                    jugadorDeTurno = 2;
+                                }
+                                else if(jugadorDeTurno == 2) {
+                                    jugadorDeTurno =1;
+                                }
+                            }
+                            ganador = juego.verificarGanador();
+                            if(ganador == 1 || ganador == 2) {
+                                JOptionPane.showMessageDialog(null, "¡¡GANASTE!! Jugador: " + jugadorDeTurno+".", "Resultado", JOptionPane.INFORMATION_MESSAGE);
+                            }
                         }
                         else if (modoDeJuego == "JvsPC"){
-                            if (jugadorDeTurno == 1) {
-                                actualizarBotones(juego.marcarSeleccion(jugadorDeTurno, i, j));
+                            actualizarBotones(juego.marcarSeleccion(jugadorDeTurno, i, j));
+                            jugadorDeTurno = 2;
+                            
+                            actualizarBotones(juego.respuestaAleatoria(jugadorDeTurno));
+                            jugadorDeTurno =1;
+                            
+                            ganador = juego.verificarGanador();
+                            if(ganador == 1 || ganador == 2) {
+                                JOptionPane.showMessageDialog(null, "¡¡GANASTE!! Jugador: " + ganador + ".", "Resultado", JOptionPane.INFORMATION_MESSAGE);
                             }
-                            else if (jugadorDeTurno == 2)
-                                actualizarBotones(juego.respuestaAleatoria(jugadorDeTurno));
-                        }
-                        
-                        int Ganador = juego.verificarGanador();
-                        
-                        if(Ganador == 1 || Ganador == 2) {
-                            JOptionPane.showMessageDialog(null,
-                    "¡¡GANASTE!! Jugador: " + jugadorDeTurno+".", 
-                    "Resultado",
-                    JOptionPane.INFORMATION_MESSAGE);
-                        }
-                        
-                        if(juego.isCambioRealizado()) {
-                            if(jugadorDeTurno == 1) {
-                                jugadorDeTurno = 2;
-                            }
-                            else if(jugadorDeTurno == 2) {
-                                jugadorDeTurno =1;
+                            else if(juego.matrizLlena()) {
+                                JOptionPane.showMessageDialog(null, "Nadie Ganó.", "¿Empate?", JOptionPane.INFORMATION_MESSAGE);
                             }
                         }
-                        
-                        actualizarBotones(juego.verificarRonda(Ganador));
+                        actualizarBotones(juego.verificarRonda(ganador));
                         btnContadorJ1.setText("" + juego.getContGanadorJ1());
                         btnContadorJ2.setText("" + juego.getContGanadorJ2());
                         
                         if(juego.juegoTerminado()){
-                            JOptionPane.showMessageDialog(null,
-                    "Juego Terminado.", 
-                    "THE END",
-                    JOptionPane.INFORMATION_MESSAGE);
+                            JOptionPane.showMessageDialog(null, "Juego Terminado.", "THE END", JOptionPane.INFORMATION_MESSAGE);
                         }  
                     }
                 }
