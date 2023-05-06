@@ -36,9 +36,13 @@ public class VistaInicio extends JFrame{
     
     private JLabel lblImagenDeFondo1;
 
+    ImageIcon btnIconPlay = new ImageIcon(getClass().getResource("/co/edu/univalle/miniproyecto2/images/PlayButton.png"));
+    ImageIcon btnIconAudio = new ImageIcon(getClass().getResource("/co/edu/univalle/miniproyecto2/images/AudioButton.png"));
+    ImageIcon btnIconMute = new ImageIcon(getClass().getResource("/co/edu/univalle/miniproyecto2/images/MuteButton.png"));
+
     public VistaInicio() {
         setTitle("Menu | Tic Tac Toe");
-        setSize(540, 680);
+        setSize(544, 680);
         setLocationRelativeTo(null);
         setResizable(true);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -67,19 +71,21 @@ public class VistaInicio extends JFrame{
         lblTitulo.setBounds(0,210, 540,185);
         lblTitulo.setForeground(Color.BLACK);
         
-        btnJugar = new JButton("JUGAR");
-        btnJugar.setFont(new java.awt.Font("Arial", 0, 25));
-        btnJugar.setBounds(165,450, 210,50);
-//        btnJugar.setBackground(new java.awt.Color(178, 221, 185));
-        btnJugar.setForeground(new java.awt.Color(0, 0, 0));
-        btnJugar.setBorder(BorderFactory.createLineBorder(Color.BLACK, 2));
+        btnJugar = new JButton();
+        btnJugar.setSize(80,80);
+        btnJugar.setIcon(new ImageIcon(btnIconPlay.getImage().getScaledInstance(btnJugar.getWidth(), btnJugar.getHeight(), Image.SCALE_SMOOTH)));
+        btnJugar.setBounds(jpContenido.getWidth()*1/2 - btnJugar.getWidth()/2,jpContenido.getHeight()*9/12 - btnJugar.getHeight()/2,btnJugar.getWidth(),btnJugar.getHeight());
+        btnJugar.setOpaque(false);
+        btnJugar.setContentAreaFilled(false);
+        btnJugar.setBorderPainted(false);
         
-        btnAudio = new JButton("Audio");
-        btnAudio.setFont(new java.awt.Font("Arial", 0, 25));
-        btnAudio.setBounds(235,25, 75,30);
-//        btnAudio.setBackground(new java.awt.Color(178, 221, 185));
-        btnAudio.setForeground(new java.awt.Color(0, 0, 0));
-        btnAudio.setBorder(BorderFactory.createLineBorder(Color.BLACK, 2));
+        btnAudio = new JButton();
+        btnAudio.setSize(50,50);
+        btnAudio.setIcon(new ImageIcon(btnIconAudio.getImage().getScaledInstance(btnAudio.getWidth(), btnAudio.getHeight(), Image.SCALE_SMOOTH)));
+        btnAudio.setBounds(jpContenido.getWidth()*1/2 - btnAudio.getWidth()/2,jpContenido.getHeight()*2/12 - btnAudio.getHeight()/2,btnAudio.getWidth(),btnAudio.getHeight());
+        btnAudio.setOpaque(false);
+        btnAudio.setContentAreaFilled(false);
+        btnAudio.setBorderPainted(false);
         
         jpContenido.add(lblTitulo);
         jpContenido.add(btnJugar);
@@ -97,8 +103,10 @@ public class VistaInicio extends JFrame{
         sonidoFondo = java.applet.Applet.newAudioClip(getClass().getResource("/co/edu/univalle/miniproyecto2/sounds/sonidoFondo.wav"));
         if (Musica){
             sonidoFondo.loop();
+            btnAudio.setIcon(new ImageIcon(btnIconAudio.getImage().getScaledInstance(btnAudio.getWidth(), btnAudio.getHeight(), Image.SCALE_SMOOTH)));
         } else {
             sonidoFondo.stop();
+            btnAudio.setIcon(new ImageIcon(btnIconMute.getImage().getScaledInstance(btnAudio.getWidth(), btnAudio.getHeight(), Image.SCALE_SMOOTH)));
         }
     }
     
