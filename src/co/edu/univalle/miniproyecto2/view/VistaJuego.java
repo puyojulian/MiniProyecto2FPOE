@@ -144,7 +144,16 @@ public class VistaJuego extends JFrame {
             for(int i = 0; i < 3; i++) {
                 for(int j = 0; j < 3; j++) {
                     if(e.getSource() == btnPosicion[i][j]) {
-                        actualizarBotones(juego.marcarSeleccion(jugadorDeTurno, i, j));
+                        if (modoDeJuego == "JvsJ"){
+                            actualizarBotones(juego.marcarSeleccion(jugadorDeTurno, i, j));
+                        }
+                        else if (modoDeJuego == "JvsPC"){
+                            if (jugadorDeTurno == 1) {
+                                actualizarBotones(juego.marcarSeleccion(jugadorDeTurno, i, j));
+                            }
+                            else if (jugadorDeTurno == 2)
+                                actualizarBotones(juego.respuestaAleatoria(jugadorDeTurno));
+                        }
                         
                         int Ganador = juego.verificarGanador();
                         
