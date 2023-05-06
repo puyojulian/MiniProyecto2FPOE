@@ -4,6 +4,8 @@
  */
 package co.edu.univalle.miniproyecto2.view;
 
+import java.awt.Image;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -30,6 +32,8 @@ public class VistaEstadisticas extends JFrame{
     private int contadorJ1;
     private int contadorJ2;
     
+    private JLabel lblImagenDeFondo1;
+    
     public VistaEstadisticas() {
         setTitle("Game | Tic Tac Toe");
         setSize(544, 680);
@@ -46,6 +50,12 @@ public class VistaEstadisticas extends JFrame{
         jpContenido.setLayout(null);
         jpContenido.setSize(getWidth(),getHeight());
         
+        ImageIcon imagenDeFondo1 = new ImageIcon(getClass().getResource("/co/edu/univalle/miniproyecto2/images/wood1_45.png"));
+        lblImagenDeFondo1 = new JLabel();
+        lblImagenDeFondo1.setSize(jpContenido.getWidth(), jpContenido.getHeight());
+        lblImagenDeFondo1.setBounds(0, 0, jpContenido.getWidth(), jpContenido.getHeight());
+        lblImagenDeFondo1.setIcon(new ImageIcon(imagenDeFondo1.getImage().getScaledInstance(lblImagenDeFondo1.getWidth(), lblImagenDeFondo1.getHeight(), Image.SCALE_SMOOTH)));
+        
         
         lblNombre = new JLabel("RESUMEN DEL JUEGO",CENTER);
         lblNombre.setSize(jpContenido.getWidth(), 30);
@@ -60,17 +70,32 @@ public class VistaEstadisticas extends JFrame{
         lblContadorJ2.setSize(jpContenido.getWidth(), 30);
         lblContadorJ2.setBounds(jpContenido.getWidth()/2 - lblContadorJ2.getWidth()/2, jpContenido.getHeight()*2/4, lblContadorJ2.getWidth(), lblContadorJ2.getHeight());
         
-        btnInicio = new JButton("Inicio");
-        btnInicio.setSize(100, 30);
+        ImageIcon btnIconInicio = new ImageIcon(getClass().getResource("/co/edu/univalle/miniproyecto2/images/HomeButton.png"));
+        btnInicio = new JButton();
+        btnInicio.setSize(100, 100);
+        btnInicio.setIcon(new ImageIcon(btnIconInicio.getImage().getScaledInstance(btnInicio.getWidth(), btnInicio.getHeight(), Image.SCALE_SMOOTH)));
         btnInicio.setBounds(jpContenido.getWidth()*1/4 - btnInicio.getWidth()/2, jpContenido.getHeight()*3/4, btnInicio.getWidth(), btnInicio.getHeight());
+        btnInicio.setOpaque(false);
+        btnInicio.setContentAreaFilled(false);
+        btnInicio.setBorderPainted(false);
         
-        btnReintentar = new JButton("Reintentar");
-        btnReintentar.setSize(100, 30);
+        ImageIcon btnIconReintentar = new ImageIcon(getClass().getResource("/co/edu/univalle/miniproyecto2/images/ReplayButton.png"));
+        btnReintentar = new JButton();
+        btnReintentar.setSize(100, 100);
+        btnReintentar.setIcon(new ImageIcon(btnIconReintentar.getImage().getScaledInstance(btnReintentar.getWidth(), btnReintentar.getHeight(), Image.SCALE_SMOOTH)));
         btnReintentar.setBounds(jpContenido.getWidth()*2/4 - btnReintentar.getWidth()/2, jpContenido.getHeight()*3/4, btnReintentar.getWidth(), btnReintentar.getHeight());
+        btnReintentar.setOpaque(false);
+        btnReintentar.setContentAreaFilled(false);
+        btnReintentar.setBorderPainted(false);
         
-        btnTerminar = new JButton("Terminar");
-        btnTerminar.setSize(100, 30);
+        ImageIcon btnIconTerminar = new ImageIcon(getClass().getResource("/co/edu/univalle/miniproyecto2/images/TurnOnOffButton.png"));
+        btnTerminar = new JButton();
+        btnTerminar.setSize(100, 100);
+        btnTerminar.setIcon(new ImageIcon(btnIconTerminar.getImage().getScaledInstance(btnTerminar.getWidth(), btnTerminar.getHeight(), Image.SCALE_SMOOTH)));
         btnTerminar.setBounds(jpContenido.getWidth()*3/4 - btnTerminar.getWidth()/2, jpContenido.getHeight()*3/4, btnTerminar.getWidth(), btnTerminar.getHeight());
+        btnTerminar.setOpaque(false);
+        btnTerminar.setContentAreaFilled(false);
+        btnTerminar.setBorderPainted(false);
         
         jpContenido.add(lblNombre);
         jpContenido.add(lblContadorJ1);
@@ -78,6 +103,7 @@ public class VistaEstadisticas extends JFrame{
         jpContenido.add(btnInicio);
         jpContenido.add(btnReintentar);
         jpContenido.add(btnTerminar);
+        jpContenido.add(lblImagenDeFondo1);
         
         add(jpContenido);
     }

@@ -82,6 +82,7 @@ public class VistaJuego extends JFrame {
         btnPausa.setBounds(jpContenido.getWidth()*5/6 - btnPausa.getWidth()/2,jpContenido.getHeight()*1/12 - btnPausa.getHeight()/2,btnPausa.getWidth(),btnPausa.getHeight());
         btnPausa.setOpaque(false);
         btnPausa.setContentAreaFilled(false);
+        btnPausa.setBorderPainted(false);
         
         btnPosicion = new JButton[3][3];
         
