@@ -29,7 +29,7 @@ class CustomPaintedJPanel extends JPanel{
     public void paint(Graphics g){
         Dimension tamano = getSize();
         imagen = new ImageIcon(getClass().getResource(nombre));
-        g.drawImage(imagen.getImage(), 0, 0, null);
+        g.drawImage(imagen.getImage(), 0, 0, getWidth(), getHeight(), null);
         setOpaque(false);
         super.paint(g);
     }

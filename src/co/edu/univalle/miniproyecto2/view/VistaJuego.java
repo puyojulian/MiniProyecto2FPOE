@@ -114,7 +114,7 @@ public class VistaJuego extends JFrame {
         lblImagenDeFondo1.setBounds(0, 0, jpContenido.getWidth(), jpContenido.getHeight());
         lblImagenDeFondo1.setIcon(new ImageIcon(imagenDeFondo1.getImage().getScaledInstance(lblImagenDeFondo1.getWidth(), lblImagenDeFondo1.getHeight(), Image.SCALE_SMOOTH)));
                       
-        jpCuadricula = new CustomPaintedJPanel("/co/edu/univalle/miniproyecto2/images/wood2_11.png");
+        jpCuadricula = new CustomPaintedJPanel("/co/edu/univalle/miniproyecto2/images/FondoCuadricula.png");
         jpCuadricula.setLayout(new GridLayout(3,3));
         jpCuadricula.setSize(300,300);
         jpCuadricula.setBounds((jpContenido.getWidth()/2)-(jpCuadricula.getWidth()/2),(jpContenido.getHeight()/2)-(jpCuadricula.getHeight()/2),jpCuadricula.getWidth(),jpCuadricula.getHeight());
