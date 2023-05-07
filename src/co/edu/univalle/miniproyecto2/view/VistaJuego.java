@@ -13,6 +13,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -163,18 +164,45 @@ public class VistaJuego extends JFrame {
                             }
                         }
                         else if (modoDeJuego == "JvsPC"){
+                            boolean resultado = false;
+                            ganador = 0;
+                            
                             actualizarBotones(juego.marcarSeleccion(jugadorDeTurno, i, j));
                             jugadorDeTurno = 2;
+                            
+                            if(ganador == 0) {
+                                ganador = juego.verificarGanador();
+                            }
+                            
+                            resultado = resultadoJvsPC();
+                            
+                            if(!resultado) {
+                                JOptionPane msg = new JOptionPane("Turno de la PC", JOptionPane.WARNING_MESSAGE);
+                                final JDialog dlg = msg.createDialog("Procesando");
+                                dlg.setDefaultCloseOperation(JDialog.DO_NOTHING_ON_CLOSE);
+                                new Thread(new Runnable() {
+                                  @Override
+                                  public void run() {
+                                    try {
+                                      Thread.sleep(1000);
+                                    } catch (InterruptedException e) {
+                                      e.printStackTrace();
+                                    }
+                                    dlg.setVisible(false);
+                                  }
+                                }).start();
+                                dlg.setVisible(true);
+                            }
                             
                             actualizarBotones(juego.respuestaAleatoria(jugadorDeTurno));
                             jugadorDeTurno =1;
                             
-                            ganador = juego.verificarGanador();
-                            if(ganador == 1 || ganador == 2) {
-                                JOptionPane.showMessageDialog(null, "¡¡GANASTE!! Jugador: " + ganador + ".", "Resultado", JOptionPane.INFORMATION_MESSAGE);
+                            if(ganador == 0) {
+                                ganador = juego.verificarGanador();
                             }
-                            else if(juego.matrizLlena()) {
-                                JOptionPane.showMessageDialog(null, "Nadie Ganó.", "¿Empate?", JOptionPane.INFORMATION_MESSAGE);
+                            
+                            if(!resultado) {
+                                resultadoJvsPC();
                             }
                         }
                         actualizarBotones(juego.verificarRonda(ganador));
@@ -195,6 +223,22 @@ public class VistaJuego extends JFrame {
                     btnPosicion[i][j].setText(""+respPosicion[i][j]);
                 }
             }
+        }
+        
+        private boolean resultadoJvsPC() {
+            if(ganador == 1) {
+                JOptionPane.showMessageDialog(null, "¡¡GANASTE!!", "Resultado", JOptionPane.INFORMATION_MESSAGE);
+                return true;
+            }
+            else if(ganador == 2) {
+                JOptionPane.showMessageDialog(null, "Ganó la computadora.", "Resultado", JOptionPane.INFORMATION_MESSAGE);
+                return true;
+            }
+            else if(juego.matrizLlena()) {
+                JOptionPane.showMessageDialog(null, "Nadie Ganó.", "¿Empate?", JOptionPane.INFORMATION_MESSAGE);
+                return true;
+            }
+            return false;
         }
         
     }    
