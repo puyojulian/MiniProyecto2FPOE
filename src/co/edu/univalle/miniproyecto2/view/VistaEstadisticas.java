@@ -9,6 +9,13 @@ import co.edu.univalle.miniproyecto2.logic.Juego;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Image;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.awt.event.MouseMotionListener;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -35,12 +42,17 @@ public class VistaEstadisticas extends JFrame{
     
     private int contadorJ1;
     private int contadorJ2;
+    private int numeroRondas;
+    
+    private String modoDeJuego;
     
     private JLabel lblImagenDeFondo1;
     
-    public VistaEstadisticas(int contadorJ1, int contadorJ2) {
+    public VistaEstadisticas(int contadorJ1, int contadorJ2,int numeroRondas,String modoDeJuego) {
         this.contadorJ1 = contadorJ1;
         this.contadorJ2 = contadorJ2;
+        this.numeroRondas = numeroRondas;
+        this.modoDeJuego = modoDeJuego;
         
         setTitle("Game | Tic Tac Toe");
         setSize(544, 680);
@@ -72,11 +84,13 @@ public class VistaEstadisticas extends JFrame{
         
         
         lblContadorJ1 = new JLabel("Jugador 1: " + contadorJ1,CENTER);
-        lblContadorJ1.setSize(jpContenido.getWidth(), 40);
+        lblContadorJ1.setFont(new Font("Showcard Gothic", Font.PLAIN, 40));
+        lblContadorJ1.setSize(jpContenido.getWidth(), 45);
         lblContadorJ1.setBounds(jpContenido.getWidth()/2 - lblContadorJ1.getWidth()/2, jpContenido.getHeight()*1/4, lblContadorJ1.getWidth(), lblContadorJ1.getHeight());
         
         lblContadorJ2 = new JLabel("Jugador 2: " + contadorJ2,CENTER);
-        lblContadorJ2.setSize(jpContenido.getWidth(), 40);
+        lblContadorJ2.setFont(new Font("Showcard Gothic", Font.PLAIN, 40));
+        lblContadorJ2.setSize(jpContenido.getWidth(), 45);
         lblContadorJ2.setBounds(jpContenido.getWidth()/2 - lblContadorJ2.getWidth()/2, jpContenido.getHeight()*2/4, lblContadorJ2.getWidth(), lblContadorJ2.getHeight());
         
         ImageIcon btnIconInicio = new ImageIcon(getClass().getResource("/co/edu/univalle/miniproyecto2/images/HomeButton.png"));
@@ -115,6 +129,149 @@ public class VistaEstadisticas extends JFrame{
         jpContenido.add(lblImagenDeFondo1);
         
         add(jpContenido);
+        
+        VistaEstadisticas.ManejadorDeEventos manejadoraDeEventos = new VistaEstadisticas.ManejadorDeEventos();
+        VistaEstadisticas.MouseEventHandler mouseEventHandler = new VistaEstadisticas.MouseEventHandler();
+        
+        btnInicio.addActionListener(manejadoraDeEventos);
+        btnReintentar.addActionListener(manejadoraDeEventos);
+        btnTerminar.addActionListener(manejadoraDeEventos);
+        btnInicio.addMouseListener(mouseEventHandler);
+        btnReintentar.addMouseListener(mouseEventHandler);
+        btnTerminar.addMouseListener(mouseEventHandler);
     }
     
+    class ManejadorDeEventos implements ActionListener{
+        @Override
+        public void actionPerformed(ActionEvent evento){
+            if(evento.getSource() == btnInicio){
+                dispose();
+                VistaInicio vistaInicio = new VistaInicio();
+            }
+            if(evento.getSource() == btnReintentar){
+                dispose();
+                VistaJuego vistaJuego = new VistaJuego(numeroRondas, modoDeJuego);
+            }
+            if(evento.getSource() == btnTerminar){
+                System.exit(0);
+            }
+        }
+    }
+    
+    public class MouseEventHandler implements MouseListener, MouseMotionListener {
+
+        @Override
+        public void mouseClicked(MouseEvent e) {
+            
+        }
+
+        @Override
+        public void mousePressed(MouseEvent e) {
+            if(e.getSource() == btnInicio){                
+                ImageIcon btnIconInicio = new ImageIcon(getClass().getResource("/co/edu/univalle/miniproyecto2/images/HomeButtonNoShadow.png"));
+                btnInicio.setSize(100, 100);
+                btnInicio.setIcon(new ImageIcon(btnIconInicio.getImage().getScaledInstance(btnInicio.getWidth(), btnInicio.getHeight(), Image.SCALE_SMOOTH)));
+                btnInicio.setBounds(jpContenido.getWidth()*1/4 - btnInicio.getWidth()/2, jpContenido.getHeight()*3/4, btnInicio.getWidth(), btnInicio.getHeight());
+                btnInicio.setOpaque(false);
+                btnInicio.setContentAreaFilled(false);
+                btnInicio.setBorderPainted(false);
+            }
+            if(e.getSource() == btnReintentar){                
+                ImageIcon btnIconReintentar = new ImageIcon(getClass().getResource("/co/edu/univalle/miniproyecto2/images/ReplayButtonNoShadow.png"));
+                btnReintentar.setSize(100, 100);
+                btnReintentar.setIcon(new ImageIcon(btnIconReintentar.getImage().getScaledInstance(btnReintentar.getWidth(), btnReintentar.getHeight(), Image.SCALE_SMOOTH)));
+                btnReintentar.setBounds(jpContenido.getWidth()*2/4 - btnReintentar.getWidth()/2, jpContenido.getHeight()*3/4, btnReintentar.getWidth(), btnReintentar.getHeight());
+                btnReintentar.setOpaque(false);
+                btnReintentar.setContentAreaFilled(false);
+                btnReintentar.setBorderPainted(false);
+            }
+            if(e.getSource() == btnTerminar){                
+                ImageIcon btnIconTerminar = new ImageIcon(getClass().getResource("/co/edu/univalle/miniproyecto2/images/TurnOnOffButtonNoShadow.png"));
+                btnTerminar.setSize(100, 100);
+                btnTerminar.setIcon(new ImageIcon(btnIconTerminar.getImage().getScaledInstance(btnTerminar.getWidth(), btnTerminar.getHeight(), Image.SCALE_SMOOTH)));
+                btnTerminar.setBounds(jpContenido.getWidth()*3/4 - btnTerminar.getWidth()/2, jpContenido.getHeight()*3/4, btnTerminar.getWidth(), btnTerminar.getHeight());
+                btnTerminar.setOpaque(false);
+                btnTerminar.setContentAreaFilled(false);
+                btnTerminar.setBorderPainted(false);
+            }
+        }
+
+        @Override
+        public void mouseReleased(MouseEvent e) {
+            throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        }
+
+        @Override
+        public void mouseEntered(MouseEvent e) {
+            if(e.getSource() == btnInicio){                
+                ImageIcon btnIconInicio = new ImageIcon(getClass().getResource("/co/edu/univalle/miniproyecto2/images/HomeButtonLight.png"));
+                btnInicio.setSize(133, 133);
+                btnInicio.setBounds(jpContenido.getWidth()*1/4 - btnInicio.getWidth()/2, jpContenido.getHeight()*3/4, btnInicio.getWidth(), btnInicio.getHeight());
+                btnInicio.setOpaque(false);
+                btnInicio.setContentAreaFilled(false);
+                btnInicio.setBorderPainted(false);
+                btnInicio.setIcon(new ImageIcon(btnIconInicio.getImage().getScaledInstance(btnInicio.getWidth(), btnInicio.getHeight(), Image.SCALE_SMOOTH)));
+            }
+            if(e.getSource() == btnReintentar){                
+                ImageIcon btnIconReintentar = new ImageIcon(getClass().getResource("/co/edu/univalle/miniproyecto2/images/ReplayButtonLight.png"));
+                btnReintentar.setSize(133, 133);
+                btnReintentar.setIcon(new ImageIcon(btnIconReintentar.getImage().getScaledInstance(btnReintentar.getWidth(), btnReintentar.getHeight(), Image.SCALE_SMOOTH)));
+                btnReintentar.setBounds(jpContenido.getWidth()*2/4 - btnReintentar.getWidth()/2, jpContenido.getHeight()*3/4, btnReintentar.getWidth(), btnReintentar.getHeight());
+                btnReintentar.setOpaque(false);
+                btnReintentar.setContentAreaFilled(false);
+                btnReintentar.setBorderPainted(false);
+            }
+            if(e.getSource() == btnTerminar){                
+                ImageIcon btnIconTerminar = new ImageIcon(getClass().getResource("/co/edu/univalle/miniproyecto2/images/TurnOnOffButtonLight.png"));
+                btnTerminar.setSize(133, 133);
+                btnTerminar.setIcon(new ImageIcon(btnIconTerminar.getImage().getScaledInstance(btnTerminar.getWidth(), btnTerminar.getHeight(), Image.SCALE_SMOOTH)));
+                btnTerminar.setBounds(jpContenido.getWidth()*3/4 - btnTerminar.getWidth()/2, jpContenido.getHeight()*3/4, btnTerminar.getWidth(), btnTerminar.getHeight());
+                btnTerminar.setOpaque(false);
+                btnTerminar.setContentAreaFilled(false);
+                btnTerminar.setBorderPainted(false);
+            }
+        }
+
+        @Override
+        public void mouseExited(MouseEvent e) {
+            if(e.getSource() == btnInicio){                
+                ImageIcon btnIconInicio = new ImageIcon(getClass().getResource("/co/edu/univalle/miniproyecto2/images/HomeButton.png"));
+                btnInicio.setSize(133, 133);
+                btnInicio.setIcon(new ImageIcon(btnIconInicio.getImage().getScaledInstance(btnInicio.getWidth(), btnInicio.getHeight(), Image.SCALE_SMOOTH)));
+                btnInicio.setBounds(jpContenido.getWidth()*1/4 - btnInicio.getWidth()/2, jpContenido.getHeight()*3/4, btnInicio.getWidth(), btnInicio.getHeight());
+                btnInicio.setOpaque(false);
+                btnInicio.setContentAreaFilled(false);
+                btnInicio.setBorderPainted(false);
+            }
+            if(e.getSource() == btnReintentar){                
+                ImageIcon btnIconReintentar = new ImageIcon(getClass().getResource("/co/edu/univalle/miniproyecto2/images/ReplayButton.png"));
+                btnReintentar.setSize(133, 133);
+                btnReintentar.setIcon(new ImageIcon(btnIconReintentar.getImage().getScaledInstance(btnReintentar.getWidth(), btnReintentar.getHeight(), Image.SCALE_SMOOTH)));
+                btnReintentar.setBounds(jpContenido.getWidth()*2/4 - btnReintentar.getWidth()/2, jpContenido.getHeight()*3/4, btnReintentar.getWidth(), btnReintentar.getHeight());
+                btnReintentar.setOpaque(false);
+                btnReintentar.setContentAreaFilled(false);
+                btnReintentar.setBorderPainted(false);
+            }
+            if(e.getSource() == btnTerminar){                
+                ImageIcon btnIconTerminar = new ImageIcon(getClass().getResource("/co/edu/univalle/miniproyecto2/images/TurnOnOffButton.png"));
+                btnTerminar.setSize(133, 133);
+                btnTerminar.setIcon(new ImageIcon(btnIconTerminar.getImage().getScaledInstance(btnTerminar.getWidth(), btnTerminar.getHeight(), Image.SCALE_SMOOTH)));
+                btnTerminar.setBounds(jpContenido.getWidth()*3/4 - btnTerminar.getWidth()/2, jpContenido.getHeight()*3/4, btnTerminar.getWidth(), btnTerminar.getHeight());
+                btnTerminar.setOpaque(false);
+                btnTerminar.setContentAreaFilled(false);
+                btnTerminar.setBorderPainted(false);
+            }
+        }
+
+        @Override
+        public void mouseDragged(MouseEvent e) {
+            throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        }
+
+        @Override
+        public void mouseMoved(MouseEvent e) {
+            throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        }
+        
+    }
 }

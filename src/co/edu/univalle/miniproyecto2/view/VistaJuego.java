@@ -281,7 +281,8 @@ public class VistaJuego extends JFrame {
                         
                         if(juego.juegoTerminado()){
                             JOptionPane.showMessageDialog(null, "Juego Terminado.", "THE END", JOptionPane.INFORMATION_MESSAGE);
-                            vistaestadisticas = new VistaEstadisticas(juego.getContGanadorJ1(),juego.getContGanadorJ2());
+                            dispose();
+                            vistaestadisticas = new VistaEstadisticas(juego.getContGanadorJ1(),juego.getContGanadorJ2(), numeroRondas, modoDeJuego);
                         }  
                     }
                 }
