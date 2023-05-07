@@ -11,6 +11,9 @@ import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.awt.event.MouseMotionListener;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JDialog;
@@ -99,6 +102,8 @@ public class VistaJuego extends JFrame {
 
         ActionEventHandler manejadoraDeEventos = new ActionEventHandler(juego);
         
+        MouseEventHandler manejadoraDeEventosMouse = new MouseEventHandler();
+        
         ImageIcon imagenDeFondo1 = new ImageIcon(getClass().getResource("/co/edu/univalle/miniproyecto2/images/wood1_45.png"));
         lblImagenDeFondo1 = new JLabel();
         lblImagenDeFondo1.setSize(jpContenido.getWidth(), jpContenido.getHeight());
@@ -124,41 +129,43 @@ public class VistaJuego extends JFrame {
         btnPausa = new JButton();
         btnPausa.setSize(40,40);
         btnPausa.setIcon(new ImageIcon(btnIconPausa.getImage().getScaledInstance(btnPausa.getWidth(), btnPausa.getHeight(), Image.SCALE_SMOOTH)));
-        btnPausa.setBounds(jpContenido.getWidth()*5/6 - btnPausa.getWidth()/2,jpContenido.getHeight()*1/12 - btnPausa.getHeight()/2,btnPausa.getWidth(),btnPausa.getHeight());
+        btnPausa.setBounds(getWidth()*5/6 - btnPausa.getWidth()/2,getHeight()*1/12 - btnPausa.getHeight()/2,btnPausa.getWidth(),btnPausa.getHeight());        
         btnPausa.setOpaque(false);
         btnPausa.setContentAreaFilled(false);
         btnPausa.setBorderPainted(false);
         btnPausa.addActionListener(manejadoraDeEventos);
+        btnPausa.addMouseListener(manejadoraDeEventosMouse);
+        btnPausa.addMouseMotionListener(manejadoraDeEventosMouse);
         
-        ImageIcon btnIconReplay = new ImageIcon(getClass().getResource("/co/edu/univalle/miniproyecto2/images/PlayButton.png"));
-        btnPausaReplay = new JButton();
-        btnPausaReplay.setSize(100,100);
-        btnPausaReplay.setIcon(new ImageIcon(btnIconReplay.getImage().getScaledInstance(btnPausaReplay.getWidth(), btnPausaReplay.getHeight(), Image.SCALE_SMOOTH)));
-        btnPausaReplay.setBounds(jpContenido.getWidth()*2 - btnPausaReplay.getWidth()/2,jpContenido.getHeight()*2/4 - btnPausaReplay.getHeight()/2,btnPausaReplay.getWidth(),btnPausaReplay.getHeight());
-        btnPausaReplay.setOpaque(false);
-        btnPausaReplay.setContentAreaFilled(false);
-        btnPausaReplay.setBorderPainted(false);
-        btnPausaReplay.addActionListener(manejadoraDeEventos);
-        
-        ImageIcon btnIconPausaContinuar = new ImageIcon(getClass().getResource("/co/edu/univalle/miniproyecto2/images/ReplayButton.png"));
-        btnPausaContinuar = new JButton();
-        btnPausaContinuar.setSize(100,100);
-        btnPausaContinuar.setIcon(new ImageIcon(btnIconPausaContinuar.getImage().getScaledInstance(btnPausaContinuar.getWidth(), btnPausaContinuar.getHeight(), Image.SCALE_SMOOTH)));
-        btnPausaContinuar.setBounds(jpContenido.getWidth()*2- btnPausaContinuar.getWidth()/2,jpContenido.getHeight()*1/4 - btnPausaContinuar.getHeight()/2,btnPausaContinuar.getWidth(),btnPausaContinuar.getHeight());
-        btnPausaContinuar.setOpaque(false);
-        btnPausaContinuar.setContentAreaFilled(false);
-        btnPausaContinuar.setBorderPainted(false);
-        btnPausaContinuar.addActionListener(manejadoraDeEventos);
-        
-        ImageIcon btnIconAudio = new ImageIcon(getClass().getResource("/co/edu/univalle/miniproyecto2/images/AudioButton.png"));
-        btnPausaAudio = new JButton();
-        btnPausaAudio.setSize(100,100);
-        btnPausaAudio.setIcon(new ImageIcon(btnIconAudio.getImage().getScaledInstance(btnPausaAudio.getWidth(), btnPausaAudio.getHeight(), Image.SCALE_SMOOTH)));
-        btnPausaAudio.setBounds(jpContenido.getWidth()*2 - btnPausaAudio.getWidth()/2,jpContenido.getHeight()*3/4 - btnPausaAudio.getHeight()/2,btnPausaAudio.getWidth(),btnPausaAudio.getHeight());
-        btnPausaAudio.setOpaque(false);
-        btnPausaAudio.setContentAreaFilled(false);
-        btnPausaAudio.setBorderPainted(false);
-        btnPausaAudio.addActionListener(manejadoraDeEventos);
+//        ImageIcon btnIconReplay = new ImageIcon(getClass().getResource("/co/edu/univalle/miniproyecto2/images/PlayButton.png"));
+//        btnPausaReplay = new JButton();
+//        btnPausaReplay.setSize(100,100);
+//        btnPausaReplay.setIcon(new ImageIcon(btnIconReplay.getImage().getScaledInstance(btnPausaReplay.getWidth(), btnPausaReplay.getHeight(), Image.SCALE_SMOOTH)));
+//        btnPausaReplay.setBounds(jpContenido.getWidth()*2 - btnPausaReplay.getWidth()/2,jpContenido.getHeight()*2/4 - btnPausaReplay.getHeight()/2,btnPausaReplay.getWidth(),btnPausaReplay.getHeight());
+//        btnPausaReplay.setOpaque(false);
+//        btnPausaReplay.setContentAreaFilled(false);
+//        btnPausaReplay.setBorderPainted(false);
+//        btnPausaReplay.addActionListener(manejadoraDeEventos);
+//        
+//        ImageIcon btnIconPausaContinuar = new ImageIcon(getClass().getResource("/co/edu/univalle/miniproyecto2/images/ReplayButton.png"));
+//        btnPausaContinuar = new JButton();
+//        btnPausaContinuar.setSize(100,100);
+//        btnPausaContinuar.setIcon(new ImageIcon(btnIconPausaContinuar.getImage().getScaledInstance(btnPausaContinuar.getWidth(), btnPausaContinuar.getHeight(), Image.SCALE_SMOOTH)));
+//        btnPausaContinuar.setBounds(jpContenido.getWidth()*2- btnPausaContinuar.getWidth()/2,jpContenido.getHeight()*1/4 - btnPausaContinuar.getHeight()/2,btnPausaContinuar.getWidth(),btnPausaContinuar.getHeight());
+//        btnPausaContinuar.setOpaque(false);
+//        btnPausaContinuar.setContentAreaFilled(false);
+//        btnPausaContinuar.setBorderPainted(false);
+//        btnPausaContinuar.addActionListener(manejadoraDeEventos);
+//        
+//        ImageIcon btnIconAudio = new ImageIcon(getClass().getResource("/co/edu/univalle/miniproyecto2/images/AudioButton.png"));
+//        btnPausaAudio = new JButton();
+//        btnPausaAudio.setSize(100,100);
+//        btnPausaAudio.setIcon(new ImageIcon(btnIconAudio.getImage().getScaledInstance(btnPausaAudio.getWidth(), btnPausaAudio.getHeight(), Image.SCALE_SMOOTH)));
+//        btnPausaAudio.setBounds(jpContenido.getWidth()*2 - btnPausaAudio.getWidth()/2,jpContenido.getHeight()*3/4 - btnPausaAudio.getHeight()/2,btnPausaAudio.getWidth(),btnPausaAudio.getHeight());
+//        btnPausaAudio.setOpaque(false);
+//        btnPausaAudio.setContentAreaFilled(false);
+//        btnPausaAudio.setBorderPainted(false);
+//        btnPausaAudio.addActionListener(manejadoraDeEventos);
                 
         
         btnPosicion = new JButton[3][3];
@@ -309,5 +316,70 @@ public class VistaJuego extends JFrame {
             return false;
         }
         
-    }    
+    }
+
+    public class MouseEventHandler implements MouseListener, MouseMotionListener {
+
+        @Override
+        public void mouseClicked(MouseEvent e) {
+//            if(e.getSource() == btnPausa) {
+//                ImageIcon btnIconNoShadowPausa = new ImageIcon(getClass().getResource("/co/edu/univalle/miniproyecto2/images/PauseButtonNoShadow.png"));
+//                btnPausa.setSize(50,50);
+//                btnPausa.setIcon(new ImageIcon(btnIconNoShadowPausa.getImage().getScaledInstance(btnPausa.getWidth(), btnPausa.getHeight(), Image.SCALE_SMOOTH)));
+//                btnPausa.setBounds(getWidth()*5/6 - btnPausa.getWidth()/2,getHeight()*1/12 - btnPausa.getHeight()/2,btnPausa.getWidth(),btnPausa.getHeight());
+//
+//            }
+        }
+
+        @Override
+        public void mousePressed(MouseEvent e) {
+            if(e.getSource() == btnPausa) {
+                ImageIcon btnIconNoShadowPausa = new ImageIcon(getClass().getResource("/co/edu/univalle/miniproyecto2/images/PauseButtonNoShadow.png"));
+                btnPausa.setSize(50,50);
+                btnPausa.setIcon(new ImageIcon(btnIconNoShadowPausa.getImage().getScaledInstance(btnPausa.getWidth(), btnPausa.getHeight(), Image.SCALE_SMOOTH)));
+                btnPausa.setBounds(getWidth()*5/6 - btnPausa.getWidth()/2,getHeight()*1/12 - btnPausa.getHeight()/2,btnPausa.getWidth(),btnPausa.getHeight());
+            }
+        }
+
+        @Override
+        public void mouseReleased(MouseEvent e) {
+            if(e.getSource() == btnPausa) {
+                ImageIcon btnIconLightPausa = new ImageIcon(getClass().getResource("/co/edu/univalle/miniproyecto2/images/PauseButtonLight.png"));
+                btnPausa.setSize(60,60);
+                btnPausa.setIcon(new ImageIcon(btnIconLightPausa.getImage().getScaledInstance(btnPausa.getWidth(), btnPausa.getHeight(), Image.SCALE_SMOOTH)));
+                btnPausa.setBounds(getWidth()*5/6 - btnPausa.getWidth()/2,getHeight()*1/12 - btnPausa.getHeight()/2,btnPausa.getWidth(),btnPausa.getHeight());
+            }
+        }
+
+        @Override
+        public void mouseEntered(MouseEvent e) {
+            if(e.getSource() == btnPausa) {
+                ImageIcon btnIconLightPausa = new ImageIcon(getClass().getResource("/co/edu/univalle/miniproyecto2/images/PauseButtonLight.png"));
+                btnPausa.setSize(60,60);
+                btnPausa.setIcon(new ImageIcon(btnIconLightPausa.getImage().getScaledInstance(btnPausa.getWidth(), btnPausa.getHeight(), Image.SCALE_SMOOTH)));
+                btnPausa.setBounds(getWidth()*5/6 - btnPausa.getWidth()/2,getHeight()*1/12 - btnPausa.getHeight()/2,btnPausa.getWidth(),btnPausa.getHeight());
+            }
+        }
+
+        @Override
+        public void mouseExited(MouseEvent e) {
+            if(e.getSource() == btnPausa) {
+                ImageIcon btnIconSalidoPausa = new ImageIcon(getClass().getResource("/co/edu/univalle/miniproyecto2/images/PauseButton.png"));
+                btnPausa.setSize(40,40);
+                btnPausa.setIcon(new ImageIcon(btnIconSalidoPausa.getImage().getScaledInstance(btnPausa.getWidth(), btnPausa.getHeight(), Image.SCALE_SMOOTH)));
+                btnPausa.setBounds(getWidth()*5/6 - btnPausa.getWidth()/2,getHeight()*1/12 - btnPausa.getHeight()/2,btnPausa.getWidth(),btnPausa.getHeight());
+            }
+        }
+
+        @Override
+        public void mouseDragged(MouseEvent e) {
+//            throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        }
+
+        @Override
+        public void mouseMoved(MouseEvent e) {
+//            throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        }
+        
+    }
 }
