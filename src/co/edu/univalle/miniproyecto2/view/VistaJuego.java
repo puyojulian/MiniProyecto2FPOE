@@ -15,7 +15,9 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
+import javax.swing.JInternalFrame;
 import javax.swing.JLabel;
+import javax.swing.JLayeredPane;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JToggleButton;
@@ -26,35 +28,46 @@ import javax.swing.JToggleButton;
  */
 public class VistaJuego extends JFrame {
     
+//    private JLayeredPane lContenido;
+    
     private JPanel jpContenido;
+    private JPanel jpPausa;
     private CustomPaintedJPanel jpCuadricula;
     
     private JLabel lblNombre;
+    private JLabel lblImagenDeFondo1;
+    
     private JToggleButton btnContadorJ1;
     private JToggleButton btnContadorJ2;
     
     private JButton btnPosicion[][];
     private JButton btnPausa;
+    private JButton btnPausaReplay;
+    private JButton btnPausaContinuar;
+    private JButton btnPausaAudio;
+    
     
     private int contadorJ1;
     private int contadorJ2;
- 
-    private JLabel lblImagenDeFondo1;
+    private int numeroRondas;
+    private int jugadorDeTurno;
+    private int ganador;
     
-    int numeroRondas;
     private String modoDeJuego;
     
     private Juego juego;
     
-    private int jugadorDeTurno;
+//    private JInternalFrame pausa;
     
-    private int ganador;
+    private VistaEstadisticas vistaEstadisticas;
+    
+    
     
     public VistaJuego(int numeroRondas, String modoDeJuego) {
         setTitle("Game | Tic Tac Toe");
         setSize(544, 680);
         setLocationRelativeTo(null);
-        setResizable(true);
+        setResizable(false);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         
         jugadorDeTurno = 1;
@@ -69,11 +82,22 @@ public class VistaJuego extends JFrame {
 
     private void inicializarComponentes() {
         
+//        lContenido = new JLayeredPane();
+//        lContenido.setBounds(0, 0, getWidth(), getHeight());
+        
+//        pausa = new JInternalFrame();
+//        pausa.setTitle("Pause");
+//        pausa.setSize(getWidth() - 100, getHeight() - 100);
+//        pausa.setResizable(false);
+//        pausa.setVisible(true);
+        
         juego = new Juego(numeroRondas, modoDeJuego);
         
         jpContenido = new JPanel();
         jpContenido.setLayout(null);
         jpContenido.setSize(getWidth(),getHeight());
+        
+//        lContenido.add(jpContenido, 0, 0);
 
         ActionEventHandler manejadoraDeEventos = new ActionEventHandler(juego);
         
@@ -93,12 +117,10 @@ public class VistaJuego extends JFrame {
         btnContadorJ1 = new JToggleButton(""+contadorJ1);
         btnContadorJ1.setSize(60, 30);
         btnContadorJ1.setBounds(jpContenido.getWidth()*1/3 - btnContadorJ1.getWidth()/2,jpContenido.getHeight()*5/6,btnContadorJ1.getWidth(),btnContadorJ1.getHeight());
-//        btnContadorJ1.setBackground(Color.GRAY);
         
         btnContadorJ2 = new JToggleButton(""+contadorJ2);
         btnContadorJ2.setSize(60, 30);
         btnContadorJ2.setBounds(jpContenido.getWidth()*2/3 - btnContadorJ2.getWidth()/2,jpContenido.getHeight()*5/6,btnContadorJ2.getWidth(),btnContadorJ2.getHeight());
-//        btnContadorJ2.setBackground(Color.GREEN);
         
         ImageIcon btnIconPausa = new ImageIcon(getClass().getResource("/co/edu/univalle/miniproyecto2/images/PauseButton.png"));
         btnPausa = new JButton();
@@ -109,6 +131,36 @@ public class VistaJuego extends JFrame {
         btnPausa.setContentAreaFilled(false);
         btnPausa.setBorderPainted(false);
         btnPausa.addActionListener(manejadoraDeEventos);
+        
+        ImageIcon btnIconReplay = new ImageIcon(getClass().getResource("/co/edu/univalle/miniproyecto2/images/PlayButton.png"));
+        btnPausaReplay = new JButton();
+        btnPausaReplay.setSize(100,100);
+        btnPausaReplay.setIcon(new ImageIcon(btnIconReplay.getImage().getScaledInstance(btnPausaReplay.getWidth(), btnPausaReplay.getHeight(), Image.SCALE_SMOOTH)));
+        btnPausaReplay.setBounds(jpContenido.getWidth()*2 - btnPausaReplay.getWidth()/2,jpContenido.getHeight()*2/4 - btnPausaReplay.getHeight()/2,btnPausaReplay.getWidth(),btnPausaReplay.getHeight());
+        btnPausaReplay.setOpaque(false);
+        btnPausaReplay.setContentAreaFilled(false);
+        btnPausaReplay.setBorderPainted(false);
+        btnPausaReplay.addActionListener(manejadoraDeEventos);
+        
+        ImageIcon btnIconPausaContinuar = new ImageIcon(getClass().getResource("/co/edu/univalle/miniproyecto2/images/ReplayButton.png"));
+        btnPausaContinuar = new JButton();
+        btnPausaContinuar.setSize(100,100);
+        btnPausaContinuar.setIcon(new ImageIcon(btnIconPausaContinuar.getImage().getScaledInstance(btnPausaContinuar.getWidth(), btnPausaContinuar.getHeight(), Image.SCALE_SMOOTH)));
+        btnPausaContinuar.setBounds(jpContenido.getWidth()*2- btnPausaContinuar.getWidth()/2,jpContenido.getHeight()*1/4 - btnPausaContinuar.getHeight()/2,btnPausaContinuar.getWidth(),btnPausaContinuar.getHeight());
+        btnPausaContinuar.setOpaque(false);
+        btnPausaContinuar.setContentAreaFilled(false);
+        btnPausaContinuar.setBorderPainted(false);
+        btnPausaContinuar.addActionListener(manejadoraDeEventos);
+        
+        ImageIcon btnIconAudio = new ImageIcon(getClass().getResource("/co/edu/univalle/miniproyecto2/images/AudioButton.png"));
+        btnPausaAudio = new JButton();
+        btnPausaAudio.setSize(100,100);
+        btnPausaAudio.setIcon(new ImageIcon(btnIconAudio.getImage().getScaledInstance(btnPausaAudio.getWidth(), btnPausaAudio.getHeight(), Image.SCALE_SMOOTH)));
+        btnPausaAudio.setBounds(jpContenido.getWidth()*2 - btnPausaAudio.getWidth()/2,jpContenido.getHeight()*3/4 - btnPausaAudio.getHeight()/2,btnPausaAudio.getWidth(),btnPausaAudio.getHeight());
+        btnPausaAudio.setOpaque(false);
+        btnPausaAudio.setContentAreaFilled(false);
+        btnPausaAudio.setBorderPainted(false);
+        btnPausaAudio.addActionListener(manejadoraDeEventos);
                 
         
         btnPosicion = new JButton[3][3];
@@ -126,13 +178,26 @@ public class VistaJuego extends JFrame {
             }
         }
         
+//        jpPausa = new JPanel();
+//        jpPausa.setLayout(null);
+//        jpPausa.setSize(pausa.getWidth(),pausa.getHeight());
+//        jpPausa.setBounds(0, 0, pausa.getWidth(), pausa.getHeight());
+//        
+//        jpPausa.add(btnPausaReplay);
+//        jpPausa.add(btnPausaContinuar);
+//        jpPausa.add(btnPausaAudio);
+        
+//        pausa.add(jpPausa);
+        
         jpContenido.add(btnContadorJ1);
         jpContenido.add(btnContadorJ2);
         jpContenido.add(btnPausa);
         jpContenido.add(jpCuadricula);
         jpContenido.add(lblImagenDeFondo1);
         
+//        add(pausa);
         add(jpContenido);
+//        add(lContenido);
     }
     
     public class ActionEventHandler implements ActionListener {
@@ -160,7 +225,7 @@ public class VistaJuego extends JFrame {
                             }
                             ganador = juego.verificarGanador();
                             if(ganador == 1 || ganador == 2) {
-                                JOptionPane.showMessageDialog(null, "¡¡GANASTE!! Jugador: " + jugadorDeTurno+".", "Resultado", JOptionPane.INFORMATION_MESSAGE);
+                                JOptionPane.showMessageDialog(null, "¡¡GANASTE!! Jugador: " + jugadorDeTurno +".", "Resultado", JOptionPane.INFORMATION_MESSAGE);
                             }
                         }
                         else if (modoDeJuego == "JvsPC"){
@@ -177,7 +242,7 @@ public class VistaJuego extends JFrame {
                             resultado = resultadoJvsPC();
                             
                             if(!resultado) {
-                                JOptionPane msg = new JOptionPane("Turno de la PC", JOptionPane.WARNING_MESSAGE);
+                                JOptionPane msg = new JOptionPane("Turno de la PC", JOptionPane.INFORMATION_MESSAGE);
                                 final JDialog dlg = msg.createDialog("Procesando");
                                 dlg.setDefaultCloseOperation(JDialog.DO_NOTHING_ON_CLOSE);
                                 new Thread(new Runnable() {
@@ -211,9 +276,14 @@ public class VistaJuego extends JFrame {
                         
                         if(juego.juegoTerminado()){
                             JOptionPane.showMessageDialog(null, "Juego Terminado.", "THE END", JOptionPane.INFORMATION_MESSAGE);
+                            vistaEstadisticas = new VistaEstadisticas();
                         }  
                     }
                 }
+            }
+            if(e.getSource() == btnPausa) {
+//                lContenido.add(jpPausa, 1, 0);
+                
             }
         }
 
