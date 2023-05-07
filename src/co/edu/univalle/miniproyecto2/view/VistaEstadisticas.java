@@ -47,6 +47,8 @@ public class VistaEstadisticas extends JFrame{
     private String modoDeJuego;
     
     private JLabel lblImagenDeFondo1;
+    private JLabel lblImagenJ1;
+    private JLabel lblImagenJ2;
     
     public VistaEstadisticas(int contadorJ1, int contadorJ2,int numeroRondas,String modoDeJuego) {
         this.contadorJ1 = contadorJ1;
@@ -80,18 +82,32 @@ public class VistaEstadisticas extends JFrame{
         lblNombre.setFont(new Font("Showcard Gothic", Font.PLAIN, 40));
         lblNombre.setSize(jpContenido.getWidth(), 80);
         lblNombre.setForeground(Color.YELLOW);
-        lblNombre.setBounds(jpContenido.getWidth()/2 - lblNombre.getWidth()/2, jpContenido.getHeight()*1/8, lblNombre.getWidth(), lblNombre.getHeight());
+        lblNombre.setBounds(jpContenido.getWidth()/2 - lblNombre.getWidth()/2, jpContenido.getHeight()*1/12, lblNombre.getWidth(), lblNombre.getHeight());
         
         
         lblContadorJ1 = new JLabel("Jugador 1: " + contadorJ1,CENTER);
         lblContadorJ1.setFont(new Font("Showcard Gothic", Font.PLAIN, 40));
         lblContadorJ1.setSize(jpContenido.getWidth(), 45);
-        lblContadorJ1.setBounds(jpContenido.getWidth()/2 - lblContadorJ1.getWidth()/2, jpContenido.getHeight()*1/4, lblContadorJ1.getWidth(), lblContadorJ1.getHeight());
+        lblContadorJ1.setForeground(Color.YELLOW);
+        lblContadorJ1.setBounds(jpContenido.getWidth()/2 - lblContadorJ1.getWidth()/2, jpContenido.getHeight()*3/8, lblContadorJ1.getWidth(), lblContadorJ1.getHeight());
         
         lblContadorJ2 = new JLabel("Jugador 2: " + contadorJ2,CENTER);
         lblContadorJ2.setFont(new Font("Showcard Gothic", Font.PLAIN, 40));
         lblContadorJ2.setSize(jpContenido.getWidth(), 45);
-        lblContadorJ2.setBounds(jpContenido.getWidth()/2 - lblContadorJ2.getWidth()/2, jpContenido.getHeight()*2/4, lblContadorJ2.getWidth(), lblContadorJ2.getHeight());
+        lblContadorJ2.setForeground(Color.YELLOW);
+        lblContadorJ2.setBounds(jpContenido.getWidth()/2 - lblContadorJ2.getWidth()/2, jpContenido.getHeight()*5/8, lblContadorJ2.getWidth(), lblContadorJ2.getHeight());
+        
+        ImageIcon imagenJ1 = new ImageIcon(getClass().getResource("/co/edu/univalle/miniproyecto2/images/ImagePlayer1.png"));
+        lblImagenJ1 = new JLabel();
+        lblImagenJ1.setSize(100, 100);
+        lblImagenJ1.setBounds(jpContenido.getWidth()/2 - lblImagenJ1.getWidth()/2, jpContenido.getHeight()*2/10, 100, 100);
+        lblImagenJ1.setIcon(new ImageIcon(imagenJ1.getImage().getScaledInstance(lblImagenJ1.getWidth(), lblImagenJ1.getHeight(), Image.SCALE_SMOOTH)));
+        
+        ImageIcon imagenJ2 = new ImageIcon(getClass().getResource("/co/edu/univalle/miniproyecto2/images/ImagePlayer2.png"));
+        lblImagenJ2 = new JLabel();
+        lblImagenJ2.setSize(100, 100);
+        lblImagenJ2.setBounds(jpContenido.getWidth()/2 - lblImagenJ2.getWidth()/2, jpContenido.getHeight()*4/9, 100, 100);
+        lblImagenJ2.setIcon(new ImageIcon(imagenJ2.getImage().getScaledInstance(lblImagenJ2.getWidth(), lblImagenJ2.getHeight(), Image.SCALE_SMOOTH)));
         
         ImageIcon btnIconInicio = new ImageIcon(getClass().getResource("/co/edu/univalle/miniproyecto2/images/HomeButton.png"));
         btnInicio = new JButton();
@@ -126,7 +142,10 @@ public class VistaEstadisticas extends JFrame{
         jpContenido.add(btnInicio);
         jpContenido.add(btnReintentar);
         jpContenido.add(btnTerminar);
+        jpContenido.add(lblImagenJ1);
+        jpContenido.add(lblImagenJ2);
         jpContenido.add(lblImagenDeFondo1);
+        
         
         add(jpContenido);
         
@@ -171,28 +190,19 @@ public class VistaEstadisticas extends JFrame{
                 ImageIcon btnIconInicio = new ImageIcon(getClass().getResource("/co/edu/univalle/miniproyecto2/images/HomeButtonNoShadow.png"));
                 btnInicio.setSize(100, 100);
                 btnInicio.setIcon(new ImageIcon(btnIconInicio.getImage().getScaledInstance(btnInicio.getWidth(), btnInicio.getHeight(), Image.SCALE_SMOOTH)));
-                btnInicio.setBounds(jpContenido.getWidth()*1/4 - btnInicio.getWidth()/2, jpContenido.getHeight()*3/4, btnInicio.getWidth(), btnInicio.getHeight());
-                btnInicio.setOpaque(false);
-                btnInicio.setContentAreaFilled(false);
-                btnInicio.setBorderPainted(false);
+                btnInicio.setBounds(getWidth()*1/4 - btnInicio.getWidth()/2, getHeight()*3/4, btnInicio.getWidth(), btnInicio.getHeight());
             }
             if(e.getSource() == btnReintentar){                
                 ImageIcon btnIconReintentar = new ImageIcon(getClass().getResource("/co/edu/univalle/miniproyecto2/images/ReplayButtonNoShadow.png"));
                 btnReintentar.setSize(100, 100);
                 btnReintentar.setIcon(new ImageIcon(btnIconReintentar.getImage().getScaledInstance(btnReintentar.getWidth(), btnReintentar.getHeight(), Image.SCALE_SMOOTH)));
-                btnReintentar.setBounds(jpContenido.getWidth()*2/4 - btnReintentar.getWidth()/2, jpContenido.getHeight()*3/4, btnReintentar.getWidth(), btnReintentar.getHeight());
-                btnReintentar.setOpaque(false);
-                btnReintentar.setContentAreaFilled(false);
-                btnReintentar.setBorderPainted(false);
+                btnReintentar.setBounds(getWidth()*2/4 - btnReintentar.getWidth()/2, getHeight()*3/4, btnReintentar.getWidth(), btnReintentar.getHeight());
             }
             if(e.getSource() == btnTerminar){                
                 ImageIcon btnIconTerminar = new ImageIcon(getClass().getResource("/co/edu/univalle/miniproyecto2/images/TurnOnOffButtonNoShadow.png"));
                 btnTerminar.setSize(100, 100);
                 btnTerminar.setIcon(new ImageIcon(btnIconTerminar.getImage().getScaledInstance(btnTerminar.getWidth(), btnTerminar.getHeight(), Image.SCALE_SMOOTH)));
-                btnTerminar.setBounds(jpContenido.getWidth()*3/4 - btnTerminar.getWidth()/2, jpContenido.getHeight()*3/4, btnTerminar.getWidth(), btnTerminar.getHeight());
-                btnTerminar.setOpaque(false);
-                btnTerminar.setContentAreaFilled(false);
-                btnTerminar.setBorderPainted(false);
+                btnTerminar.setBounds(getWidth()*3/4 - btnTerminar.getWidth()/2, getHeight()*3/4, btnTerminar.getWidth(), btnTerminar.getHeight());
             }
         }
 
@@ -206,29 +216,20 @@ public class VistaEstadisticas extends JFrame{
             if(e.getSource() == btnInicio){                
                 ImageIcon btnIconInicio = new ImageIcon(getClass().getResource("/co/edu/univalle/miniproyecto2/images/HomeButtonLight.png"));
                 btnInicio.setSize(133, 133);
-                btnInicio.setBounds(jpContenido.getWidth()*1/4 - btnInicio.getWidth()/2, jpContenido.getHeight()*3/4, btnInicio.getWidth(), btnInicio.getHeight());
-                btnInicio.setOpaque(false);
-                btnInicio.setContentAreaFilled(false);
-                btnInicio.setBorderPainted(false);
                 btnInicio.setIcon(new ImageIcon(btnIconInicio.getImage().getScaledInstance(btnInicio.getWidth(), btnInicio.getHeight(), Image.SCALE_SMOOTH)));
+                btnInicio.setBounds(getWidth()*1/4 - btnInicio.getWidth()*2/4, getHeight()*3/4 - btnInicio.getWidth()*15/100, btnInicio.getWidth(), btnInicio.getHeight());
             }
             if(e.getSource() == btnReintentar){                
                 ImageIcon btnIconReintentar = new ImageIcon(getClass().getResource("/co/edu/univalle/miniproyecto2/images/ReplayButtonLight.png"));
                 btnReintentar.setSize(133, 133);
                 btnReintentar.setIcon(new ImageIcon(btnIconReintentar.getImage().getScaledInstance(btnReintentar.getWidth(), btnReintentar.getHeight(), Image.SCALE_SMOOTH)));
-                btnReintentar.setBounds(jpContenido.getWidth()*2/4 - btnReintentar.getWidth()/2, jpContenido.getHeight()*3/4, btnReintentar.getWidth(), btnReintentar.getHeight());
-                btnReintentar.setOpaque(false);
-                btnReintentar.setContentAreaFilled(false);
-                btnReintentar.setBorderPainted(false);
+                btnReintentar.setBounds(getWidth()*2/4 - btnReintentar.getWidth()*2/4, getHeight()*3/4 - btnReintentar.getWidth()*15/100, btnReintentar.getWidth(), btnReintentar.getHeight());
             }
             if(e.getSource() == btnTerminar){                
                 ImageIcon btnIconTerminar = new ImageIcon(getClass().getResource("/co/edu/univalle/miniproyecto2/images/TurnOnOffButtonLight.png"));
                 btnTerminar.setSize(133, 133);
                 btnTerminar.setIcon(new ImageIcon(btnIconTerminar.getImage().getScaledInstance(btnTerminar.getWidth(), btnTerminar.getHeight(), Image.SCALE_SMOOTH)));
-                btnTerminar.setBounds(jpContenido.getWidth()*3/4 - btnTerminar.getWidth()/2, jpContenido.getHeight()*3/4, btnTerminar.getWidth(), btnTerminar.getHeight());
-                btnTerminar.setOpaque(false);
-                btnTerminar.setContentAreaFilled(false);
-                btnTerminar.setBorderPainted(false);
+                btnTerminar.setBounds(getWidth()*3/4 - btnTerminar.getWidth()*2/4, getHeight()*3/4 - btnTerminar.getWidth()*15/100, btnTerminar.getWidth(), btnTerminar.getHeight());
             }
         }
 
@@ -236,30 +237,21 @@ public class VistaEstadisticas extends JFrame{
         public void mouseExited(MouseEvent e) {
             if(e.getSource() == btnInicio){                
                 ImageIcon btnIconInicio = new ImageIcon(getClass().getResource("/co/edu/univalle/miniproyecto2/images/HomeButton.png"));
-                btnInicio.setSize(133, 133);
+                btnInicio.setSize(100, 100);
                 btnInicio.setIcon(new ImageIcon(btnIconInicio.getImage().getScaledInstance(btnInicio.getWidth(), btnInicio.getHeight(), Image.SCALE_SMOOTH)));
-                btnInicio.setBounds(jpContenido.getWidth()*1/4 - btnInicio.getWidth()/2, jpContenido.getHeight()*3/4, btnInicio.getWidth(), btnInicio.getHeight());
-                btnInicio.setOpaque(false);
-                btnInicio.setContentAreaFilled(false);
-                btnInicio.setBorderPainted(false);
+                btnInicio.setBounds(getWidth()*1/4 - btnInicio.getWidth()/2, getHeight()*3/4, btnInicio.getWidth(), btnInicio.getHeight());
             }
             if(e.getSource() == btnReintentar){                
                 ImageIcon btnIconReintentar = new ImageIcon(getClass().getResource("/co/edu/univalle/miniproyecto2/images/ReplayButton.png"));
-                btnReintentar.setSize(133, 133);
+                btnReintentar.setSize(100, 100);
                 btnReintentar.setIcon(new ImageIcon(btnIconReintentar.getImage().getScaledInstance(btnReintentar.getWidth(), btnReintentar.getHeight(), Image.SCALE_SMOOTH)));
-                btnReintentar.setBounds(jpContenido.getWidth()*2/4 - btnReintentar.getWidth()/2, jpContenido.getHeight()*3/4, btnReintentar.getWidth(), btnReintentar.getHeight());
-                btnReintentar.setOpaque(false);
-                btnReintentar.setContentAreaFilled(false);
-                btnReintentar.setBorderPainted(false);
+                btnReintentar.setBounds(getWidth()*2/4 - btnReintentar.getWidth()/2, getHeight()*3/4, btnReintentar.getWidth(), btnReintentar.getHeight());
             }
             if(e.getSource() == btnTerminar){                
                 ImageIcon btnIconTerminar = new ImageIcon(getClass().getResource("/co/edu/univalle/miniproyecto2/images/TurnOnOffButton.png"));
-                btnTerminar.setSize(133, 133);
+                btnTerminar.setSize(100, 100);
                 btnTerminar.setIcon(new ImageIcon(btnIconTerminar.getImage().getScaledInstance(btnTerminar.getWidth(), btnTerminar.getHeight(), Image.SCALE_SMOOTH)));
-                btnTerminar.setBounds(jpContenido.getWidth()*3/4 - btnTerminar.getWidth()/2, jpContenido.getHeight()*3/4, btnTerminar.getWidth(), btnTerminar.getHeight());
-                btnTerminar.setOpaque(false);
-                btnTerminar.setContentAreaFilled(false);
-                btnTerminar.setBorderPainted(false);
+                btnTerminar.setBounds(getWidth()*3/4 - btnTerminar.getWidth()/2, getHeight()*3/4, btnTerminar.getWidth(), btnTerminar.getHeight());
             }
         }
 

@@ -5,6 +5,7 @@
 package co.edu.univalle.miniproyecto2.view;
 
 import co.edu.univalle.miniproyecto2.logic.Juego;
+import java.applet.AudioClip;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.GridLayout;
@@ -55,6 +56,8 @@ public class VistaJuego extends JFrame {
     
     private String modoDeJuego;
     
+    private boolean Musica = true;
+    
     private Juego juego;
     private VistaEstadisticas vistaestadisticas;
     
@@ -62,7 +65,7 @@ public class VistaJuego extends JFrame {
     
     private VistaEstadisticas vistaEstadisticas;
     
-    
+    ImageIcon btnIconAudio = new ImageIcon(getClass().getResource("/co/edu/univalle/miniproyecto2/images/AudioButton.png"));
     
     public VistaJuego(int numeroRondas, String modoDeJuego) {
         setTitle("Game | Tic Tac Toe");
@@ -77,6 +80,7 @@ public class VistaJuego extends JFrame {
         this.numeroRondas = numeroRondas;
         this.modoDeJuego = modoDeJuego;
         
+//        Musica(Musica);
         inicializarComponentes();
         setVisible(true);
     }
@@ -157,7 +161,6 @@ public class VistaJuego extends JFrame {
 //        btnPausaContinuar.setBorderPainted(false);
 //        btnPausaContinuar.addActionListener(manejadoraDeEventos);
 //        
-//        ImageIcon btnIconAudio = new ImageIcon(getClass().getResource("/co/edu/univalle/miniproyecto2/images/AudioButton.png"));
 //        btnPausaAudio = new JButton();
 //        btnPausaAudio.setSize(100,100);
 //        btnPausaAudio.setIcon(new ImageIcon(btnIconAudio.getImage().getScaledInstance(btnPausaAudio.getWidth(), btnPausaAudio.getHeight(), Image.SCALE_SMOOTH)));
@@ -204,6 +207,18 @@ public class VistaJuego extends JFrame {
         add(jpContenido);
 //        add(lContenido);
     }
+    
+//    private void Musica(boolean Musica){
+//        AudioClip sonidoFondo;
+//        sonidoFondo = java.applet.Applet.newAudioClip(getClass().getResource("/co/edu/univalle/miniproyecto2/sounds/sonidoFondo.wav"));
+//        if (Musica){
+//            sonidoFondo.loop();
+//            btnPausaAudio.setIcon(new ImageIcon(btnIconAudio.getImage().getScaledInstance(btnPausaAudio.getWidth(), btnPausaAudio.getHeight(), Image.SCALE_SMOOTH)));
+//        } else {
+//            sonidoFondo.stop();
+//            btnPausaAudio.setIcon(new ImageIcon(btnIconAudio.getImage().getScaledInstance(btnPausaAudio.getWidth(), btnPausaAudio.getHeight(), Image.SCALE_SMOOTH)));
+//        }
+//    }
     
     public class ActionEventHandler implements ActionListener {
         
@@ -316,7 +331,6 @@ public class VistaJuego extends JFrame {
             }
             return false;
         }
-        
     }
 
     public class MouseEventHandler implements MouseListener, MouseMotionListener {
@@ -328,7 +342,10 @@ public class VistaJuego extends JFrame {
 //                btnPausa.setSize(50,50);
 //                btnPausa.setIcon(new ImageIcon(btnIconNoShadowPausa.getImage().getScaledInstance(btnPausa.getWidth(), btnPausa.getHeight(), Image.SCALE_SMOOTH)));
 //                btnPausa.setBounds(getWidth()*5/6 - btnPausa.getWidth()/2,getHeight()*1/12 - btnPausa.getHeight()/2,btnPausa.getWidth(),btnPausa.getHeight());
-//
+//            }
+//            if(evento.getSource() == btnAudio){
+//                Musica = !Musica;
+//                Musica(Musica);
 //            }
         }
 
