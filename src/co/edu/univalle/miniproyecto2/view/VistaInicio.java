@@ -67,8 +67,8 @@ public class VistaInicio extends JFrame{
         add(jpContenido);
         
         lblTitulo = new JLabel("<html>TIC<p>TAC<p>TOE<html>",SwingConstants.CENTER);
-        lblTitulo.setFont(new Font("Arial", Font.PLAIN, 60));
-        lblTitulo.setBounds(0,210, 540,185);
+        lblTitulo.setFont(new Font("Showcard Gothic", Font.PLAIN, 60));
+        lblTitulo.setBounds(0,210, 540,200);
         lblTitulo.setForeground(Color.BLACK);
         
         btnJugar = new JButton();

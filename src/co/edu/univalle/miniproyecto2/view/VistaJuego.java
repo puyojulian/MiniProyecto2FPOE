@@ -35,9 +35,6 @@ public class VistaJuego extends JFrame {
     
     private JButton btnPosicion[][];
     private JButton btnPausa;
-    
-    private int contadorJ1;
-    private int contadorJ2;
  
     private JLabel lblImagenDeFondo1;
     
@@ -45,6 +42,7 @@ public class VistaJuego extends JFrame {
     private String modoDeJuego;
     
     private Juego juego;
+    private VistaEstadisticas vistaestadisticas;
     
     private int jugadorDeTurno;
     
@@ -90,12 +88,12 @@ public class VistaJuego extends JFrame {
         
         lblNombre = new JLabel("");
         
-        btnContadorJ1 = new JToggleButton(""+contadorJ1);
+        btnContadorJ1 = new JToggleButton("");
         btnContadorJ1.setSize(60, 30);
         btnContadorJ1.setBounds(jpContenido.getWidth()*1/3 - btnContadorJ1.getWidth()/2,jpContenido.getHeight()*5/6,btnContadorJ1.getWidth(),btnContadorJ1.getHeight());
 //        btnContadorJ1.setBackground(Color.GRAY);
         
-        btnContadorJ2 = new JToggleButton(""+contadorJ2);
+        btnContadorJ2 = new JToggleButton("");
         btnContadorJ2.setSize(60, 30);
         btnContadorJ2.setBounds(jpContenido.getWidth()*2/3 - btnContadorJ2.getWidth()/2,jpContenido.getHeight()*5/6,btnContadorJ2.getWidth(),btnContadorJ2.getHeight());
 //        btnContadorJ2.setBackground(Color.GREEN);
@@ -160,13 +158,14 @@ public class VistaJuego extends JFrame {
                             }
                             ganador = juego.verificarGanador();
                             if(ganador == 1 || ganador == 2) {
-                                JOptionPane.showMessageDialog(null, "¡¡GANASTE!! Jugador: " + jugadorDeTurno+".", "Resultado", JOptionPane.INFORMATION_MESSAGE);
+                                JOptionPane.showMessageDialog(null, "¡¡GANASTE!! Jugador: " + ganador+".", "Resultado", JOptionPane.INFORMATION_MESSAGE);
                             }
                         }
-                        else if (modoDeJuego == "JvsPC"){
+                        else if (modoDeJuego == "JvsPC" && (btnPosicion[i][j].getText().equals("0") || btnPosicion[i][j].getText().equals(""))){
+                            System.out.println(":(");
                             boolean resultado = false;
                             ganador = 0;
-                            
+                           
                             actualizarBotones(juego.marcarSeleccion(jugadorDeTurno, i, j));
                             jugadorDeTurno = 2;
                             
@@ -193,7 +192,6 @@ public class VistaJuego extends JFrame {
                                 }).start();
                                 dlg.setVisible(true);
                             }
-                            
                             actualizarBotones(juego.respuestaAleatoria(jugadorDeTurno));
                             jugadorDeTurno =1;
                             
@@ -211,6 +209,7 @@ public class VistaJuego extends JFrame {
                         
                         if(juego.juegoTerminado()){
                             JOptionPane.showMessageDialog(null, "Juego Terminado.", "THE END", JOptionPane.INFORMATION_MESSAGE);
+                            vistaestadisticas = new VistaEstadisticas(juego.getContGanadorJ1(),juego.getContGanadorJ2());
                         }  
                     }
                 }

@@ -4,6 +4,10 @@
  */
 package co.edu.univalle.miniproyecto2.view;
 
+import co.edu.univalle.miniproyecto2.logic.Juego;
+
+import java.awt.Color;
+import java.awt.Font;
 import java.awt.Image;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -34,7 +38,10 @@ public class VistaEstadisticas extends JFrame{
     
     private JLabel lblImagenDeFondo1;
     
-    public VistaEstadisticas() {
+    public VistaEstadisticas(int contadorJ1, int contadorJ2) {
+        this.contadorJ1 = contadorJ1;
+        this.contadorJ2 = contadorJ2;
+        
         setTitle("Game | Tic Tac Toe");
         setSize(544, 680);
         setLocationRelativeTo(null);
@@ -58,16 +65,18 @@ public class VistaEstadisticas extends JFrame{
         
         
         lblNombre = new JLabel("RESUMEN DEL JUEGO",CENTER);
-        lblNombre.setSize(jpContenido.getWidth(), 30);
+        lblNombre.setFont(new Font("Showcard Gothic", Font.PLAIN, 40));
+        lblNombre.setSize(jpContenido.getWidth(), 80);
+        lblNombre.setForeground(Color.YELLOW);
         lblNombre.setBounds(jpContenido.getWidth()/2 - lblNombre.getWidth()/2, jpContenido.getHeight()*1/8, lblNombre.getWidth(), lblNombre.getHeight());
         
         
-        lblContadorJ1 = new JLabel(""+contadorJ1,CENTER);
-        lblContadorJ1.setSize(jpContenido.getWidth(), 30);
+        lblContadorJ1 = new JLabel("Jugador 1: " + contadorJ1,CENTER);
+        lblContadorJ1.setSize(jpContenido.getWidth(), 40);
         lblContadorJ1.setBounds(jpContenido.getWidth()/2 - lblContadorJ1.getWidth()/2, jpContenido.getHeight()*1/4, lblContadorJ1.getWidth(), lblContadorJ1.getHeight());
         
-        lblContadorJ2 = new JLabel(""+contadorJ1,CENTER);
-        lblContadorJ2.setSize(jpContenido.getWidth(), 30);
+        lblContadorJ2 = new JLabel("Jugador 2: " + contadorJ2,CENTER);
+        lblContadorJ2.setSize(jpContenido.getWidth(), 40);
         lblContadorJ2.setBounds(jpContenido.getWidth()/2 - lblContadorJ2.getWidth()/2, jpContenido.getHeight()*2/4, lblContadorJ2.getWidth(), lblContadorJ2.getHeight());
         
         ImageIcon btnIconInicio = new ImageIcon(getClass().getResource("/co/edu/univalle/miniproyecto2/images/HomeButton.png"));
