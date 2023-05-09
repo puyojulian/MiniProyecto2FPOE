@@ -342,7 +342,18 @@ public class VistaJuego extends JFrame {
         private void actualizarBotones(int[][] respPosicion) {
             for(int i=0;i<3;i++) {
                 for(int j=0;j<3;j++) {
-                    btnPosicion[i][j].setText(""+respPosicion[i][j]);
+//                    btnPosicion[i][j].setText(""+respPosicion[i][j]);
+                    if(respPosicion[i][j] == 1) {
+                        ImageIcon btnImageCross = new ImageIcon(getClass().getResource("/co/edu/univalle/miniproyecto2/images/BlackCross.png"));
+                        btnPosicion[i][j].setIcon(new ImageIcon(btnImageCross.getImage().getScaledInstance(btnPosicion[i][j].getWidth(),btnPosicion[i][j].getHeight(), Image.SCALE_SMOOTH)));
+                    }
+                    else if(respPosicion[i][j] == 2) {
+                        ImageIcon btnImageCircle = new ImageIcon(getClass().getResource("/co/edu/univalle/miniproyecto2/images/RedCircle.png"));
+                        btnPosicion[i][j].setIcon(new ImageIcon(btnImageCircle.getImage().getScaledInstance(btnPosicion[i][j].getWidth(),btnPosicion[i][j].getHeight(), Image.SCALE_SMOOTH)));
+                    }
+                    else if(respPosicion[i][j] == 0) {
+                        btnPosicion[i][j].setIcon(null);
+                    }
                 }
             }
         }
