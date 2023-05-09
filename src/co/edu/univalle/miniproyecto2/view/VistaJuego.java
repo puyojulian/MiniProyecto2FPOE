@@ -255,6 +255,9 @@ public class VistaJuego extends JFrame {
                             if(ganador == 1 || ganador == 2) {
                                 JOptionPane.showMessageDialog(null, "¡¡GANASTE!! Jugador: " + ganador+".", "Resultado", JOptionPane.INFORMATION_MESSAGE);
                             }
+                            else if(juego.matrizLlena()) {
+                                JOptionPane.showMessageDialog(null, "Nadie Ganó.", "¿Empate?", JOptionPane.INFORMATION_MESSAGE);
+                            }
                         }
                         else if (modoDeJuego == "JvsPC" && (btnPosicion[i][j].getText().equals("0") || btnPosicion[i][j].getText().equals(""))){
                             System.out.println(":(");
@@ -345,11 +348,11 @@ public class VistaJuego extends JFrame {
 //                    btnPosicion[i][j].setText(""+respPosicion[i][j]);
                     if(respPosicion[i][j] == 1) {
                         ImageIcon btnImageCross = new ImageIcon(getClass().getResource("/co/edu/univalle/miniproyecto2/images/BlackCross.png"));
-                        btnPosicion[i][j].setIcon(new ImageIcon(btnImageCross.getImage().getScaledInstance(btnPosicion[i][j].getWidth(),btnPosicion[i][j].getHeight(), Image.SCALE_SMOOTH)));
+                        btnPosicion[i][j].setIcon(new ImageIcon(btnImageCross.getImage().getScaledInstance(btnPosicion[i][j].getWidth() - 20, btnPosicion[i][j].getHeight() -20, Image.SCALE_SMOOTH)));
                     }
                     else if(respPosicion[i][j] == 2) {
                         ImageIcon btnImageCircle = new ImageIcon(getClass().getResource("/co/edu/univalle/miniproyecto2/images/RedCircle.png"));
-                        btnPosicion[i][j].setIcon(new ImageIcon(btnImageCircle.getImage().getScaledInstance(btnPosicion[i][j].getWidth(),btnPosicion[i][j].getHeight(), Image.SCALE_SMOOTH)));
+                        btnPosicion[i][j].setIcon(new ImageIcon(btnImageCircle.getImage().getScaledInstance(btnPosicion[i][j].getWidth() - 20, btnPosicion[i][j].getHeight() - 20, Image.SCALE_SMOOTH)));
                     }
                     else if(respPosicion[i][j] == 0) {
                         btnPosicion[i][j].setIcon(null);
