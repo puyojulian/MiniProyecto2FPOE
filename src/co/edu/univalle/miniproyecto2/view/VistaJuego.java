@@ -35,7 +35,7 @@ public class VistaJuego extends JFrame {
 //    private JLayeredPane lContenido;
     
     private JPanel jpContenido;
-    private JPanel jpPausa;
+    private CustomPaintedJPanel jpPausa;
     private CustomPaintedJPanel jpCuadricula;
     
     private JLabel lblNombre;
@@ -59,9 +59,8 @@ public class VistaJuego extends JFrame {
     private boolean Musica = true;
     
     private Juego juego;
-    private VistaEstadisticas vistaestadisticas;
     
-//    private JInternalFrame pausa;
+    private JInternalFrame pausa;
     
     private VistaEstadisticas vistaEstadisticas;
     
@@ -90,11 +89,12 @@ public class VistaJuego extends JFrame {
 //        lContenido = new JLayeredPane();
 //        lContenido.setBounds(0, 0, getWidth(), getHeight());
         
-//        pausa = new JInternalFrame();
-//        pausa.setTitle("Pause");
-//        pausa.setSize(getWidth() - 100, getHeight() - 100);
-//        pausa.setResizable(false);
-//        pausa.setVisible(true);
+        pausa = new JInternalFrame();
+        pausa.setTitle("Pause");
+        pausa.setSize(getWidth()*5/8, getHeight()*7/10); // 
+        pausa.setResizable(false);
+        pausa.setVisible(true);
+        pausa.setBounds(getWidth()/2 - pausa.getWidth()/2, getHeight()/2 - pausa.getHeight()/2, pausa.getWidth(), pausa.getHeight());
         
         juego = new Juego(numeroRondas, modoDeJuego);
         
@@ -102,7 +102,7 @@ public class VistaJuego extends JFrame {
         jpContenido.setLayout(null);
         jpContenido.setSize(getWidth(),getHeight());
         
-//        lContenido.add(jpContenido, 0, 0);
+//        lContenido.add(jpContenido, Integer.valueOf(10));
 
         ActionEventHandler manejadoraDeEventos = new ActionEventHandler(juego);
         
@@ -141,34 +141,34 @@ public class VistaJuego extends JFrame {
         btnPausa.addMouseListener(manejadoraDeEventosMouse);
         btnPausa.addMouseMotionListener(manejadoraDeEventosMouse);
         
-//        ImageIcon btnIconReplay = new ImageIcon(getClass().getResource("/co/edu/univalle/miniproyecto2/images/PlayButton.png"));
-//        btnPausaReplay = new JButton();
-//        btnPausaReplay.setSize(100,100);
-//        btnPausaReplay.setIcon(new ImageIcon(btnIconReplay.getImage().getScaledInstance(btnPausaReplay.getWidth(), btnPausaReplay.getHeight(), Image.SCALE_SMOOTH)));
-//        btnPausaReplay.setBounds(jpContenido.getWidth()*2 - btnPausaReplay.getWidth()/2,jpContenido.getHeight()*2/4 - btnPausaReplay.getHeight()/2,btnPausaReplay.getWidth(),btnPausaReplay.getHeight());
-//        btnPausaReplay.setOpaque(false);
-//        btnPausaReplay.setContentAreaFilled(false);
-//        btnPausaReplay.setBorderPainted(false);
-//        btnPausaReplay.addActionListener(manejadoraDeEventos);
-//        
-//        ImageIcon btnIconPausaContinuar = new ImageIcon(getClass().getResource("/co/edu/univalle/miniproyecto2/images/ReplayButton.png"));
-//        btnPausaContinuar = new JButton();
-//        btnPausaContinuar.setSize(100,100);
-//        btnPausaContinuar.setIcon(new ImageIcon(btnIconPausaContinuar.getImage().getScaledInstance(btnPausaContinuar.getWidth(), btnPausaContinuar.getHeight(), Image.SCALE_SMOOTH)));
-//        btnPausaContinuar.setBounds(jpContenido.getWidth()*2- btnPausaContinuar.getWidth()/2,jpContenido.getHeight()*1/4 - btnPausaContinuar.getHeight()/2,btnPausaContinuar.getWidth(),btnPausaContinuar.getHeight());
-//        btnPausaContinuar.setOpaque(false);
-//        btnPausaContinuar.setContentAreaFilled(false);
-//        btnPausaContinuar.setBorderPainted(false);
-//        btnPausaContinuar.addActionListener(manejadoraDeEventos);
-//        
-//        btnPausaAudio = new JButton();
-//        btnPausaAudio.setSize(100,100);
-//        btnPausaAudio.setIcon(new ImageIcon(btnIconAudio.getImage().getScaledInstance(btnPausaAudio.getWidth(), btnPausaAudio.getHeight(), Image.SCALE_SMOOTH)));
-//        btnPausaAudio.setBounds(jpContenido.getWidth()*2 - btnPausaAudio.getWidth()/2,jpContenido.getHeight()*3/4 - btnPausaAudio.getHeight()/2,btnPausaAudio.getWidth(),btnPausaAudio.getHeight());
-//        btnPausaAudio.setOpaque(false);
-//        btnPausaAudio.setContentAreaFilled(false);
-//        btnPausaAudio.setBorderPainted(false);
-//        btnPausaAudio.addActionListener(manejadoraDeEventos);
+        ImageIcon btnIconReplay = new ImageIcon(getClass().getResource("/co/edu/univalle/miniproyecto2/images/ReplayButton.png"));
+        btnPausaReplay = new JButton();
+        btnPausaReplay.setSize(80,80);
+        btnPausaReplay.setIcon(new ImageIcon(btnIconReplay.getImage().getScaledInstance(btnPausaReplay.getWidth(), btnPausaReplay.getHeight(), Image.SCALE_SMOOTH)));
+        btnPausaReplay.setBounds(pausa.getWidth()/2 - btnPausaReplay.getWidth()/2,pausa.getHeight()*2/4 - btnPausaReplay.getHeight()/2,btnPausaReplay.getWidth(),btnPausaReplay.getHeight());
+        btnPausaReplay.setOpaque(false);
+        btnPausaReplay.setContentAreaFilled(false);
+        btnPausaReplay.setBorderPainted(false);
+        btnPausaReplay.addActionListener(manejadoraDeEventos);
+        
+        ImageIcon btnIconPausaContinuar = new ImageIcon(getClass().getResource("/co/edu/univalle/miniproyecto2/images/PlayButton.png"));
+        btnPausaContinuar = new JButton();
+        btnPausaContinuar.setSize(80,80);
+        btnPausaContinuar.setIcon(new ImageIcon(btnIconPausaContinuar.getImage().getScaledInstance(btnPausaContinuar.getWidth(), btnPausaContinuar.getHeight(), Image.SCALE_SMOOTH)));
+        btnPausaContinuar.setBounds(pausa.getWidth()/2- btnPausaContinuar.getWidth()/2,pausa.getHeight()*1/4 - btnPausaContinuar.getHeight()/2,btnPausaContinuar.getWidth(),btnPausaContinuar.getHeight());
+        btnPausaContinuar.setOpaque(false);
+        btnPausaContinuar.setContentAreaFilled(false);
+        btnPausaContinuar.setBorderPainted(false);
+        btnPausaContinuar.addActionListener(manejadoraDeEventos);
+        
+        btnPausaAudio = new JButton();
+        btnPausaAudio.setSize(80,80);
+        btnPausaAudio.setIcon(new ImageIcon(btnIconAudio.getImage().getScaledInstance(btnPausaAudio.getWidth(), btnPausaAudio.getHeight(), Image.SCALE_SMOOTH)));
+        btnPausaAudio.setBounds(pausa.getWidth()/2 - btnPausaAudio.getWidth()/2,pausa.getHeight()*3/4 - btnPausaAudio.getHeight()/2,btnPausaAudio.getWidth(),btnPausaAudio.getHeight());
+        btnPausaAudio.setOpaque(false);
+        btnPausaAudio.setContentAreaFilled(false);
+        btnPausaAudio.setBorderPainted(false);
+        btnPausaAudio.addActionListener(manejadoraDeEventos);
                 
         
         btnPosicion = new JButton[3][3];
@@ -178,7 +178,7 @@ public class VistaJuego extends JFrame {
                 btnPosicion[i][j] = new JButton("");
                 btnPosicion[i][j].setOpaque(false);
                 btnPosicion[i][j].setContentAreaFilled(false);
-                btnPosicion[i][j].setBorderPainted(true);
+                btnPosicion[i][j].setBorderPainted(false);
                 
                 btnPosicion[i][j].addActionListener(manejadoraDeEventos);
                 
@@ -186,16 +186,23 @@ public class VistaJuego extends JFrame {
             }
         }
         
-//        jpPausa = new JPanel();
-//        jpPausa.setLayout(null);
-//        jpPausa.setSize(pausa.getWidth(),pausa.getHeight());
-//        jpPausa.setBounds(0, 0, pausa.getWidth(), pausa.getHeight());
+        jpPausa = new CustomPaintedJPanel("/co/edu/univalle/miniproyecto2/images/wood2_45.png");
+        jpPausa.setLayout(null);
+        jpPausa.setSize(pausa.getWidth(),pausa.getHeight());
+        jpPausa.setBounds(0, 0, pausa.getWidth(), pausa.getHeight());
 //        
-//        jpPausa.add(btnPausaReplay);
-//        jpPausa.add(btnPausaContinuar);
-//        jpPausa.add(btnPausaAudio);
+//        lContenido.add(jpPausa, Integer.valueOf(100));
+
+        jpPausa.add(btnPausaReplay);
+        jpPausa.add(btnPausaContinuar);
+        jpPausa.add(btnPausaAudio);
         
-//        pausa.add(jpPausa);
+        
+//        lContenido.moveToBack(jpPausa);
+        
+        pausa.add(jpPausa);
+        
+        add(pausa);
         
         jpContenido.add(btnContadorJ1);
         jpContenido.add(btnContadorJ2);
@@ -203,8 +210,9 @@ public class VistaJuego extends JFrame {
         jpContenido.add(jpCuadricula);
         jpContenido.add(lblImagenDeFondo1);
         
-//        add(pausa);
         add(jpContenido);
+        
+        pausa.dispose();
 //        add(lContenido);
     }
     
@@ -297,14 +305,37 @@ public class VistaJuego extends JFrame {
                         if(juego.juegoTerminado()){
                             JOptionPane.showMessageDialog(null, "Juego Terminado.", "THE END", JOptionPane.INFORMATION_MESSAGE);
                             dispose();
-                            vistaestadisticas = new VistaEstadisticas(juego.getContGanadorJ1(),juego.getContGanadorJ2(), numeroRondas, modoDeJuego);
+                            vistaEstadisticas = new VistaEstadisticas(juego.getContGanadorJ1(),juego.getContGanadorJ2(), numeroRondas, modoDeJuego);
                         }  
                     }
                 }
             }
             if(e.getSource() == btnPausa) {
-//                lContenido.add(jpPausa, 1, 0);
                 
+                pausa.setBounds(getWidth()/2 - pausa.getWidth()/2, getHeight()/2 - pausa.getHeight()/2, pausa.getWidth(), pausa.getHeight());
+
+                pausa.show();
+                
+                for(int i = 0; i < jpContenido.getComponents().length; i++) {
+                    jpContenido.getComponents()[i].setEnabled(false);
+                }
+                jpContenido.setEnabled(false);
+                for(int i = 0; i < jpCuadricula.getComponents().length; i++) {
+                    jpCuadricula.getComponents()[i].setEnabled(false);
+                }
+                jpCuadricula.setEnabled(false);
+            }
+            else if(e.getSource() == btnPausaContinuar) {
+                pausa.dispose();
+                
+                for(int i = 0; i < jpContenido.getComponents().length; i++) {
+                    jpContenido.getComponents()[i].setEnabled(true);
+                }
+                jpContenido.setEnabled(true);
+                for(int i = 0; i < jpCuadricula.getComponents().length; i++) {
+                    jpCuadricula.getComponents()[i].setEnabled(true);
+                }
+                jpCuadricula.setEnabled(true);
             }
         }
 
@@ -356,6 +387,7 @@ public class VistaJuego extends JFrame {
                 btnPausa.setSize(50,50);
                 btnPausa.setIcon(new ImageIcon(btnIconNoShadowPausa.getImage().getScaledInstance(btnPausa.getWidth(), btnPausa.getHeight(), Image.SCALE_SMOOTH)));
                 btnPausa.setBounds(getWidth()*5/6 - btnPausa.getWidth()/2,getHeight()*1/12 - btnPausa.getHeight()/2,btnPausa.getWidth(),btnPausa.getHeight());
+                
             }
         }
 
