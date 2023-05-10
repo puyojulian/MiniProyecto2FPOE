@@ -12,10 +12,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
-import java.awt.event.MouseMotionListener;
-import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -23,6 +19,7 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JToggleButton;
+import javax.swing.border.LineBorder;
 /**
  *
  * @author Sebastián
@@ -84,17 +81,37 @@ public class VistaOpciones extends JFrame{
         btnAudio.setContentAreaFilled(false);
         btnAudio.setBorderPainted(false);
         
-        btnNumRonda1 = new JToggleButton("1");
-        btnNumRonda1.setFont(new java.awt.Font("Arial", 0, 35));
+        btnNumRonda1 = new JToggleButton("");
+        ImageIcon btnIconRonda1 = new ImageIcon(getClass().getResource("/co/edu/univalle/miniproyecto2/images/Ronda1.png"));
+        btnNumRonda1.setSize(75, 75);
+        btnNumRonda1.setIcon(new ImageIcon(btnIconRonda1.getImage().getScaledInstance(btnNumRonda1.getWidth(), btnNumRonda1.getHeight(), Image.SCALE_SMOOTH)));
+        btnNumRonda1.setOpaque(false);
+        btnNumRonda1.setContentAreaFilled(false);
+        btnNumRonda1.setBorderPainted(false);
         
-        btnNumRonda2 = new JToggleButton("2");
-        btnNumRonda2.setFont(new java.awt.Font("Arial", 0, 35));
+        btnNumRonda2 = new JToggleButton("");
+        ImageIcon btnIconRonda2 = new ImageIcon(getClass().getResource("/co/edu/univalle/miniproyecto2/images/Ronda2.png"));
+        btnNumRonda2.setSize(75, 75);
+        btnNumRonda2.setIcon(new ImageIcon(btnIconRonda2.getImage().getScaledInstance(btnNumRonda2.getWidth(), btnNumRonda2.getHeight(), Image.SCALE_SMOOTH)));
+        btnNumRonda2.setOpaque(false);
+        btnNumRonda2.setContentAreaFilled(false);
+        btnNumRonda2.setBorderPainted(false);
         
-        btnNumRonda3 = new JToggleButton("3");
-        btnNumRonda3.setFont(new java.awt.Font("Arial", 0, 35));
+        btnNumRonda3 = new JToggleButton("");
+        ImageIcon btnIconRonda3 = new ImageIcon(getClass().getResource("/co/edu/univalle/miniproyecto2/images/Ronda3.png"));
+        btnNumRonda3.setSize(75, 75);
+        btnNumRonda3.setIcon(new ImageIcon(btnIconRonda3.getImage().getScaledInstance(btnNumRonda3.getWidth(), btnNumRonda3.getHeight(), Image.SCALE_SMOOTH)));
+        btnNumRonda3.setOpaque(false);
+        btnNumRonda3.setContentAreaFilled(false);
+        btnNumRonda3.setBorderPainted(false);
         
-        btnNumRonda4 = new JToggleButton("4");
-        btnNumRonda4.setFont(new java.awt.Font("Arial", 0, 35));
+        btnNumRonda4 = new JToggleButton("");
+        ImageIcon btnIconRonda4 = new ImageIcon(getClass().getResource("/co/edu/univalle/miniproyecto2/images/Ronda4.png"));
+        btnNumRonda4.setSize(75, 75);
+        btnNumRonda4.setIcon(new ImageIcon(btnIconRonda4.getImage().getScaledInstance(btnNumRonda4.getWidth(), btnNumRonda4.getHeight(), Image.SCALE_SMOOTH)));
+        btnNumRonda4.setOpaque(false);
+        btnNumRonda4.setContentAreaFilled(false);
+        btnNumRonda4.setBorderPainted(false);
         
         btnJvsPC = new JToggleButton("");
         btnJvsPC.setBounds(150,200, 115,115);
@@ -104,7 +121,7 @@ public class VistaOpciones extends JFrame{
         btnJvsPC.setBounds(getWidth()*4/12 - btnJvsPC.getWidth()/2, getHeight()*5/13 - btnJvsPC.getWidth()/2, btnJvsPC.getWidth(), btnJvsPC.getHeight());
         btnJvsPC.setOpaque(false);
         btnJvsPC.setContentAreaFilled(false);
-        btnJvsPC.setBorderPainted(false);
+        btnJvsPC.setBorder(new LineBorder(Color.BLACK));
 
         btnJvsJ = new JToggleButton("");
         btnJvsJ.setBounds(270,200, 115,115);
@@ -113,7 +130,7 @@ public class VistaOpciones extends JFrame{
         btnJvsJ.setIcon(new ImageIcon(btnIconJvsJ.getImage().getScaledInstance(btnJvsJ.getWidth(), btnJvsJ.getHeight(), Image.SCALE_SMOOTH)));
         btnJvsJ.setBounds(getWidth()*8/12 - btnJvsJ.getWidth()/2, getHeight()*5/13 - btnJvsJ.getWidth()/2, btnJvsJ.getWidth(), btnJvsJ.getHeight());
         btnJvsJ.setOpaque(false);
-        btnJvsJ.setBorderPainted(false);
+        btnJvsJ.setBorder(new LineBorder(Color.BLACK));
         
         ImageIcon btnIconConfirm = new ImageIcon(getClass().getResource("/co/edu/univalle/miniproyecto2/images/ConfirmButton.png"));
         btnConfirmar = new JButton();
@@ -122,10 +139,9 @@ public class VistaOpciones extends JFrame{
         btnConfirmar.setBounds(jpContenido.getWidth()*1/2 - btnConfirmar.getWidth()/2,jpContenido.getHeight()*9/12 - btnConfirmar.getHeight()/2,btnConfirmar.getWidth(),btnConfirmar.getHeight());
         btnConfirmar.setOpaque(false);
         btnConfirmar.setContentAreaFilled(false);
-        btnConfirmar.setBorderPainted(false);
         
         jpBotones = new JPanel();
-        jpBotones.setBounds(150,380,235,35);
+        jpBotones.setBounds(115,380,310,75);
         
         GridLayout GridBotones;
         GridBotones = new GridLayout(1,4,5,0);
@@ -198,39 +214,83 @@ public class VistaOpciones extends JFrame{
             }
             else if(evento.getSource() == btnNumRonda1) {                
                 btnNumRonda2.setSelected(false);
+                ImageIcon btnIconRonda2 = new ImageIcon(getClass().getResource("/co/edu/univalle/miniproyecto2/images/Ronda2.png"));
+                btnNumRonda2.setSize(75, 75);
+                btnNumRonda2.setIcon(new ImageIcon(btnIconRonda2.getImage().getScaledInstance(btnNumRonda2.getWidth(), btnNumRonda2.getHeight(), Image.SCALE_SMOOTH)));
+                
                 btnNumRonda3.setSelected(false);
+                ImageIcon btnIconRonda3 = new ImageIcon(getClass().getResource("/co/edu/univalle/miniproyecto2/images/Ronda3.png"));
+                btnNumRonda3.setSize(75, 75);
+                btnNumRonda3.setIcon(new ImageIcon(btnIconRonda3.getImage().getScaledInstance(btnNumRonda3.getWidth(), btnNumRonda3.getHeight(), Image.SCALE_SMOOTH)));
+                
                 btnNumRonda4.setSelected(false);
-                btnNumRonda2.setBackground(new java.awt.Color(195, 195, 195));
-                btnNumRonda3.setBackground(new java.awt.Color(195, 195, 195));
-                btnNumRonda4.setBackground(new java.awt.Color(195, 195, 195));
-                btnNumRonda1.setBackground(new java.awt.Color(181, 230, 29));
+                ImageIcon btnIconRonda4 = new ImageIcon(getClass().getResource("/co/edu/univalle/miniproyecto2/images/Ronda4.png"));
+                btnNumRonda4.setSize(75, 75);
+                btnNumRonda4.setIcon(new ImageIcon(btnIconRonda4.getImage().getScaledInstance(btnNumRonda4.getWidth(), btnNumRonda4.getHeight(), Image.SCALE_SMOOTH)));
+                
+                ImageIcon btnIconRonda1 = new ImageIcon(getClass().getResource("/co/edu/univalle/miniproyecto2/images/Ronda1Selected.png"));
+                btnNumRonda1.setSize(75, 75);
+                btnNumRonda1.setIcon(new ImageIcon(btnIconRonda1.getImage().getScaledInstance(btnNumRonda1.getWidth(), btnNumRonda1.getHeight(), Image.SCALE_SMOOTH)));
             }
             else if(evento.getSource() == btnNumRonda2) {                
                 btnNumRonda1.setSelected(false);
+                ImageIcon btnIconRonda1 = new ImageIcon(getClass().getResource("/co/edu/univalle/miniproyecto2/images/Ronda1.png"));
+                btnNumRonda1.setSize(75, 75);
+                btnNumRonda1.setIcon(new ImageIcon(btnIconRonda1.getImage().getScaledInstance(btnNumRonda1.getWidth(), btnNumRonda1.getHeight(), Image.SCALE_SMOOTH)));
+                
                 btnNumRonda3.setSelected(false);
+                ImageIcon btnIconRonda3 = new ImageIcon(getClass().getResource("/co/edu/univalle/miniproyecto2/images/Ronda3.png"));
+                btnNumRonda3.setSize(75, 75);
+                btnNumRonda3.setIcon(new ImageIcon(btnIconRonda3.getImage().getScaledInstance(btnNumRonda3.getWidth(), btnNumRonda3.getHeight(), Image.SCALE_SMOOTH)));
+               
                 btnNumRonda4.setSelected(false);
-                btnNumRonda1.setBackground(new java.awt.Color(195, 195, 195));
-                btnNumRonda3.setBackground(new java.awt.Color(195, 195, 195));
-                btnNumRonda4.setBackground(new java.awt.Color(195, 195, 195));
-                btnNumRonda2.setBackground(new java.awt.Color(181, 230, 29));
+                ImageIcon btnIconRonda4 = new ImageIcon(getClass().getResource("/co/edu/univalle/miniproyecto2/images/Ronda4.png"));
+                btnNumRonda4.setSize(75, 75);
+                btnNumRonda4.setIcon(new ImageIcon(btnIconRonda4.getImage().getScaledInstance(btnNumRonda4.getWidth(), btnNumRonda4.getHeight(), Image.SCALE_SMOOTH)));
+                
+                ImageIcon btnIconRonda2 = new ImageIcon(getClass().getResource("/co/edu/univalle/miniproyecto2/images/Ronda2Selected.png"));
+                btnNumRonda2.setSize(75, 75);
+                btnNumRonda2.setIcon(new ImageIcon(btnIconRonda2.getImage().getScaledInstance(btnNumRonda2.getWidth(), btnNumRonda2.getHeight(), Image.SCALE_SMOOTH)));
             }
             else if(evento.getSource() == btnNumRonda3) {                
                 btnNumRonda1.setSelected(false);
+                ImageIcon btnIconRonda1 = new ImageIcon(getClass().getResource("/co/edu/univalle/miniproyecto2/images/Ronda1.png"));
+                btnNumRonda1.setSize(75, 75);
+                btnNumRonda1.setIcon(new ImageIcon(btnIconRonda1.getImage().getScaledInstance(btnNumRonda1.getWidth(), btnNumRonda1.getHeight(), Image.SCALE_SMOOTH)));
+                
                 btnNumRonda2.setSelected(false);
+                ImageIcon btnIconRonda2 = new ImageIcon(getClass().getResource("/co/edu/univalle/miniproyecto2/images/Ronda2.png"));
+                btnNumRonda2.setSize(75, 75);
+                btnNumRonda2.setIcon(new ImageIcon(btnIconRonda2.getImage().getScaledInstance(btnNumRonda2.getWidth(), btnNumRonda2.getHeight(), Image.SCALE_SMOOTH)));
+                
                 btnNumRonda4.setSelected(false);
-                btnNumRonda1.setBackground(new java.awt.Color(195, 195, 195));
-                btnNumRonda2.setBackground(new java.awt.Color(195, 195, 195));
-                btnNumRonda4.setBackground(new java.awt.Color(195, 195, 195));
-                btnNumRonda3.setBackground(new java.awt.Color(181, 230, 29));
+                ImageIcon btnIconRonda4 = new ImageIcon(getClass().getResource("/co/edu/univalle/miniproyecto2/images/Ronda4.png"));
+                btnNumRonda4.setSize(75, 75);
+                btnNumRonda4.setIcon(new ImageIcon(btnIconRonda4.getImage().getScaledInstance(btnNumRonda4.getWidth(), btnNumRonda4.getHeight(), Image.SCALE_SMOOTH)));
+                
+                ImageIcon btnIconRonda3 = new ImageIcon(getClass().getResource("/co/edu/univalle/miniproyecto2/images/Ronda3Selected.png"));
+                btnNumRonda3.setSize(75, 75);
+                btnNumRonda3.setIcon(new ImageIcon(btnIconRonda3.getImage().getScaledInstance(btnNumRonda3.getWidth(), btnNumRonda3.getHeight(), Image.SCALE_SMOOTH)));
             }
             else if(evento.getSource() == btnNumRonda4) {                
                 btnNumRonda1.setSelected(false);
+                ImageIcon btnIconRonda1 = new ImageIcon(getClass().getResource("/co/edu/univalle/miniproyecto2/images/Ronda1.png"));
+                btnNumRonda1.setSize(75, 75);
+                btnNumRonda1.setIcon(new ImageIcon(btnIconRonda1.getImage().getScaledInstance(btnNumRonda1.getWidth(), btnNumRonda1.getHeight(), Image.SCALE_SMOOTH)));
+                
                 btnNumRonda2.setSelected(false);
+                ImageIcon btnIconRonda2 = new ImageIcon(getClass().getResource("/co/edu/univalle/miniproyecto2/images/Ronda2.png"));
+                btnNumRonda2.setSize(75, 75);
+                btnNumRonda2.setIcon(new ImageIcon(btnIconRonda2.getImage().getScaledInstance(btnNumRonda2.getWidth(), btnNumRonda2.getHeight(), Image.SCALE_SMOOTH)));
+                
                 btnNumRonda3.setSelected(false);
-                btnNumRonda1.setBackground(new java.awt.Color(195, 195, 195));
-                btnNumRonda2.setBackground(new java.awt.Color(195, 195, 195));
-                btnNumRonda3.setBackground(new java.awt.Color(195, 195, 195));
-                btnNumRonda4.setBackground(new java.awt.Color(181, 230, 29));
+                ImageIcon btnIconRonda3 = new ImageIcon(getClass().getResource("/co/edu/univalle/miniproyecto2/images/Ronda3.png"));
+                btnNumRonda3.setSize(75, 75);
+                btnNumRonda3.setIcon(new ImageIcon(btnIconRonda3.getImage().getScaledInstance(btnNumRonda3.getWidth(), btnNumRonda3.getHeight(), Image.SCALE_SMOOTH)));
+                
+                ImageIcon btnIconRonda4 = new ImageIcon(getClass().getResource("/co/edu/univalle/miniproyecto2/images/Ronda4Selected.png"));
+                btnNumRonda4.setSize(75, 75);
+                btnNumRonda4.setIcon(new ImageIcon(btnIconRonda4.getImage().getScaledInstance(btnNumRonda4.getWidth(), btnNumRonda4.getHeight(), Image.SCALE_SMOOTH)));
             }
             if(evento.getSource() == btnConfirmar) {
                 if(btnJvsJ.isSelected() && btnNumRonda1.isSelected()) {
