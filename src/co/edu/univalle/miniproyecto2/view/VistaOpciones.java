@@ -12,6 +12,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.awt.event.MouseMotionListener;
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
@@ -93,13 +96,24 @@ public class VistaOpciones extends JFrame{
         btnNumRonda4 = new JToggleButton("4");
         btnNumRonda4.setFont(new java.awt.Font("Arial", 0, 35));
         
-        btnJvsPC = new JToggleButton("J vs PC");
-        btnJvsPC.setFont(new java.awt.Font("Arial", 0, 20));
-        btnJvsPC.setBounds(150,300, 115,35);
+        btnJvsPC = new JToggleButton("");
+        btnJvsPC.setBounds(150,200, 115,115);
+        ImageIcon btnIconJvsPC = new ImageIcon(getClass().getResource("/co/edu/univalle/miniproyecto2/images/PlayerVsPc.png"));
+        btnJvsPC.setSize(150, 150);
+        btnJvsPC.setIcon(new ImageIcon(btnIconJvsPC.getImage().getScaledInstance(btnJvsPC.getWidth(), btnJvsPC.getHeight(), Image.SCALE_SMOOTH)));
+        btnJvsPC.setBounds(getWidth()*4/12 - btnJvsPC.getWidth()/2, getHeight()*5/13 - btnJvsPC.getWidth()/2, btnJvsPC.getWidth(), btnJvsPC.getHeight());
+        btnJvsPC.setOpaque(false);
+        btnJvsPC.setContentAreaFilled(false);
+        btnJvsPC.setBorderPainted(false);
 
-        btnJvsJ = new JToggleButton("J vs J");
-        btnJvsJ.setFont(new java.awt.Font("Arial", 0, 20));
-        btnJvsJ.setBounds(270,300, 115,35);
+        btnJvsJ = new JToggleButton("");
+        btnJvsJ.setBounds(270,200, 115,115);
+        ImageIcon btnIconJvsJ = new ImageIcon(getClass().getResource("/co/edu/univalle/miniproyecto2/images/PlayerVsPlayer.png"));
+        btnJvsJ.setSize(150, 150);
+        btnJvsJ.setIcon(new ImageIcon(btnIconJvsJ.getImage().getScaledInstance(btnJvsJ.getWidth(), btnJvsJ.getHeight(), Image.SCALE_SMOOTH)));
+        btnJvsJ.setBounds(getWidth()*8/12 - btnJvsJ.getWidth()/2, getHeight()*5/13 - btnJvsJ.getWidth()/2, btnJvsJ.getWidth(), btnJvsJ.getHeight());
+        btnJvsJ.setOpaque(false);
+        btnJvsJ.setBorderPainted(false);
         
         ImageIcon btnIconConfirm = new ImageIcon(getClass().getResource("/co/edu/univalle/miniproyecto2/images/ConfirmButton.png"));
         btnConfirmar = new JButton();
@@ -111,7 +125,7 @@ public class VistaOpciones extends JFrame{
         btnConfirmar.setBorderPainted(false);
         
         jpBotones = new JPanel();
-        jpBotones.setBounds(150,340,235,35);
+        jpBotones.setBounds(150,380,235,35);
         
         GridLayout GridBotones;
         GridBotones = new GridLayout(1,4,5,0);
@@ -160,31 +174,63 @@ public class VistaOpciones extends JFrame{
                 Musica = !Musica;
                 Musica(Musica);
             }
-                if(evento.getSource() == btnJvsJ) {                
+                if(evento.getSource() == btnJvsJ) { 
+                ImageIcon btnIconJvsJ = new ImageIcon(getClass().getResource("/co/edu/univalle/miniproyecto2/images/PlayerVsPlayerSelected.png"));
+                btnJvsJ.setSize(150, 150);
+                btnJvsJ.setIcon(new ImageIcon(btnIconJvsJ.getImage().getScaledInstance(btnJvsJ.getWidth(), btnJvsJ.getHeight(), Image.SCALE_SMOOTH)));
+                btnJvsJ.setBounds(getWidth()*8/12 - btnJvsJ.getWidth()/2, getHeight()*5/13 - btnJvsJ.getWidth()/2, btnJvsJ.getWidth(), btnJvsJ.getHeight());
                 btnJvsPC.setSelected(false);
+                ImageIcon btnIconJvsPC = new ImageIcon(getClass().getResource("/co/edu/univalle/miniproyecto2/images/PlayerVsPc.png"));
+                btnJvsPC.setSize(150, 150);
+                btnJvsPC.setIcon(new ImageIcon(btnIconJvsPC.getImage().getScaledInstance(btnJvsPC.getWidth(), btnJvsPC.getHeight(), Image.SCALE_SMOOTH)));
+                btnJvsPC.setBounds(getWidth()*4/12 - btnJvsPC.getWidth()/2, getHeight()*5/13 - btnJvsPC.getWidth()/2, btnJvsPC.getWidth(), btnJvsPC.getHeight());
             }
             else if(evento.getSource() == btnJvsPC) {
+                ImageIcon btnIconJvsPC = new ImageIcon(getClass().getResource("/co/edu/univalle/miniproyecto2/images/PlayerVsPc2.png"));
+                btnJvsPC.setSize(150, 150);
+                btnJvsPC.setIcon(new ImageIcon(btnIconJvsPC.getImage().getScaledInstance(btnJvsPC.getWidth(), btnJvsPC.getHeight(), Image.SCALE_SMOOTH)));
+                btnJvsPC.setBounds(getWidth()*4/12 - btnJvsPC.getWidth()/2, getHeight()*5/13 - btnJvsPC.getWidth()/2, btnJvsPC.getWidth(), btnJvsPC.getHeight());
                 btnJvsJ.setSelected(false);
+                ImageIcon btnIconJvsJ = new ImageIcon(getClass().getResource("/co/edu/univalle/miniproyecto2/images/PlayerVsPlayer.png"));
+                btnJvsJ.setSize(150, 150);
+                btnJvsJ.setIcon(new ImageIcon(btnIconJvsJ.getImage().getScaledInstance(btnJvsJ.getWidth(), btnJvsJ.getHeight(), Image.SCALE_SMOOTH)));
+                btnJvsJ.setBounds(getWidth()*8/12 - btnJvsJ.getWidth()/2, getHeight()*5/13 - btnJvsJ.getWidth()/2, btnJvsJ.getWidth(), btnJvsJ.getHeight());
             }
             else if(evento.getSource() == btnNumRonda1) {                
                 btnNumRonda2.setSelected(false);
                 btnNumRonda3.setSelected(false);
                 btnNumRonda4.setSelected(false);
+                btnNumRonda2.setBackground(new java.awt.Color(195, 195, 195));
+                btnNumRonda3.setBackground(new java.awt.Color(195, 195, 195));
+                btnNumRonda4.setBackground(new java.awt.Color(195, 195, 195));
+                btnNumRonda1.setBackground(new java.awt.Color(181, 230, 29));
             }
             else if(evento.getSource() == btnNumRonda2) {                
                 btnNumRonda1.setSelected(false);
                 btnNumRonda3.setSelected(false);
                 btnNumRonda4.setSelected(false);
+                btnNumRonda1.setBackground(new java.awt.Color(195, 195, 195));
+                btnNumRonda3.setBackground(new java.awt.Color(195, 195, 195));
+                btnNumRonda4.setBackground(new java.awt.Color(195, 195, 195));
+                btnNumRonda2.setBackground(new java.awt.Color(181, 230, 29));
             }
             else if(evento.getSource() == btnNumRonda3) {                
                 btnNumRonda1.setSelected(false);
                 btnNumRonda2.setSelected(false);
                 btnNumRonda4.setSelected(false);
+                btnNumRonda1.setBackground(new java.awt.Color(195, 195, 195));
+                btnNumRonda2.setBackground(new java.awt.Color(195, 195, 195));
+                btnNumRonda4.setBackground(new java.awt.Color(195, 195, 195));
+                btnNumRonda3.setBackground(new java.awt.Color(181, 230, 29));
             }
             else if(evento.getSource() == btnNumRonda4) {                
                 btnNumRonda1.setSelected(false);
                 btnNumRonda2.setSelected(false);
                 btnNumRonda3.setSelected(false);
+                btnNumRonda1.setBackground(new java.awt.Color(195, 195, 195));
+                btnNumRonda2.setBackground(new java.awt.Color(195, 195, 195));
+                btnNumRonda3.setBackground(new java.awt.Color(195, 195, 195));
+                btnNumRonda4.setBackground(new java.awt.Color(181, 230, 29));
             }
             if(evento.getSource() == btnConfirmar) {
                 if(btnJvsJ.isSelected() && btnNumRonda1.isSelected()) {
