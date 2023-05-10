@@ -6,8 +6,6 @@ package co.edu.univalle.miniproyecto2.view;
 
 import java.awt.Color;
 import java.awt.Font;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import javax.swing.JFrame;
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -15,6 +13,9 @@ import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import java.applet.AudioClip;
 import java.awt.Image;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.awt.event.MouseMotionListener;
 import javax.swing.ImageIcon;
 /**
  *
@@ -87,10 +88,10 @@ public class VistaInicio extends JFrame{
         jpContenido.add(btnAudio);
         jpContenido.add(lblImagenDeFondo1);
         
-        ManejadorDeEventos manejadorEventos = new ManejadorDeEventos();
-        
-        btnJugar.addActionListener(manejadorEventos);
-        btnAudio.addActionListener(manejadorEventos);
+        VistaInicio.MouseEventHandler mouseEventHandler = new VistaInicio.MouseEventHandler();
+
+        btnJugar.addMouseListener(mouseEventHandler);
+        btnAudio.addMouseListener(mouseEventHandler);
     }
 
     private void Musica(boolean Musica){
@@ -105,18 +106,80 @@ public class VistaInicio extends JFrame{
         }
     }
     
-    class ManejadorDeEventos implements ActionListener{
+    public class MouseEventHandler implements MouseListener, MouseMotionListener {
+
         @Override
-        public void actionPerformed(ActionEvent evento){
-            if(evento.getSource() == btnJugar){                
-                dispose();
-                VistaOpciones vistaopciones = new VistaOpciones();
-            }
-            if(evento.getSource() == btnAudio){
+        public void mouseClicked(MouseEvent e) {
+            if(e.getSource() == btnAudio){
                 Musica = !Musica;
                 Musica(Musica);
             }
         }
+
+        @Override
+        public void mousePressed(MouseEvent e) {
+            throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        }
+
+        @Override
+        public void mouseReleased(MouseEvent e) {
+            if(e.getSource() == btnJugar){                
+                dispose();
+                VistaOpciones vistaopciones = new VistaOpciones();
+            }
+        }
+
+        @Override
+        public void mouseEntered(MouseEvent e) {
+            if(e.getSource() == btnJugar){                
+                ImageIcon btnIconJugar = new ImageIcon(getClass().getResource("/co/edu/univalle/miniproyecto2/images/PlayButtonLight.png"));
+                btnJugar.setSize(106, 106);
+                btnJugar.setIcon(new ImageIcon(btnIconJugar.getImage().getScaledInstance(btnJugar.getWidth(), btnJugar.getHeight(), Image.SCALE_SMOOTH)));
+                btnJugar.setBounds(getWidth()/2 - btnJugar.getWidth()/2, getHeight()*9/12 - btnJugar.getWidth()/2, btnJugar.getWidth(), btnJugar.getHeight());
+            }
+            if(e.getSource() == btnAudio){ 
+                if (Musica){
+                    ImageIcon btnIconAudio = new ImageIcon(getClass().getResource("/co/edu/univalle/miniproyecto2/images/AudioButtonLight.png"));
+                } else {
+                    ImageIcon btnIconAudio = new ImageIcon(getClass().getResource("/co/edu/univalle/miniproyecto2/images/MuteButtonLight.png"));
+                }
+                
+                btnAudio.setSize(66, 66);
+                btnAudio.setIcon(new ImageIcon(btnIconAudio.getImage().getScaledInstance(btnAudio.getWidth(), btnAudio.getHeight(), Image.SCALE_SMOOTH)));
+                btnAudio.setBounds(getWidth()/2 - btnAudio.getWidth()/2, getHeight()*2/12 - btnAudio.getWidth()/2, btnAudio.getWidth(), btnAudio.getHeight());
+            }
+        }
+
+        @Override
+        public void mouseExited(MouseEvent e) {
+            if(e.getSource() == btnJugar){                
+                ImageIcon btnIconJugar = new ImageIcon(getClass().getResource("/co/edu/univalle/miniproyecto2/images/PlayButton.png"));
+                btnJugar.setSize(80, 80);
+                btnJugar.setIcon(new ImageIcon(btnIconJugar.getImage().getScaledInstance(btnJugar.getWidth(), btnJugar.getHeight(), Image.SCALE_SMOOTH)));
+                btnJugar.setBounds(getWidth()*1/2 - btnJugar.getWidth()/2,getHeight()*9/12 - btnJugar.getHeight()/2,btnJugar.getWidth(),btnJugar.getHeight());
+            }
+            if(e.getSource() == btnAudio){                
+                if (Musica){
+                    ImageIcon btnIconAudio = new ImageIcon(getClass().getResource("/co/edu/univalle/miniproyecto2/images/AudioButton.png"));
+                } else {
+                    ImageIcon btnIconAudio = new ImageIcon(getClass().getResource("/co/edu/univalle/miniproyecto2/images/MuteButton.png"));
+                }
+                btnAudio.setSize(50, 50);
+                btnAudio.setIcon(new ImageIcon(btnIconAudio.getImage().getScaledInstance(btnAudio.getWidth(), btnAudio.getHeight(), Image.SCALE_SMOOTH)));
+                btnAudio.setBounds(getWidth()*1/2 - btnAudio.getWidth()/2,getHeight()*2/12 - btnAudio.getHeight()/2,btnAudio.getWidth(),btnAudio.getHeight());
+            }
+        }
+
+        @Override
+        public void mouseDragged(MouseEvent e) {
+            throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        }
+
+        @Override
+        public void mouseMoved(MouseEvent e) {
+            throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        }
+        
     }
     
 }
