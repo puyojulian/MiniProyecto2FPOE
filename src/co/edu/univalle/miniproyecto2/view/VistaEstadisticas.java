@@ -56,7 +56,7 @@ public class VistaEstadisticas extends JFrame{
         this.numeroRondas = numeroRondas;
         this.modoDeJuego = modoDeJuego;
         
-        setTitle("Game | Tic Tac Toe");
+        setTitle("Estadistics | Tic Tac Toe");
         setSize(544, 680);
         setLocationRelativeTo(null);
         setResizable(false);
