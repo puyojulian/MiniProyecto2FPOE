@@ -187,4 +187,8 @@ public class Juego {
             }
         }
     }
+    
+    public int[][] getPosicion() {
+        return posicion;
+    }
 }

@@ -6,15 +6,24 @@ package co.edu.univalle.miniproyecto2.view;
 
 import co.edu.univalle.miniproyecto2.logic.Juego;
 import java.applet.AudioClip;
+import java.awt.AWTException;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.Image;
+import java.awt.KeyEventDispatcher;
+import java.awt.KeyboardFocusManager;
+import java.awt.Robot;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JDialog;
@@ -31,8 +40,6 @@ import javax.swing.JToggleButton;
  * @author Julian Puyo
  */
 public class VistaJuego extends JFrame {
-    
-//    private JLayeredPane lContenido;
     
     private JPanel jpContenido;
     private CustomPaintedJPanel jpPausa;
@@ -66,7 +73,7 @@ public class VistaJuego extends JFrame {
     
     ImageIcon btnIconAudio = new ImageIcon(getClass().getResource("/co/edu/univalle/miniproyecto2/images/AudioButton.png"));
     
-    public VistaJuego(int numeroRondas, String modoDeJuego) {
+    public VistaJuego(int numeroRondas, String modoDeJuego) throws AWTException {
         setTitle("Game | Tic Tac Toe");
         setSize(544, 680);
         setLocationRelativeTo(null);
@@ -84,11 +91,7 @@ public class VistaJuego extends JFrame {
         setVisible(true);
     }
 
-    private void inicializarComponentes() {
-        
-//        lContenido = new JLayeredPane();
-//        lContenido.setBounds(0, 0, getWidth(), getHeight());
-        
+    private void inicializarComponentes() throws AWTException {        
         pausa = new JInternalFrame();
         pausa.setTitle("Pause");
         pausa.setSize(getWidth()*5/8, getHeight()*7/10); // 
@@ -101,12 +104,16 @@ public class VistaJuego extends JFrame {
         jpContenido = new JPanel();
         jpContenido.setLayout(null);
         jpContenido.setSize(getWidth(),getHeight());
-        
-//        lContenido.add(jpContenido, Integer.valueOf(10));
 
+//        Robot robot = new Robot();
+        
         ActionEventHandler manejadoraDeEventos = new ActionEventHandler(juego);
         
         MouseEventHandler manejadoraDeEventosMouse = new MouseEventHandler();
+        
+        KeyEventHandler manejadoraDeEventosKey = new KeyEventHandler(juego);
+        
+        KeyboardFocusManager.getCurrentKeyboardFocusManager().addKeyEventDispatcher(manejadoraDeEventosKey);
         
         ImageIcon imagenDeFondo1 = new ImageIcon(getClass().getResource("/co/edu/univalle/miniproyecto2/images/wood1_45.png"));
         lblImagenDeFondo1 = new JLabel();
@@ -190,15 +197,11 @@ public class VistaJuego extends JFrame {
         jpPausa.setLayout(null);
         jpPausa.setSize(pausa.getWidth(),pausa.getHeight());
         jpPausa.setBounds(0, 0, pausa.getWidth(), pausa.getHeight());
-//        
-//        lContenido.add(jpPausa, Integer.valueOf(100));
+
 
         jpPausa.add(btnPausaReplay);
         jpPausa.add(btnPausaContinuar);
         jpPausa.add(btnPausaAudio);
-        
-        
-//        lContenido.moveToBack(jpPausa);
         
         pausa.add(jpPausa);
         
@@ -213,7 +216,6 @@ public class VistaJuego extends JFrame {
         add(jpContenido);
         
         pausa.dispose();
-//        add(lContenido);
     }
     
 //    private void Musica(boolean Musica){
@@ -253,7 +255,7 @@ public class VistaJuego extends JFrame {
                             }
                             ganador = juego.verificarGanador();
                             if(ganador == 1 || ganador == 2) {
-                                JOptionPane.showMessageDialog(null, "¡¡GANASTE!! Jugador: " + ganador+".", "Resultado", JOptionPane.INFORMATION_MESSAGE);
+                                JOptionPane.showMessageDialog(null, "¡¡GANASTE!! Jugador: " + ganador + ".", "Resultado", JOptionPane.INFORMATION_MESSAGE);
                             }
                             else if(juego.matrizLlena()) {
                                 JOptionPane.showMessageDialog(null, "Nadie Ganó.", "¿Empate?", JOptionPane.INFORMATION_MESSAGE);
@@ -355,7 +357,8 @@ public class VistaJuego extends JFrame {
                         btnPosicion[i][j].setIcon(new ImageIcon(btnImageCircle.getImage().getScaledInstance(btnPosicion[i][j].getWidth() - 20, btnPosicion[i][j].getHeight() - 20, Image.SCALE_SMOOTH)));
                     }
                     else if(respPosicion[i][j] == 0) {
-                        btnPosicion[i][j].setIcon(null);
+                        ImageIcon btnImageEmpty = new ImageIcon(getClass().getResource("/co/edu/univalle/miniproyecto2/images/EmptyImage.png"));
+                        btnPosicion[i][j].setIcon(new ImageIcon(btnImageEmpty.getImage().getScaledInstance(btnPosicion[i][j].getWidth() - 20, btnPosicion[i][j].getHeight() - 20, Image.SCALE_SMOOTH)));
                     }
                 }
             }
@@ -446,4 +449,129 @@ public class VistaJuego extends JFrame {
         }
         
     }
+    
+    public class KeyEventHandler implements KeyEventDispatcher {
+        
+        private Juego juego;
+//        private Robot robot;
+        
+        public KeyEventHandler(Juego juego) {
+            this.juego = juego;
+//            this.robot = robot;
+        }
+
+        private void actualizarBotones(int[][] respPosicion) {
+            for(int i=0;i<3;i++) {
+                for(int j=0;j<3;j++) {
+                    if(respPosicion[i][j] == 1) {
+                        ImageIcon btnImageCross = new ImageIcon(getClass().getResource("/co/edu/univalle/miniproyecto2/images/BlackCross.png"));
+                        btnPosicion[i][j].setIcon(new ImageIcon(btnImageCross.getImage().getScaledInstance(btnPosicion[i][j].getWidth() - 20, btnPosicion[i][j].getHeight() -20, Image.SCALE_SMOOTH)));
+                    }
+                    else if(respPosicion[i][j] == 2) {
+                        ImageIcon btnImageCircle = new ImageIcon(getClass().getResource("/co/edu/univalle/miniproyecto2/images/RedCircle.png"));
+                        btnPosicion[i][j].setIcon(new ImageIcon(btnImageCircle.getImage().getScaledInstance(btnPosicion[i][j].getWidth() - 20, btnPosicion[i][j].getHeight() - 20, Image.SCALE_SMOOTH)));
+                    }
+                    else if(respPosicion[i][j] == 0) {
+                        ImageIcon btnImageEmpty = new ImageIcon(getClass().getResource("/co/edu/univalle/miniproyecto2/images/EmptyImage.png"));
+                        btnPosicion[i][j].setIcon(new ImageIcon(btnImageEmpty.getImage().getScaledInstance(btnPosicion[i][j].getWidth() - 20, btnPosicion[i][j].getHeight() - 20, Image.SCALE_SMOOTH)));
+                    }
+                }
+            }
+        }
+
+        @Override
+        public boolean dispatchKeyEvent(KeyEvent e) {
+            actualizarBotones(juego.getPosicion());
+            
+            boolean seleccionado = false;
+            
+            for(int i = 0; i < 3; i++) {
+                for(int j = 0; j < 3; j++) {
+                    if(btnPosicion[i][j].isFocusOwner()) {
+                        seleccionado = true;
+                    }
+                }
+            }
+            switch (e.getID()) {
+                case KeyEvent.KEY_RELEASED -> {
+                    switch (e.getKeyCode()) {
+                        case KeyEvent.VK_UP -> {
+                            if(!seleccionado) {
+                                btnPosicion[0][0].requestFocus();
+                                break;
+                            }
+                            for(int i = 0; i < 3; i++) {
+                                for(int j = 0; j < 3; j++) {
+                                    if(btnPosicion[i][j].isFocusOwner() && (i != 0)) {
+                                        btnPosicion[i-1][j].requestFocus();
+                                        break;
+                                    }
+                                }
+                            }
+                            return true;
+                        }
+                        case KeyEvent.VK_DOWN -> {
+                            if(!seleccionado) {
+                                btnPosicion[0][0].requestFocus();
+                                break;
+                            }
+                            for(int i = 0; i < 3; i++) {
+                                for(int j = 0; j < 3; j++) {
+                                    if(btnPosicion[i][j].isFocusOwner() && (i != 2)) {
+                                        btnPosicion[i+1][j].requestFocus();
+                                        break;
+                                    }
+                                }
+                            }
+                            return true;
+                        }
+                        case KeyEvent.VK_RIGHT -> {
+                            if(!seleccionado) {
+                                btnPosicion[0][0].requestFocus();
+                                break;
+                            }
+                            for(int i = 0; i < 3; i++) {
+                                for(int j = 0; j < 3; j++) {
+                                    if(btnPosicion[i][j].isFocusOwner() && (j != 2)) {
+                                        btnPosicion[i][j+1].requestFocus();
+                                        break;
+                                    }
+                                }
+                            }
+                            return true;
+                        }
+                        case KeyEvent.VK_LEFT -> {
+                            if(!seleccionado) {
+                                btnPosicion[0][0].requestFocus();
+                                break;
+                            }
+                            for(int i = 0; i < 3; i++) {
+                                for(int j = 0; j < 3; j++) {
+                                    if(btnPosicion[i][j].isFocusOwner() && (j != 0)) {
+                                        btnPosicion[i][j-1].requestFocus();
+                                        break;
+                                    }
+                                }
+                            }
+                            return true;
+                        }
+                        case KeyEvent.VK_ENTER -> {
+                            try {
+                                Robot robot = new Robot();
+                                // Simulate a key press
+                                robot.keyPress(KeyEvent.VK_SPACE);
+                                robot.keyRelease(KeyEvent.VK_SPACE);
+                            } catch (AWTException ex) {
+                                Logger.getLogger(VistaJuego.class.getName()).log(Level.SEVERE, null, ex);
+                            }
+                            return true;
+                        }
+                    }
+                }
+            }
+            return false;
+        }
+        
+    }
+    
 }
