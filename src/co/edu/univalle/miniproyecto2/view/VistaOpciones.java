@@ -442,7 +442,7 @@ public class VistaOpciones extends JFrame{
             else if ((e.getSource() == btnAudio) && (estadoMusica == true)){
                 estadoMusica = !estadoMusica;
                 musica.playStop(estadoMusica);
-                ImageIcon btnIconAudio = new ImageIcon(getClass().getResource("/co/edu/univalle/miniproyecto2/images/AudioButtonLight.png"));
+                ImageIcon btnIconAudio = new ImageIcon(getClass().getResource("/co/edu/univalle/miniproyecto2/images/MuteButtonLight.png"));
                 btnAudio.setSize(70, 70);
                 btnAudio.setIcon(new ImageIcon(btnIconAudio.getImage().getScaledInstance(btnAudio.getWidth(), btnAudio.getHeight(), Image.SCALE_SMOOTH)));
                 btnAudio.setBounds(getWidth()*1/2 - btnAudio.getWidth()/2, getHeight()*2/12 - btnAudio.getHeight()/2,btnAudio.getWidth(),btnAudio.getHeight());
@@ -450,7 +450,7 @@ public class VistaOpciones extends JFrame{
             else if ((e.getSource() == btnAudio) && (estadoMusica == false)){
                 estadoMusica = !estadoMusica;
                 musica.playStop(estadoMusica);
-                ImageIcon btnIconAudio = new ImageIcon(getClass().getResource("/co/edu/univalle/miniproyecto2/images/MuteButtonLight.png"));
+                ImageIcon btnIconAudio = new ImageIcon(getClass().getResource("/co/edu/univalle/miniproyecto2/images/AudioButtonLight.png"));
                 btnAudio.setSize(70, 70);
                 btnAudio.setIcon(new ImageIcon(btnIconAudio.getImage().getScaledInstance(btnAudio.getWidth(), btnAudio.getHeight(), Image.SCALE_SMOOTH)));
                 btnAudio.setBounds(getWidth()*1/2 - btnAudio.getWidth()/2, getHeight()*2/12 - btnAudio.getHeight()/2,btnAudio.getWidth(),btnAudio.getHeight());

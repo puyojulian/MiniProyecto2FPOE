@@ -121,25 +121,25 @@ public class VistaInicio extends JFrame{
 
         @Override
         public void mouseClicked(MouseEvent e) {
-            if(e.getSource() == btnAudio){
-                estadoMusica = !estadoMusica;
-                musica.playStop(estadoMusica);
-            }
+//            if(e.getSource() == btnAudio){
+//                estadoMusica = !estadoMusica;
+//                musica.playStop(estadoMusica);
+//            }
         }
 
         @Override
         public void mousePressed(MouseEvent e) {
             if (estadoMusica){
-                    ImageIcon btnIconAudio = new ImageIcon(getClass().getResource("/co/edu/univalle/miniproyecto2/images/AudioButtonNoShadow.png"));
-                    btnAudio.setSize(46, 46);
-                    btnAudio.setIcon(new ImageIcon(btnIconAudio.getImage().getScaledInstance(btnAudio.getWidth(), btnAudio.getHeight(), Image.SCALE_SMOOTH)));
-                    btnAudio.setBounds(getWidth()/2 - btnAudio.getWidth()/2, getHeight()*2/12 - btnAudio.getWidth()/2, btnAudio.getWidth(), btnAudio.getHeight());
-                } else {
-                    ImageIcon btnIconAudio = new ImageIcon(getClass().getResource("/co/edu/univalle/miniproyecto2/images/MuteButtonNoShadow.png"));
-                    btnAudio.setSize(46, 46);
-                    btnAudio.setIcon(new ImageIcon(btnIconAudio.getImage().getScaledInstance(btnAudio.getWidth(), btnAudio.getHeight(), Image.SCALE_SMOOTH)));
-                    btnAudio.setBounds(getWidth()/2 - btnAudio.getWidth()/2, getHeight()*2/12 - btnAudio.getWidth()/2, btnAudio.getWidth(), btnAudio.getHeight());
-                }
+                ImageIcon btnIconAudio = new ImageIcon(getClass().getResource("/co/edu/univalle/miniproyecto2/images/AudioButtonNoShadow.png"));
+                btnAudio.setSize(46, 46);
+                btnAudio.setIcon(new ImageIcon(btnIconAudio.getImage().getScaledInstance(btnAudio.getWidth(), btnAudio.getHeight(), Image.SCALE_SMOOTH)));
+                btnAudio.setBounds(getWidth()/2 - btnAudio.getWidth()/2, getHeight()*2/12 - btnAudio.getWidth()/2, btnAudio.getWidth(), btnAudio.getHeight());
+            } else {
+                ImageIcon btnIconAudio = new ImageIcon(getClass().getResource("/co/edu/univalle/miniproyecto2/images/MuteButtonNoShadow.png"));
+                btnAudio.setSize(46, 46);
+                btnAudio.setIcon(new ImageIcon(btnIconAudio.getImage().getScaledInstance(btnAudio.getWidth(), btnAudio.getHeight(), Image.SCALE_SMOOTH)));
+                btnAudio.setBounds(getWidth()/2 - btnAudio.getWidth()/2, getHeight()*2/12 - btnAudio.getWidth()/2, btnAudio.getWidth(), btnAudio.getHeight());
+            }
         }
 
         @Override
@@ -147,6 +147,22 @@ public class VistaInicio extends JFrame{
             if(e.getSource() == btnJugar){                
                 dispose();
                 VistaOpciones vistaOpciones = new VistaOpciones(musica);
+            }
+            else if ((e.getSource() == btnAudio) && (estadoMusica == true)){
+                estadoMusica = !estadoMusica;
+                musica.playStop(estadoMusica);
+                ImageIcon btnIconAudio = new ImageIcon(getClass().getResource("/co/edu/univalle/miniproyecto2/images/MuteButtonLight.png"));
+                btnAudio.setSize(66, 66);
+                btnAudio.setIcon(new ImageIcon(btnIconAudio.getImage().getScaledInstance(btnAudio.getWidth(), btnAudio.getHeight(), Image.SCALE_SMOOTH)));
+                btnAudio.setBounds(getWidth()/2 - btnAudio.getWidth()/2, getHeight()*2/12 - btnAudio.getWidth()/2, btnAudio.getWidth(), btnAudio.getHeight());
+            } 
+            else if ((e.getSource() == btnAudio) && (estadoMusica == false)){
+                estadoMusica = !estadoMusica;
+                musica.playStop(estadoMusica);
+                ImageIcon btnIconAudio = new ImageIcon(getClass().getResource("/co/edu/univalle/miniproyecto2/images/AudioButtonLight.png"));
+                btnAudio.setSize(66, 66);
+                btnAudio.setIcon(new ImageIcon(btnIconAudio.getImage().getScaledInstance(btnAudio.getWidth(), btnAudio.getHeight(), Image.SCALE_SMOOTH)));
+                btnAudio.setBounds(getWidth()/2 - btnAudio.getWidth()/2, getHeight()*2/12 - btnAudio.getWidth()/2, btnAudio.getWidth(), btnAudio.getHeight());
             }
         }
 
