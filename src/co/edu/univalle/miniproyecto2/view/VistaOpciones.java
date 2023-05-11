@@ -4,6 +4,7 @@
  */
 package co.edu.univalle.miniproyecto2.view;
 
+import co.edu.univalle.miniproyecto2.sounds.Music;
 import java.applet.AudioClip;
 import java.awt.AWTException;
 import java.awt.Color;
@@ -45,21 +46,25 @@ public class VistaOpciones extends JFrame{
     private JButton btnConfirmar;
     
     private JLabel lblImagenDeFondo1;
-    private boolean Musica = true;
+    
+    private Music musica;
+    
+    private boolean estadoMusica;
     
     private VistaJuego vistaJuego;
 
-    public VistaOpciones() {
+    public VistaOpciones(Music musica) {
         setTitle("Options | Tic Tac Toe");
         setSize(540, 680);
         setLocationRelativeTo(null);
         setResizable(true);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         
+        this.musica = musica;
+        estadoMusica = musica.isState();
+        
         inicializarComponentes();
         setVisible(true);
-        
-        Musica(Musica);
     }
     
     private void inicializarComponentes() {
@@ -79,9 +84,16 @@ public class VistaOpciones extends JFrame{
         
         
         btnAudio = new JButton();
-        ImageIcon btnIconAudio = new ImageIcon(getClass().getResource("/co/edu/univalle/miniproyecto2/images/AudioButton.png"));
         btnAudio.setSize(50,50);
-        btnAudio.setIcon(new ImageIcon(btnIconAudio.getImage().getScaledInstance(btnAudio.getWidth(), btnAudio.getHeight(), Image.SCALE_SMOOTH)));
+        ImageIcon btnIconAudio = new ImageIcon(getClass().getResource("/co/edu/univalle/miniproyecto2/images/AudioButton.png"));
+        ImageIcon btnIconMute = new ImageIcon(getClass().getResource("/co/edu/univalle/miniproyecto2/images/MuteButton.png"));
+        if(estadoMusica) {
+            btnAudio.setIcon(new ImageIcon(btnIconAudio.getImage().getScaledInstance(btnAudio.getWidth(), btnAudio.getHeight(), Image.SCALE_SMOOTH)));
+
+        }
+        else {
+            btnAudio.setIcon(new ImageIcon(btnIconMute.getImage().getScaledInstance(btnAudio.getWidth(), btnAudio.getHeight(), Image.SCALE_SMOOTH)));
+        }
         btnAudio.setBounds(jpContenido.getWidth()*1/2 - btnAudio.getWidth()/2,jpContenido.getHeight()*2/12 - btnAudio.getHeight()/2,btnAudio.getWidth(),btnAudio.getHeight());
         btnAudio.setOpaque(false);
         btnAudio.setContentAreaFilled(false);
@@ -180,15 +192,15 @@ public class VistaOpciones extends JFrame{
         btnConfirmar.addActionListener(manejadorEventos);
     }
     
-    public void Musica(boolean Musica){
-        AudioClip sonidoFondo;
-        sonidoFondo = java.applet.Applet.newAudioClip(getClass().getResource("/co/edu/univalle/miniproyecto2/sounds/sonidoFondo.wav"));
-        if (Musica){
-            sonidoFondo.loop();
-        } else {
-            sonidoFondo.stop();
-        }
-    }
+//    public void Musica(boolean Musica){
+//        AudioClip sonidoFondo;
+//        sonidoFondo = java.applet.Applet.newAudioClip(getClass().getResource("/co/edu/univalle/miniproyecto2/sounds/sonidoFondo.wav"));
+//        if (Musica){
+//            sonidoFondo.loop();
+//        } else {
+//            sonidoFondo.stop();
+//        }
+//    }
     
     class ManejadorDeEventos implements ActionListener, KeyListener{
         @Override
@@ -299,7 +311,7 @@ public class VistaOpciones extends JFrame{
             if(evento.getSource() == btnConfirmar) {
                 if(btnJvsJ.isSelected() && btnNumRonda1.isSelected()) {
                     try {
-                        vistaJuego = new VistaJuego(1,"JvsJ");
+                        vistaJuego = new VistaJuego(1,"JvsJ", musica);
                     } catch (AWTException ex) {
                         Logger.getLogger(VistaOpciones.class.getName()).log(Level.SEVERE, null, ex);
                     }
@@ -307,7 +319,7 @@ public class VistaOpciones extends JFrame{
                 }
                 else if(btnJvsJ.isSelected() && btnNumRonda2.isSelected()) {
                     try {
-                        vistaJuego = new VistaJuego(2,"JvsJ");
+                        vistaJuego = new VistaJuego(2,"JvsJ", musica);
                     } catch (AWTException ex) {
                         Logger.getLogger(VistaOpciones.class.getName()).log(Level.SEVERE, null, ex);
                     }
@@ -315,7 +327,7 @@ public class VistaOpciones extends JFrame{
                 }
                 else if(btnJvsJ.isSelected() && btnNumRonda3.isSelected()) {
                     try {
-                        vistaJuego = new VistaJuego(3,"JvsJ");
+                        vistaJuego = new VistaJuego(3,"JvsJ", musica);
                     } catch (AWTException ex) {
                         Logger.getLogger(VistaOpciones.class.getName()).log(Level.SEVERE, null, ex);
                     }
@@ -323,7 +335,7 @@ public class VistaOpciones extends JFrame{
                 }
                 else if(btnJvsJ.isSelected() && btnNumRonda4.isSelected()) {
                     try {
-                        vistaJuego = new VistaJuego(4,"JvsJ");
+                        vistaJuego = new VistaJuego(4,"JvsJ", musica);
                     } catch (AWTException ex) {
                         Logger.getLogger(VistaOpciones.class.getName()).log(Level.SEVERE, null, ex);
                     }
@@ -331,7 +343,7 @@ public class VistaOpciones extends JFrame{
                 }
                 else if(btnJvsPC.isSelected() && btnNumRonda1.isSelected()) {
                     try {
-                        vistaJuego = new VistaJuego(1,"JvsPC");
+                        vistaJuego = new VistaJuego(1,"JvsPC", musica);
                     } catch (AWTException ex) {
                         Logger.getLogger(VistaOpciones.class.getName()).log(Level.SEVERE, null, ex);
                     }
@@ -339,7 +351,7 @@ public class VistaOpciones extends JFrame{
                 }
                 else if(btnJvsPC.isSelected() && btnNumRonda2.isSelected()) {
                     try {
-                        vistaJuego = new VistaJuego(2,"JvsPC");
+                        vistaJuego = new VistaJuego(2,"JvsPC", musica);
                     } catch (AWTException ex) {
                         Logger.getLogger(VistaOpciones.class.getName()).log(Level.SEVERE, null, ex);
                     }
@@ -347,7 +359,7 @@ public class VistaOpciones extends JFrame{
                 }
                 else if(btnJvsPC.isSelected() && btnNumRonda3.isSelected()) {
                     try {
-                        vistaJuego = new VistaJuego(3,"JvsPC");
+                        vistaJuego = new VistaJuego(3,"JvsPC", musica);
                     } catch (AWTException ex) {
                         Logger.getLogger(VistaOpciones.class.getName()).log(Level.SEVERE, null, ex);
                     }
@@ -355,7 +367,7 @@ public class VistaOpciones extends JFrame{
                 }
                 else if(btnJvsPC.isSelected() && btnNumRonda4.isSelected()) {
                     try {
-                        vistaJuego = new VistaJuego(4,"JvsPC");
+                        vistaJuego = new VistaJuego(4,"JvsPC", musica);
                     } catch (AWTException ex) {
                         Logger.getLogger(VistaOpciones.class.getName()).log(Level.SEVERE, null, ex);
                     }
@@ -405,13 +417,13 @@ public class VistaOpciones extends JFrame{
                 btnConfirmar.setBounds(getWidth()*1/2 - btnConfirmar.getWidth()/2, getHeight()*9/12 - btnConfirmar.getHeight()/2,btnConfirmar.getWidth(),btnConfirmar.getHeight());
                 
             }
-            else if ((e.getSource() == btnAudio) && (Musica == true)){
+            else if ((e.getSource() == btnAudio) && (estadoMusica == true)){
                 ImageIcon btnIconAudio = new ImageIcon(getClass().getResource("/co/edu/univalle/miniproyecto2/images/AudioButtonNoShadow.png"));
                 btnAudio.setSize(60, 60);
                 btnAudio.setIcon(new ImageIcon(btnIconAudio.getImage().getScaledInstance(btnAudio.getWidth(), btnAudio.getHeight(), Image.SCALE_SMOOTH)));
                 btnAudio.setBounds(getWidth()*1/2 - btnAudio.getWidth()/2, getHeight()*2/12 - btnAudio.getHeight()/2,btnAudio.getWidth(),btnAudio.getHeight());
             } 
-            else if ((e.getSource() == btnAudio) && (Musica == false)){
+            else if ((e.getSource() == btnAudio) && (estadoMusica == false)){
                 ImageIcon btnIconAudio = new ImageIcon(getClass().getResource("/co/edu/univalle/miniproyecto2/images/MuteButtonNoShadow.png"));
                 btnAudio.setSize(60, 60);
                 btnAudio.setIcon(new ImageIcon(btnIconAudio.getImage().getScaledInstance(btnAudio.getWidth(), btnAudio.getHeight(), Image.SCALE_SMOOTH)));
@@ -427,17 +439,17 @@ public class VistaOpciones extends JFrame{
                 btnConfirmar.setIcon(new ImageIcon(btnIconLightConfirmar.getImage().getScaledInstance(btnConfirmar.getWidth(), btnConfirmar.getHeight(), Image.SCALE_SMOOTH)));
                 btnConfirmar.setBounds(getWidth()*1/2 - btnConfirmar.getWidth()/2, getHeight()*9/12 - btnConfirmar.getHeight()/2,btnConfirmar.getWidth(),btnConfirmar.getHeight());
             }
-            else if ((e.getSource() == btnAudio) && (Musica == true)){
-                Musica = !Musica;
-                Musica(Musica);
+            else if ((e.getSource() == btnAudio) && (estadoMusica == true)){
+                estadoMusica = !estadoMusica;
+                musica.playStop(estadoMusica);
                 ImageIcon btnIconAudio = new ImageIcon(getClass().getResource("/co/edu/univalle/miniproyecto2/images/AudioButtonLight.png"));
                 btnAudio.setSize(70, 70);
                 btnAudio.setIcon(new ImageIcon(btnIconAudio.getImage().getScaledInstance(btnAudio.getWidth(), btnAudio.getHeight(), Image.SCALE_SMOOTH)));
                 btnAudio.setBounds(getWidth()*1/2 - btnAudio.getWidth()/2, getHeight()*2/12 - btnAudio.getHeight()/2,btnAudio.getWidth(),btnAudio.getHeight());
             } 
-            else if ((e.getSource() == btnAudio) && (Musica == false)){
-                Musica = !Musica;
-                Musica(Musica);
+            else if ((e.getSource() == btnAudio) && (estadoMusica == false)){
+                estadoMusica = !estadoMusica;
+                musica.playStop(estadoMusica);
                 ImageIcon btnIconAudio = new ImageIcon(getClass().getResource("/co/edu/univalle/miniproyecto2/images/MuteButtonLight.png"));
                 btnAudio.setSize(70, 70);
                 btnAudio.setIcon(new ImageIcon(btnIconAudio.getImage().getScaledInstance(btnAudio.getWidth(), btnAudio.getHeight(), Image.SCALE_SMOOTH)));
@@ -453,13 +465,13 @@ public class VistaOpciones extends JFrame{
                 btnConfirmar.setIcon(new ImageIcon(btnIconLightConfirmar.getImage().getScaledInstance(btnConfirmar.getWidth(), btnConfirmar.getHeight(), Image.SCALE_SMOOTH)));
                 btnConfirmar.setBounds(getWidth()*1/2 - btnConfirmar.getWidth()/2, getHeight()*9/12 - btnConfirmar.getHeight()/2,btnConfirmar.getWidth(),btnConfirmar.getHeight());
             }
-            else if ((e.getSource() == btnAudio) && (Musica == true)){
+            else if ((e.getSource() == btnAudio) && (estadoMusica == true)){
                 ImageIcon btnIconAudio = new ImageIcon(getClass().getResource("/co/edu/univalle/miniproyecto2/images/AudioButtonLight.png"));
                 btnAudio.setSize(70, 70);
                 btnAudio.setIcon(new ImageIcon(btnIconAudio.getImage().getScaledInstance(btnAudio.getWidth(), btnAudio.getHeight(), Image.SCALE_SMOOTH)));
                 btnAudio.setBounds(getWidth()*1/2 - btnAudio.getWidth()/2, getHeight()*2/12 - btnAudio.getHeight()/2,btnAudio.getWidth(),btnAudio.getHeight());
             } 
-            else if ((e.getSource() == btnAudio) && (Musica == false)){
+            else if ((e.getSource() == btnAudio) && (estadoMusica == false)){
                 ImageIcon btnIconAudio = new ImageIcon(getClass().getResource("/co/edu/univalle/miniproyecto2/images/MuteButtonLight.png"));
                 btnAudio.setSize(70, 70);
                 btnAudio.setIcon(new ImageIcon(btnIconAudio.getImage().getScaledInstance(btnAudio.getWidth(), btnAudio.getHeight(), Image.SCALE_SMOOTH)));
@@ -475,13 +487,13 @@ public class VistaOpciones extends JFrame{
                 btnConfirmar.setIcon(new ImageIcon(btnIconSalidoConfirmar.getImage().getScaledInstance(btnConfirmar.getWidth(), btnConfirmar.getHeight(), Image.SCALE_SMOOTH)));
                 btnConfirmar.setBounds(getWidth()*1/2 - btnConfirmar.getWidth()/2, getHeight()*9/12 - btnConfirmar.getHeight()/2,btnConfirmar.getWidth(),btnConfirmar.getHeight());
             }
-            else if ((e.getSource() == btnAudio) && (Musica == true)){
+            else if ((e.getSource() == btnAudio) && (estadoMusica == true)){
                 ImageIcon btnIconAudio = new ImageIcon(getClass().getResource("/co/edu/univalle/miniproyecto2/images/AudioButton.png"));
                 btnAudio.setSize(50, 50);
                 btnAudio.setIcon(new ImageIcon(btnIconAudio.getImage().getScaledInstance(btnAudio.getWidth(), btnAudio.getHeight(), Image.SCALE_SMOOTH)));
                 btnAudio.setBounds(getWidth()*1/2 - btnAudio.getWidth()/2, getHeight()*2/12 - btnAudio.getHeight()/2,btnAudio.getWidth(),btnAudio.getHeight());
             } 
-            else if ((e.getSource() == btnAudio) && (Musica == false)){
+            else if ((e.getSource() == btnAudio) && (estadoMusica == false)){
                 ImageIcon btnIconAudio = new ImageIcon(getClass().getResource("/co/edu/univalle/miniproyecto2/images/MuteButton.png"));
                 btnAudio.setSize(50, 50);
                 btnAudio.setIcon(new ImageIcon(btnIconAudio.getImage().getScaledInstance(btnAudio.getWidth(), btnAudio.getHeight(), Image.SCALE_SMOOTH)));

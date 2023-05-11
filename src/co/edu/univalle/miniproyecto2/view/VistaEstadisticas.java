@@ -5,6 +5,7 @@
 package co.edu.univalle.miniproyecto2.view;
 
 import co.edu.univalle.miniproyecto2.logic.Juego;
+import co.edu.univalle.miniproyecto2.sounds.Music;
 import java.awt.AWTException;
 
 import java.awt.Color;
@@ -53,7 +54,11 @@ public class VistaEstadisticas extends JFrame{
     private JLabel lblImagenJ1;
     private JLabel lblImagenJ2;
     
-    public VistaEstadisticas(int contadorJ1, int contadorJ2,int numeroRondas,String modoDeJuego) {
+    private Music musica;
+    
+    private boolean estadoMusica;
+    
+    public VistaEstadisticas(int contadorJ1, int contadorJ2, int numeroRondas, String modoDeJuego, Music musica) {
         this.contadorJ1 = contadorJ1;
         this.contadorJ2 = contadorJ2;
         this.numeroRondas = numeroRondas;
@@ -64,6 +69,9 @@ public class VistaEstadisticas extends JFrame{
         setLocationRelativeTo(null);
         setResizable(false);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
+        
+        this.musica = musica;
+//        estadoMusica = musica.isState();
         
         inicializarComponentes();
         setVisible(true);
@@ -168,12 +176,12 @@ public class VistaEstadisticas extends JFrame{
         public void actionPerformed(ActionEvent evento){
             if(evento.getSource() == btnInicio){
                 dispose();
-                VistaInicio vistaInicio = new VistaInicio();
+                VistaInicio vistaInicio = new VistaInicio(musica);
             }
             if(evento.getSource() == btnReintentar){
                 dispose();
                 try {
-                    VistaJuego vistaJuego = new VistaJuego(numeroRondas, modoDeJuego);
+                    VistaJuego vistaJuego = new VistaJuego(numeroRondas, modoDeJuego, musica);
                 } catch (AWTException ex) {
                     Logger.getLogger(VistaEstadisticas.class.getName()).log(Level.SEVERE, null, ex);
                 }

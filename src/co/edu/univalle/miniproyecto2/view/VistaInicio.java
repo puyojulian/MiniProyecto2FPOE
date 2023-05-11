@@ -146,7 +146,7 @@ public class VistaInicio extends JFrame{
         public void mouseReleased(MouseEvent e) {
             if(e.getSource() == btnJugar){                
                 dispose();
-                VistaOpciones vistaOpciones = new VistaOpciones();
+                VistaOpciones vistaOpciones = new VistaOpciones(musica);
             }
         }
 
