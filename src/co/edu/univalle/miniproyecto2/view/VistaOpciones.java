@@ -5,6 +5,7 @@
 package co.edu.univalle.miniproyecto2.view;
 
 import java.applet.AudioClip;
+import java.awt.AWTException;
 import java.awt.Color;
 import java.awt.GridLayout;
 import java.awt.Image;
@@ -12,6 +13,11 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.awt.event.MouseMotionListener;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -72,6 +78,7 @@ public class VistaOpciones extends JFrame{
         
         add(jpContenido);
         
+        MouseEventHandler manejadoraDeEventosMouse = new MouseEventHandler();
         
         btnAudio = new JButton();
         btnAudio.setSize(50,50);
@@ -80,6 +87,7 @@ public class VistaOpciones extends JFrame{
         btnAudio.setOpaque(false);
         btnAudio.setContentAreaFilled(false);
         btnAudio.setBorderPainted(false);
+        btnAudio.addMouseListener(manejadoraDeEventosMouse);
         
         btnNumRonda1 = new JToggleButton("");
         ImageIcon btnIconRonda1 = new ImageIcon(getClass().getResource("/co/edu/univalle/miniproyecto2/images/Ronda1.png"));
@@ -139,6 +147,8 @@ public class VistaOpciones extends JFrame{
         btnConfirmar.setBounds(jpContenido.getWidth()*1/2 - btnConfirmar.getWidth()/2,jpContenido.getHeight()*9/12 - btnConfirmar.getHeight()/2,btnConfirmar.getWidth(),btnConfirmar.getHeight());
         btnConfirmar.setOpaque(false);
         btnConfirmar.setContentAreaFilled(false);
+        btnConfirmar.setBorderPainted(false);
+        btnConfirmar.addMouseListener(manejadoraDeEventosMouse);
         
         jpBotones = new JPanel();
         jpBotones.setBounds(115,380,310,75);
@@ -186,11 +196,8 @@ public class VistaOpciones extends JFrame{
     class ManejadorDeEventos implements ActionListener, KeyListener{
         @Override
         public void actionPerformed(ActionEvent evento){
-                if(evento.getSource() == btnAudio){
-                Musica = !Musica;
-                Musica(Musica);
-            }
-                if(evento.getSource() == btnJvsJ) { 
+
+            if(evento.getSource() == btnJvsJ) { 
                 ImageIcon btnIconJvsJ = new ImageIcon(getClass().getResource("/co/edu/univalle/miniproyecto2/images/PlayerVsPlayerSelected.png"));
                 btnJvsJ.setSize(150, 150);
                 btnJvsJ.setIcon(new ImageIcon(btnIconJvsJ.getImage().getScaledInstance(btnJvsJ.getWidth(), btnJvsJ.getHeight(), Image.SCALE_SMOOTH)));
@@ -294,35 +301,67 @@ public class VistaOpciones extends JFrame{
             }
             if(evento.getSource() == btnConfirmar) {
                 if(btnJvsJ.isSelected() && btnNumRonda1.isSelected()) {
-                    vistaJuego = new VistaJuego(1,"JvsJ");
+                    try {
+                        vistaJuego = new VistaJuego(1,"JvsJ");
+                    } catch (AWTException ex) {
+                        Logger.getLogger(VistaOpciones.class.getName()).log(Level.SEVERE, null, ex);
+                    }
                     dispose();
                 }
                 else if(btnJvsJ.isSelected() && btnNumRonda2.isSelected()) {
-                    vistaJuego = new VistaJuego(2,"JvsJ");
+                    try {
+                        vistaJuego = new VistaJuego(2,"JvsJ");
+                    } catch (AWTException ex) {
+                        Logger.getLogger(VistaOpciones.class.getName()).log(Level.SEVERE, null, ex);
+                    }
                     dispose();
                 }
                 else if(btnJvsJ.isSelected() && btnNumRonda3.isSelected()) {
-                    vistaJuego = new VistaJuego(3,"JvsJ");
+                    try {
+                        vistaJuego = new VistaJuego(3,"JvsJ");
+                    } catch (AWTException ex) {
+                        Logger.getLogger(VistaOpciones.class.getName()).log(Level.SEVERE, null, ex);
+                    }
                     dispose();
                 }
                 else if(btnJvsJ.isSelected() && btnNumRonda4.isSelected()) {
-                    vistaJuego = new VistaJuego(4,"JvsJ");
+                    try {
+                        vistaJuego = new VistaJuego(4,"JvsJ");
+                    } catch (AWTException ex) {
+                        Logger.getLogger(VistaOpciones.class.getName()).log(Level.SEVERE, null, ex);
+                    }
                     dispose();
                 }
                 else if(btnJvsPC.isSelected() && btnNumRonda1.isSelected()) {
-                    vistaJuego = new VistaJuego(1,"JvsPC");
+                    try {
+                        vistaJuego = new VistaJuego(1,"JvsPC");
+                    } catch (AWTException ex) {
+                        Logger.getLogger(VistaOpciones.class.getName()).log(Level.SEVERE, null, ex);
+                    }
                     dispose();
                 }
                 else if(btnJvsPC.isSelected() && btnNumRonda2.isSelected()) {
-                    vistaJuego = new VistaJuego(2,"JvsPC");
+                    try {
+                        vistaJuego = new VistaJuego(2,"JvsPC");
+                    } catch (AWTException ex) {
+                        Logger.getLogger(VistaOpciones.class.getName()).log(Level.SEVERE, null, ex);
+                    }
                     dispose();
                 }
                 else if(btnJvsPC.isSelected() && btnNumRonda3.isSelected()) {
-                    vistaJuego = new VistaJuego(3,"JvsPC");
+                    try {
+                        vistaJuego = new VistaJuego(3,"JvsPC");
+                    } catch (AWTException ex) {
+                        Logger.getLogger(VistaOpciones.class.getName()).log(Level.SEVERE, null, ex);
+                    }
                     dispose();
                 }
                 else if(btnJvsPC.isSelected() && btnNumRonda4.isSelected()) {
-                    vistaJuego = new VistaJuego(4,"JvsPC");
+                    try {
+                        vistaJuego = new VistaJuego(4,"JvsPC");
+                    } catch (AWTException ex) {
+                        Logger.getLogger(VistaOpciones.class.getName()).log(Level.SEVERE, null, ex);
+                    }
                     dispose();
                 }
                 else {
@@ -351,6 +390,118 @@ public class VistaOpciones extends JFrame{
             /*System.out.println("Se digitó la tecla " + e.getKeyChar()+
                     " Con codigo " + e.getKeyCode());*/
         }
+    }
+    
+    public class MouseEventHandler implements MouseListener, MouseMotionListener {
+
+        @Override
+        public void mouseClicked(MouseEvent e) {
+//            throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        }
+
+        @Override
+        public void mousePressed(MouseEvent e) {
+            if(e.getSource() == btnConfirmar) {
+                ImageIcon btnIconNoShadowConfirmar = new ImageIcon(getClass().getResource("/co/edu/univalle/miniproyecto2/images/ConfirmButtonNoShadow.png"));
+                btnConfirmar.setSize(90,90);
+                btnConfirmar.setIcon(new ImageIcon(btnIconNoShadowConfirmar.getImage().getScaledInstance(btnConfirmar.getWidth(), btnConfirmar.getHeight(), Image.SCALE_SMOOTH)));
+                btnConfirmar.setBounds(getWidth()*1/2 - btnConfirmar.getWidth()/2, getHeight()*9/12 - btnConfirmar.getHeight()/2,btnConfirmar.getWidth(),btnConfirmar.getHeight());
+                
+            }
+            else if ((e.getSource() == btnAudio) && (Musica == true)){
+                ImageIcon btnIconAudio = new ImageIcon(getClass().getResource("/co/edu/univalle/miniproyecto2/images/AudioButtonNoShadow.png"));
+                btnAudio.setSize(60, 60);
+                btnAudio.setIcon(new ImageIcon(btnIconAudio.getImage().getScaledInstance(btnAudio.getWidth(), btnAudio.getHeight(), Image.SCALE_SMOOTH)));
+                btnAudio.setBounds(getWidth()*1/2 - btnAudio.getWidth()/2, getHeight()*2/12 - btnAudio.getHeight()/2,btnAudio.getWidth(),btnAudio.getHeight());
+            } 
+            else if ((e.getSource() == btnAudio) && (Musica == false)){
+                ImageIcon btnIconAudio = new ImageIcon(getClass().getResource("/co/edu/univalle/miniproyecto2/images/MuteButtonNoShadow.png"));
+                btnAudio.setSize(60, 60);
+                btnAudio.setIcon(new ImageIcon(btnIconAudio.getImage().getScaledInstance(btnAudio.getWidth(), btnAudio.getHeight(), Image.SCALE_SMOOTH)));
+                btnAudio.setBounds(getWidth()*1/2 - btnAudio.getWidth()/2, getHeight()*2/12 - btnAudio.getHeight()/2,btnAudio.getWidth(),btnAudio.getHeight());
+            }
+        }
+
+        @Override
+        public void mouseReleased(MouseEvent e) {
+            if(e.getSource() == btnConfirmar) {
+                ImageIcon btnIconLightConfirmar = new ImageIcon(getClass().getResource("/co/edu/univalle/miniproyecto2/images/ConfirmButtonLight.png"));
+                btnConfirmar.setSize(100,100);
+                btnConfirmar.setIcon(new ImageIcon(btnIconLightConfirmar.getImage().getScaledInstance(btnConfirmar.getWidth(), btnConfirmar.getHeight(), Image.SCALE_SMOOTH)));
+                btnConfirmar.setBounds(getWidth()*1/2 - btnConfirmar.getWidth()/2, getHeight()*9/12 - btnConfirmar.getHeight()/2,btnConfirmar.getWidth(),btnConfirmar.getHeight());
+            }
+            else if ((e.getSource() == btnAudio) && (Musica == true)){
+                Musica = !Musica;
+                Musica(Musica);
+                ImageIcon btnIconAudio = new ImageIcon(getClass().getResource("/co/edu/univalle/miniproyecto2/images/AudioButtonLight.png"));
+                btnAudio.setSize(70, 70);
+                btnAudio.setIcon(new ImageIcon(btnIconAudio.getImage().getScaledInstance(btnAudio.getWidth(), btnAudio.getHeight(), Image.SCALE_SMOOTH)));
+                btnAudio.setBounds(getWidth()*1/2 - btnAudio.getWidth()/2, getHeight()*2/12 - btnAudio.getHeight()/2,btnAudio.getWidth(),btnAudio.getHeight());
+            } 
+            else if ((e.getSource() == btnAudio) && (Musica == false)){
+                Musica = !Musica;
+                Musica(Musica);
+                ImageIcon btnIconAudio = new ImageIcon(getClass().getResource("/co/edu/univalle/miniproyecto2/images/MuteButtonLight.png"));
+                btnAudio.setSize(70, 70);
+                btnAudio.setIcon(new ImageIcon(btnIconAudio.getImage().getScaledInstance(btnAudio.getWidth(), btnAudio.getHeight(), Image.SCALE_SMOOTH)));
+                btnAudio.setBounds(getWidth()*1/2 - btnAudio.getWidth()/2, getHeight()*2/12 - btnAudio.getHeight()/2,btnAudio.getWidth(),btnAudio.getHeight());
+            }
+        }
+
+        @Override
+        public void mouseEntered(MouseEvent e) {
+            if(e.getSource() == btnConfirmar) {
+                ImageIcon btnIconLightConfirmar = new ImageIcon(getClass().getResource("/co/edu/univalle/miniproyecto2/images/ConfirmButtonLight.png"));
+                btnConfirmar.setSize(100,100);
+                btnConfirmar.setIcon(new ImageIcon(btnIconLightConfirmar.getImage().getScaledInstance(btnConfirmar.getWidth(), btnConfirmar.getHeight(), Image.SCALE_SMOOTH)));
+                btnConfirmar.setBounds(getWidth()*1/2 - btnConfirmar.getWidth()/2, getHeight()*9/12 - btnConfirmar.getHeight()/2,btnConfirmar.getWidth(),btnConfirmar.getHeight());
+            }
+            else if ((e.getSource() == btnAudio) && (Musica == true)){
+                ImageIcon btnIconAudio = new ImageIcon(getClass().getResource("/co/edu/univalle/miniproyecto2/images/AudioButtonLight.png"));
+                btnAudio.setSize(70, 70);
+                btnAudio.setIcon(new ImageIcon(btnIconAudio.getImage().getScaledInstance(btnAudio.getWidth(), btnAudio.getHeight(), Image.SCALE_SMOOTH)));
+                btnAudio.setBounds(getWidth()*1/2 - btnAudio.getWidth()/2, getHeight()*2/12 - btnAudio.getHeight()/2,btnAudio.getWidth(),btnAudio.getHeight());
+            } 
+            else if ((e.getSource() == btnAudio) && (Musica == false)){
+                ImageIcon btnIconAudio = new ImageIcon(getClass().getResource("/co/edu/univalle/miniproyecto2/images/MuteButtonLight.png"));
+                btnAudio.setSize(70, 70);
+                btnAudio.setIcon(new ImageIcon(btnIconAudio.getImage().getScaledInstance(btnAudio.getWidth(), btnAudio.getHeight(), Image.SCALE_SMOOTH)));
+                btnAudio.setBounds(getWidth()*1/2 - btnAudio.getWidth()/2, getHeight()*2/12 - btnAudio.getHeight()/2,btnAudio.getWidth(),btnAudio.getHeight());
+            }
+        }
+
+        @Override
+        public void mouseExited(MouseEvent e) {
+            if(e.getSource() == btnConfirmar) {
+                ImageIcon btnIconSalidoConfirmar = new ImageIcon(getClass().getResource("/co/edu/univalle/miniproyecto2/images/ConfirmButton.png"));
+                btnConfirmar.setSize(80,80);
+                btnConfirmar.setIcon(new ImageIcon(btnIconSalidoConfirmar.getImage().getScaledInstance(btnConfirmar.getWidth(), btnConfirmar.getHeight(), Image.SCALE_SMOOTH)));
+                btnConfirmar.setBounds(getWidth()*1/2 - btnConfirmar.getWidth()/2, getHeight()*9/12 - btnConfirmar.getHeight()/2,btnConfirmar.getWidth(),btnConfirmar.getHeight());
+            }
+            else if ((e.getSource() == btnAudio) && (Musica == true)){
+                ImageIcon btnIconAudio = new ImageIcon(getClass().getResource("/co/edu/univalle/miniproyecto2/images/AudioButton.png"));
+                btnAudio.setSize(50, 50);
+                btnAudio.setIcon(new ImageIcon(btnIconAudio.getImage().getScaledInstance(btnAudio.getWidth(), btnAudio.getHeight(), Image.SCALE_SMOOTH)));
+                btnAudio.setBounds(getWidth()*1/2 - btnAudio.getWidth()/2, getHeight()*2/12 - btnAudio.getHeight()/2,btnAudio.getWidth(),btnAudio.getHeight());
+            } 
+            else if ((e.getSource() == btnAudio) && (Musica == false)){
+                ImageIcon btnIconAudio = new ImageIcon(getClass().getResource("/co/edu/univalle/miniproyecto2/images/MuteButton.png"));
+                btnAudio.setSize(50, 50);
+                btnAudio.setIcon(new ImageIcon(btnIconAudio.getImage().getScaledInstance(btnAudio.getWidth(), btnAudio.getHeight(), Image.SCALE_SMOOTH)));
+                btnAudio.setBounds(getWidth()*1/2 - btnAudio.getWidth()/2, getHeight()*2/12 - btnAudio.getHeight()/2,btnAudio.getWidth(),btnAudio.getHeight());
+            }
+        }
+
+        @Override
+        public void mouseDragged(MouseEvent e) {
+//            throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        }
+
+        @Override
+        public void mouseMoved(MouseEvent e) {
+//            throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        }
+        
     }
     
 }

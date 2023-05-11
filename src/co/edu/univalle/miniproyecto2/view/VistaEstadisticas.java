@@ -5,6 +5,7 @@
 package co.edu.univalle.miniproyecto2.view;
 
 import co.edu.univalle.miniproyecto2.logic.Juego;
+import java.awt.AWTException;
 
 import java.awt.Color;
 import java.awt.Font;
@@ -16,6 +17,8 @@ import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -169,7 +172,11 @@ public class VistaEstadisticas extends JFrame{
             }
             if(evento.getSource() == btnReintentar){
                 dispose();
-                VistaJuego vistaJuego = new VistaJuego(numeroRondas, modoDeJuego);
+                try {
+                    VistaJuego vistaJuego = new VistaJuego(numeroRondas, modoDeJuego);
+                } catch (AWTException ex) {
+                    Logger.getLogger(VistaEstadisticas.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
             if(evento.getSource() == btnTerminar){
                 System.exit(0);

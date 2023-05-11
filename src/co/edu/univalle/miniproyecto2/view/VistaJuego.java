@@ -157,6 +157,7 @@ public class VistaJuego extends JFrame {
         btnPausaReplay.setContentAreaFilled(false);
         btnPausaReplay.setBorderPainted(false);
         btnPausaReplay.addActionListener(manejadoraDeEventos);
+        btnPausaReplay.addMouseListener(manejadoraDeEventosMouse);
         
         ImageIcon btnIconPausaContinuar = new ImageIcon(getClass().getResource("/co/edu/univalle/miniproyecto2/images/PlayButton.png"));
         btnPausaContinuar = new JButton();
@@ -167,6 +168,7 @@ public class VistaJuego extends JFrame {
         btnPausaContinuar.setContentAreaFilled(false);
         btnPausaContinuar.setBorderPainted(false);
         btnPausaContinuar.addActionListener(manejadoraDeEventos);
+        btnPausaContinuar.addMouseListener(manejadoraDeEventosMouse);
         
         btnPausaAudio = new JButton();
         btnPausaAudio.setSize(80,80);
@@ -176,6 +178,7 @@ public class VistaJuego extends JFrame {
         btnPausaAudio.setContentAreaFilled(false);
         btnPausaAudio.setBorderPainted(false);
         btnPausaAudio.addActionListener(manejadoraDeEventos);
+        btnPausaAudio.addMouseListener(manejadoraDeEventosMouse);
                 
         
         btnPosicion = new JButton[3][3];
@@ -342,6 +345,14 @@ public class VistaJuego extends JFrame {
                 }
                 jpCuadricula.setEnabled(true);
             }
+            if(e.getSource() == btnPausaReplay){
+                dispose();
+                try {
+                    VistaJuego vistaJuego = new VistaJuego(numeroRondas, modoDeJuego);
+                } catch (AWTException ex) {
+                    Logger.getLogger(VistaEstadisticas.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
         }
 
         private void actualizarBotones(int[][] respPosicion) {
@@ -406,6 +417,24 @@ public class VistaJuego extends JFrame {
                 btnPausa.setBounds(getWidth()*5/6 - btnPausa.getWidth()/2,getHeight()*1/12 - btnPausa.getHeight()/2,btnPausa.getWidth(),btnPausa.getHeight());
                 
             }
+            else if(e.getSource() == btnPausaContinuar) {
+                ImageIcon btnIconNoShadowPausa = new ImageIcon(getClass().getResource("/co/edu/univalle/miniproyecto2/images/PlayButtonNoShadow.png"));
+                btnPausaContinuar.setSize(90,90);
+                btnPausaContinuar.setIcon(new ImageIcon(btnIconNoShadowPausa.getImage().getScaledInstance(btnPausaContinuar.getWidth(), btnPausaContinuar.getHeight(), Image.SCALE_SMOOTH)));
+                btnPausaContinuar.setBounds(pausa.getWidth()/2 - btnPausaContinuar.getWidth()/2, pausa.getHeight()*1/4 - btnPausaContinuar.getHeight()/2,btnPausaContinuar.getWidth(),btnPausaContinuar.getHeight());
+            }
+            else if(e.getSource() == btnPausaReplay) {
+                ImageIcon btnIconLightPausa = new ImageIcon(getClass().getResource("/co/edu/univalle/miniproyecto2/images/ReplayButtonNoShadow.png"));
+                btnPausaReplay.setSize(90,90);
+                btnPausaReplay.setIcon(new ImageIcon(btnIconLightPausa.getImage().getScaledInstance(btnPausaReplay.getWidth(), btnPausaReplay.getHeight(), Image.SCALE_SMOOTH)));
+                btnPausaReplay.setBounds(pausa.getWidth()/2 - btnPausaReplay.getWidth()/2,pausa.getHeight()*2/4 - btnPausaReplay.getHeight()/2,btnPausaReplay.getWidth(),btnPausaReplay.getHeight());
+            }
+            else if(e.getSource() == btnPausaAudio) {
+                ImageIcon btnIconLightPausa = new ImageIcon(getClass().getResource("/co/edu/univalle/miniproyecto2/images/AudioButtonNoShadow.png"));
+                btnPausaAudio.setSize(90,90);
+                btnPausaAudio.setIcon(new ImageIcon(btnIconLightPausa.getImage().getScaledInstance(btnPausaAudio.getWidth(), btnPausaAudio.getHeight(), Image.SCALE_SMOOTH)));
+                btnPausaAudio.setBounds(pausa.getWidth()/2 - btnPausaAudio.getWidth()/2,pausa.getHeight()*3/4 - btnPausaAudio.getHeight()/2,btnPausaAudio.getWidth(),btnPausaAudio.getHeight());
+            }
         }
 
         @Override
@@ -416,8 +445,26 @@ public class VistaJuego extends JFrame {
                 btnPausa.setIcon(new ImageIcon(btnIconLightPausa.getImage().getScaledInstance(btnPausa.getWidth(), btnPausa.getHeight(), Image.SCALE_SMOOTH)));
                 btnPausa.setBounds(getWidth()*5/6 - btnPausa.getWidth()/2,getHeight()*1/12 - btnPausa.getHeight()/2,btnPausa.getWidth(),btnPausa.getHeight());
             }
+            else if(e.getSource() == btnPausaContinuar) {
+                ImageIcon btnIconNoShadowPausa = new ImageIcon(getClass().getResource("/co/edu/univalle/miniproyecto2/images/PlayButtonLight.png"));
+                btnPausaContinuar.setSize(100,100);
+                btnPausaContinuar.setIcon(new ImageIcon(btnIconNoShadowPausa.getImage().getScaledInstance(btnPausaContinuar.getWidth(), btnPausaContinuar.getHeight(), Image.SCALE_SMOOTH)));
+                btnPausaContinuar.setBounds(pausa.getWidth()/2 - btnPausaContinuar.getWidth()/2,pausa.getHeight()*1/4 - btnPausaContinuar.getHeight()/2,btnPausaContinuar.getWidth(),btnPausaReplay.getHeight());
+            }
+            else if(e.getSource() == btnPausaReplay) {
+                ImageIcon btnIconLightPausa = new ImageIcon(getClass().getResource("/co/edu/univalle/miniproyecto2/images/ReplayButtonLight.png"));
+                btnPausaReplay.setSize(100,100);
+                btnPausaReplay.setIcon(new ImageIcon(btnIconLightPausa.getImage().getScaledInstance(btnPausaReplay.getWidth(), btnPausaReplay.getHeight(), Image.SCALE_SMOOTH)));
+                btnPausaReplay.setBounds(pausa.getWidth()/2 - btnPausaReplay.getWidth()/2,pausa.getHeight()*2/4 - btnPausaReplay.getHeight()/2,btnPausaReplay.getWidth(),btnPausaReplay.getHeight());
+            }
+            else if(e.getSource() == btnPausaAudio) {
+                ImageIcon btnIconLightPausa = new ImageIcon(getClass().getResource("/co/edu/univalle/miniproyecto2/images/AudioButtonLight.png"));
+                btnPausaAudio.setSize(100,100);
+                btnPausaAudio.setIcon(new ImageIcon(btnIconLightPausa.getImage().getScaledInstance(btnPausaAudio.getWidth(), btnPausaAudio.getHeight(), Image.SCALE_SMOOTH)));
+                btnPausaAudio.setBounds(pausa.getWidth()/2 - btnPausaAudio.getWidth()/2,pausa.getHeight()*3/4 - btnPausaAudio.getHeight()/2,btnPausaAudio.getWidth(),btnPausaAudio.getHeight());
+            }
         }
-
+        
         @Override
         public void mouseEntered(MouseEvent e) {
             if(e.getSource() == btnPausa) {
@@ -425,6 +472,24 @@ public class VistaJuego extends JFrame {
                 btnPausa.setSize(60,60);
                 btnPausa.setIcon(new ImageIcon(btnIconLightPausa.getImage().getScaledInstance(btnPausa.getWidth(), btnPausa.getHeight(), Image.SCALE_SMOOTH)));
                 btnPausa.setBounds(getWidth()*5/6 - btnPausa.getWidth()/2,getHeight()*1/12 - btnPausa.getHeight()/2,btnPausa.getWidth(),btnPausa.getHeight());
+            }
+            else if(e.getSource() == btnPausaContinuar) {
+                ImageIcon btnIconNoShadowPausa = new ImageIcon(getClass().getResource("/co/edu/univalle/miniproyecto2/images/PlayButtonLight.png"));
+                btnPausaContinuar.setSize(100,100);
+                btnPausaContinuar.setIcon(new ImageIcon(btnIconNoShadowPausa.getImage().getScaledInstance(btnPausaContinuar.getWidth(), btnPausaContinuar.getHeight(), Image.SCALE_SMOOTH)));
+                btnPausaContinuar.setBounds(pausa.getWidth()/2 - btnPausaContinuar.getWidth()/2,pausa.getHeight()*1/4 - btnPausaContinuar.getHeight()/2,btnPausaContinuar.getWidth(),btnPausaReplay.getHeight());
+            }
+            else if(e.getSource() == btnPausaReplay) {
+                ImageIcon btnIconLightPausa = new ImageIcon(getClass().getResource("/co/edu/univalle/miniproyecto2/images/ReplayButtonLight.png"));
+                btnPausaReplay.setSize(100,100);
+                btnPausaReplay.setIcon(new ImageIcon(btnIconLightPausa.getImage().getScaledInstance(btnPausaReplay.getWidth(), btnPausaReplay.getHeight(), Image.SCALE_SMOOTH)));
+                btnPausaReplay.setBounds(pausa.getWidth()/2 - btnPausaReplay.getWidth()/2,pausa.getHeight()*2/4 - btnPausaReplay.getHeight()/2,btnPausaReplay.getWidth(),btnPausaReplay.getHeight());
+            }
+            else if(e.getSource() == btnPausaAudio) {
+                ImageIcon btnIconLightPausa = new ImageIcon(getClass().getResource("/co/edu/univalle/miniproyecto2/images/AudioButtonLight.png"));
+                btnPausaAudio.setSize(100,100);
+                btnPausaAudio.setIcon(new ImageIcon(btnIconLightPausa.getImage().getScaledInstance(btnPausaAudio.getWidth(), btnPausaAudio.getHeight(), Image.SCALE_SMOOTH)));
+                btnPausaAudio.setBounds(pausa.getWidth()/2 - btnPausaAudio.getWidth()/2,pausa.getHeight()*3/4 - btnPausaAudio.getHeight()/2,btnPausaAudio.getWidth(),btnPausaAudio.getHeight());
             }
         }
 
@@ -435,6 +500,24 @@ public class VistaJuego extends JFrame {
                 btnPausa.setSize(40,40);
                 btnPausa.setIcon(new ImageIcon(btnIconSalidoPausa.getImage().getScaledInstance(btnPausa.getWidth(), btnPausa.getHeight(), Image.SCALE_SMOOTH)));
                 btnPausa.setBounds(getWidth()*5/6 - btnPausa.getWidth()/2,getHeight()*1/12 - btnPausa.getHeight()/2,btnPausa.getWidth(),btnPausa.getHeight());
+            }
+            else if(e.getSource() == btnPausaContinuar) {
+                ImageIcon btnIconNoShadowPausa = new ImageIcon(getClass().getResource("/co/edu/univalle/miniproyecto2/images/PlayButton.png"));
+                btnPausaContinuar.setSize(80,80);
+                btnPausaContinuar.setIcon(new ImageIcon(btnIconNoShadowPausa.getImage().getScaledInstance(btnPausaContinuar.getWidth(), btnPausaContinuar.getHeight(), Image.SCALE_SMOOTH)));
+                btnPausaContinuar.setBounds(pausa.getWidth()/2 - btnPausaContinuar.getWidth()/2,pausa.getHeight()*1/4 - btnPausaContinuar.getHeight()/2,btnPausaContinuar.getWidth(),btnPausaReplay.getHeight());
+            }
+            else if(e.getSource() == btnPausaReplay) {
+                ImageIcon btnIconLightPausa = new ImageIcon(getClass().getResource("/co/edu/univalle/miniproyecto2/images/ReplayButton.png"));
+                btnPausaReplay.setSize(80,80);
+                btnPausaReplay.setIcon(new ImageIcon(btnIconLightPausa.getImage().getScaledInstance(btnPausaReplay.getWidth(), btnPausaReplay.getHeight(), Image.SCALE_SMOOTH)));
+                btnPausaReplay.setBounds(pausa.getWidth()/2 - btnPausaReplay.getWidth()/2,pausa.getHeight()*2/4 - btnPausaReplay.getHeight()/2,btnPausaReplay.getWidth(),btnPausaReplay.getHeight());
+            }
+            else if(e.getSource() == btnPausaAudio) {
+                ImageIcon btnIconLightPausa = new ImageIcon(getClass().getResource("/co/edu/univalle/miniproyecto2/images/AudioButton.png"));
+                btnPausaAudio.setSize(80,80);
+                btnPausaAudio.setIcon(new ImageIcon(btnIconLightPausa.getImage().getScaledInstance(btnPausaAudio.getWidth(), btnPausaAudio.getHeight(), Image.SCALE_SMOOTH)));
+                btnPausaAudio.setBounds(pausa.getWidth()/2 - btnPausaAudio.getWidth()/2,pausa.getHeight()*3/4 - btnPausaAudio.getHeight()/2,btnPausaAudio.getWidth(),btnPausaAudio.getHeight());
             }
         }
 
@@ -453,11 +536,9 @@ public class VistaJuego extends JFrame {
     public class KeyEventHandler implements KeyEventDispatcher {
         
         private Juego juego;
-//        private Robot robot;
         
         public KeyEventHandler(Juego juego) {
             this.juego = juego;
-//            this.robot = robot;
         }
 
         private void actualizarBotones(int[][] respPosicion) {
