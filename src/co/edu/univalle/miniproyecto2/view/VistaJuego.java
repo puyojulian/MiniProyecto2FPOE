@@ -71,8 +71,6 @@ public class VistaJuego extends JFrame {
     
     private VistaEstadisticas vistaEstadisticas;
     
-    ImageIcon btnIconAudio = new ImageIcon(getClass().getResource("/co/edu/univalle/miniproyecto2/images/AudioButton.png"));
-    
     public VistaJuego(int numeroRondas, String modoDeJuego) throws AWTException {
         setTitle("Game | Tic Tac Toe");
         setSize(544, 680);
@@ -86,7 +84,7 @@ public class VistaJuego extends JFrame {
         this.numeroRondas = numeroRondas;
         this.modoDeJuego = modoDeJuego;
         
-//        Musica(Musica);
+        Musica(Musica);
         inicializarComponentes();
         setVisible(true);
     }
@@ -170,6 +168,7 @@ public class VistaJuego extends JFrame {
         btnPausaContinuar.addActionListener(manejadoraDeEventos);
         btnPausaContinuar.addMouseListener(manejadoraDeEventosMouse);
         
+        ImageIcon btnIconAudio = new ImageIcon(getClass().getResource("/co/edu/univalle/miniproyecto2/images/AudioButton.png"));
         btnPausaAudio = new JButton();
         btnPausaAudio.setSize(80,80);
         btnPausaAudio.setIcon(new ImageIcon(btnIconAudio.getImage().getScaledInstance(btnPausaAudio.getWidth(), btnPausaAudio.getHeight(), Image.SCALE_SMOOTH)));
@@ -180,7 +179,6 @@ public class VistaJuego extends JFrame {
         btnPausaAudio.addActionListener(manejadoraDeEventos);
         btnPausaAudio.addMouseListener(manejadoraDeEventosMouse);
                 
-        
         btnPosicion = new JButton[3][3];
         
         for(int i=0;i<3;i++) {
@@ -221,17 +219,15 @@ public class VistaJuego extends JFrame {
         pausa.dispose();
     }
     
-//    private void Musica(boolean Musica){
-//        AudioClip sonidoFondo;
-//        sonidoFondo = java.applet.Applet.newAudioClip(getClass().getResource("/co/edu/univalle/miniproyecto2/sounds/sonidoFondo.wav"));
-//        if (Musica){
-//            sonidoFondo.loop();
-//            btnPausaAudio.setIcon(new ImageIcon(btnIconAudio.getImage().getScaledInstance(btnPausaAudio.getWidth(), btnPausaAudio.getHeight(), Image.SCALE_SMOOTH)));
-//        } else {
-//            sonidoFondo.stop();
-//            btnPausaAudio.setIcon(new ImageIcon(btnIconAudio.getImage().getScaledInstance(btnPausaAudio.getWidth(), btnPausaAudio.getHeight(), Image.SCALE_SMOOTH)));
-//        }
-//    }
+    public void Musica(boolean Musica){
+        AudioClip sonidoFondo;
+        sonidoFondo = java.applet.Applet.newAudioClip(getClass().getResource("/co/edu/univalle/miniproyecto2/sounds/sonidoFondo.wav"));
+        if (Musica){
+            sonidoFondo.loop();
+        } else {
+            sonidoFondo.stop();
+        }
+    }
     
     public class ActionEventHandler implements ActionListener {
         
@@ -457,8 +453,18 @@ public class VistaJuego extends JFrame {
                 btnPausaReplay.setIcon(new ImageIcon(btnIconLightPausa.getImage().getScaledInstance(btnPausaReplay.getWidth(), btnPausaReplay.getHeight(), Image.SCALE_SMOOTH)));
                 btnPausaReplay.setBounds(pausa.getWidth()/2 - btnPausaReplay.getWidth()/2,pausa.getHeight()*2/4 - btnPausaReplay.getHeight()/2,btnPausaReplay.getWidth(),btnPausaReplay.getHeight());
             }
-            else if(e.getSource() == btnPausaAudio) {
+            else if ((e.getSource() == btnPausaAudio) && (Musica == true)){
+                Musica = !Musica;
+                Musica(Musica);
                 ImageIcon btnIconLightPausa = new ImageIcon(getClass().getResource("/co/edu/univalle/miniproyecto2/images/AudioButtonLight.png"));
+                btnPausaAudio.setSize(100,100);
+                btnPausaAudio.setIcon(new ImageIcon(btnIconLightPausa.getImage().getScaledInstance(btnPausaAudio.getWidth(), btnPausaAudio.getHeight(), Image.SCALE_SMOOTH)));
+                btnPausaAudio.setBounds(pausa.getWidth()/2 - btnPausaAudio.getWidth()/2,pausa.getHeight()*3/4 - btnPausaAudio.getHeight()/2,btnPausaAudio.getWidth(),btnPausaAudio.getHeight());
+            } 
+            else if ((e.getSource() == btnPausaAudio) && (Musica == false)){
+                Musica = !Musica;
+                Musica(Musica);
+                ImageIcon btnIconLightPausa = new ImageIcon(getClass().getResource("/co/edu/univalle/miniproyecto2/images/MuteButtonLight.png"));
                 btnPausaAudio.setSize(100,100);
                 btnPausaAudio.setIcon(new ImageIcon(btnIconLightPausa.getImage().getScaledInstance(btnPausaAudio.getWidth(), btnPausaAudio.getHeight(), Image.SCALE_SMOOTH)));
                 btnPausaAudio.setBounds(pausa.getWidth()/2 - btnPausaAudio.getWidth()/2,pausa.getHeight()*3/4 - btnPausaAudio.getHeight()/2,btnPausaAudio.getWidth(),btnPausaAudio.getHeight());
@@ -513,7 +519,13 @@ public class VistaJuego extends JFrame {
                 btnPausaReplay.setIcon(new ImageIcon(btnIconLightPausa.getImage().getScaledInstance(btnPausaReplay.getWidth(), btnPausaReplay.getHeight(), Image.SCALE_SMOOTH)));
                 btnPausaReplay.setBounds(pausa.getWidth()/2 - btnPausaReplay.getWidth()/2,pausa.getHeight()*2/4 - btnPausaReplay.getHeight()/2,btnPausaReplay.getWidth(),btnPausaReplay.getHeight());
             }
-            else if(e.getSource() == btnPausaAudio) {
+            else if ((e.getSource() == btnPausaAudio) && (Musica == true)){
+                ImageIcon btnIconLightPausa = new ImageIcon(getClass().getResource("/co/edu/univalle/miniproyecto2/images/AudioButton.png"));
+                btnPausaAudio.setSize(80,80);
+                btnPausaAudio.setIcon(new ImageIcon(btnIconLightPausa.getImage().getScaledInstance(btnPausaAudio.getWidth(), btnPausaAudio.getHeight(), Image.SCALE_SMOOTH)));
+                btnPausaAudio.setBounds(pausa.getWidth()/2 - btnPausaAudio.getWidth()/2,pausa.getHeight()*3/4 - btnPausaAudio.getHeight()/2,btnPausaAudio.getWidth(),btnPausaAudio.getHeight());
+            } 
+            else if ((e.getSource() == btnPausaAudio) && (Musica == false)){
                 ImageIcon btnIconLightPausa = new ImageIcon(getClass().getResource("/co/edu/univalle/miniproyecto2/images/AudioButton.png"));
                 btnPausaAudio.setSize(80,80);
                 btnPausaAudio.setIcon(new ImageIcon(btnIconLightPausa.getImage().getScaledInstance(btnPausaAudio.getWidth(), btnPausaAudio.getHeight(), Image.SCALE_SMOOTH)));

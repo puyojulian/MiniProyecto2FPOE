@@ -47,9 +47,6 @@ public class VistaOpciones extends JFrame{
     private JLabel lblImagenDeFondo1;
     private boolean Musica = true;
     
-    ImageIcon btnIconAudio = new ImageIcon(getClass().getResource("/co/edu/univalle/miniproyecto2/images/AudioButton.png"));
-    ImageIcon btnIconMute = new ImageIcon(getClass().getResource("/co/edu/univalle/miniproyecto2/images/MuteButton.png"));
-    
     private VistaJuego vistaJuego;
 
     public VistaOpciones() {
@@ -80,7 +77,9 @@ public class VistaOpciones extends JFrame{
         
         MouseEventHandler manejadoraDeEventosMouse = new MouseEventHandler();
         
+        
         btnAudio = new JButton();
+        ImageIcon btnIconAudio = new ImageIcon(getClass().getResource("/co/edu/univalle/miniproyecto2/images/AudioButton.png"));
         btnAudio.setSize(50,50);
         btnAudio.setIcon(new ImageIcon(btnIconAudio.getImage().getScaledInstance(btnAudio.getWidth(), btnAudio.getHeight(), Image.SCALE_SMOOTH)));
         btnAudio.setBounds(jpContenido.getWidth()*1/2 - btnAudio.getWidth()/2,jpContenido.getHeight()*2/12 - btnAudio.getHeight()/2,btnAudio.getWidth(),btnAudio.getHeight());
@@ -181,15 +180,13 @@ public class VistaOpciones extends JFrame{
         btnConfirmar.addActionListener(manejadorEventos);
     }
     
-    private void Musica(boolean Musica){
+    public void Musica(boolean Musica){
         AudioClip sonidoFondo;
         sonidoFondo = java.applet.Applet.newAudioClip(getClass().getResource("/co/edu/univalle/miniproyecto2/sounds/sonidoFondo.wav"));
         if (Musica){
             sonidoFondo.loop();
-            btnAudio.setIcon(new ImageIcon(btnIconAudio.getImage().getScaledInstance(btnAudio.getWidth(), btnAudio.getHeight(), Image.SCALE_SMOOTH)));
         } else {
             sonidoFondo.stop();
-            btnAudio.setIcon(new ImageIcon(btnIconMute.getImage().getScaledInstance(btnAudio.getWidth(), btnAudio.getHeight(), Image.SCALE_SMOOTH)));
         }
     }
     

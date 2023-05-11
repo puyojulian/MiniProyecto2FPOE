@@ -4,6 +4,7 @@
  */
 package co.edu.univalle.miniproyecto2.view;
 
+import co.edu.univalle.miniproyecto2.sounds.Music;
 import java.awt.Color;
 import java.awt.Font;
 import javax.swing.JFrame;
@@ -28,7 +29,9 @@ public class VistaInicio extends JFrame{
     private JButton btnJugar;
     private JButton btnAudio;
     
-    private boolean Musica = true;
+    private Music musica;
+    
+    private boolean estadoMusica;
     
     private JLabel lblImagenDeFondo1;
 
@@ -36,17 +39,19 @@ public class VistaInicio extends JFrame{
     ImageIcon btnIconAudio = new ImageIcon(getClass().getResource("/co/edu/univalle/miniproyecto2/images/AudioButton.png"));
     ImageIcon btnIconMute = new ImageIcon(getClass().getResource("/co/edu/univalle/miniproyecto2/images/MuteButton.png"));
 
-    public VistaInicio() {
+    public VistaInicio(Music musica) {
         setTitle("Menu | Tic Tac Toe");
         setSize(544, 680);
         setLocationRelativeTo(null);
         setResizable(true);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         
+        this.musica = musica;
+        estadoMusica = musica.isState();
+        musica.playStop(estadoMusica);
+        
         inicializarComponentes();
         setVisible(true);
-        
-        Musica(Musica);
     }
     
     private void inicializarComponentes() {
@@ -88,37 +93,43 @@ public class VistaInicio extends JFrame{
         jpContenido.add(btnAudio);
         jpContenido.add(lblImagenDeFondo1);
         
-        VistaInicio.MouseEventHandler mouseEventHandler = new VistaInicio.MouseEventHandler();
+        VistaInicio.MouseEventHandler mouseEventHandler = new VistaInicio.MouseEventHandler(musica);
 
         btnJugar.addMouseListener(mouseEventHandler);
         btnAudio.addMouseListener(mouseEventHandler);
     }
 
-    private void Musica(boolean Musica){
-        AudioClip sonidoFondo;
-        sonidoFondo = java.applet.Applet.newAudioClip(getClass().getResource("/co/edu/univalle/miniproyecto2/sounds/sonidoFondo.wav"));
-        if (Musica){
-            sonidoFondo.loop();
-            btnAudio.setIcon(new ImageIcon(btnIconAudio.getImage().getScaledInstance(btnAudio.getWidth(), btnAudio.getHeight(), Image.SCALE_SMOOTH)));
-        } else {
-            sonidoFondo.stop();
-            btnAudio.setIcon(new ImageIcon(btnIconMute.getImage().getScaledInstance(btnAudio.getWidth(), btnAudio.getHeight(), Image.SCALE_SMOOTH)));
-        }
-    }
+//    public void Musica(boolean Musica){
+//        AudioClip sonidoFondo;
+//        sonidoFondo = java.applet.Applet.newAudioClip(getClass().getResource("/co/edu/univalle/miniproyecto2/sounds/sonidoFondo.wav"));
+//        if (Musica){
+//            sonidoFondo.loop();
+//            btnAudio.setIcon(new ImageIcon(btnIconAudio.getImage().getScaledInstance(btnAudio.getWidth(), btnAudio.getHeight(), Image.SCALE_SMOOTH)));
+//        } else {
+//            sonidoFondo.stop();
+//            btnAudio.setIcon(new ImageIcon(btnIconMute.getImage().getScaledInstance(btnAudio.getWidth(), btnAudio.getHeight(), Image.SCALE_SMOOTH)));
+//        }
+//    }
     
     public class MouseEventHandler implements MouseListener, MouseMotionListener {
+        
+        private Music musica;
+        
+        public MouseEventHandler(Music musica) {
+            this.musica = musica;
+        }
 
         @Override
         public void mouseClicked(MouseEvent e) {
             if(e.getSource() == btnAudio){
-                Musica = !Musica;
-                Musica(Musica);
+                estadoMusica = !estadoMusica;
+                musica.playStop(estadoMusica);
             }
         }
 
         @Override
         public void mousePressed(MouseEvent e) {
-            if (Musica){
+            if (estadoMusica){
                     ImageIcon btnIconAudio = new ImageIcon(getClass().getResource("/co/edu/univalle/miniproyecto2/images/AudioButtonNoShadow.png"));
                     btnAudio.setSize(46, 46);
                     btnAudio.setIcon(new ImageIcon(btnIconAudio.getImage().getScaledInstance(btnAudio.getWidth(), btnAudio.getHeight(), Image.SCALE_SMOOTH)));
@@ -135,7 +146,7 @@ public class VistaInicio extends JFrame{
         public void mouseReleased(MouseEvent e) {
             if(e.getSource() == btnJugar){                
                 dispose();
-                VistaOpciones vistaopciones = new VistaOpciones();
+                VistaOpciones vistaOpciones = new VistaOpciones();
             }
         }
 
@@ -148,7 +159,7 @@ public class VistaInicio extends JFrame{
                 btnJugar.setBounds(getWidth()/2 - btnJugar.getWidth()/2, getHeight()*9/12 - btnJugar.getWidth()/2, btnJugar.getWidth(), btnJugar.getHeight());
             }
             if(e.getSource() == btnAudio){ 
-                if (Musica){
+                if (estadoMusica){
                     ImageIcon btnIconAudio = new ImageIcon(getClass().getResource("/co/edu/univalle/miniproyecto2/images/AudioButtonLight.png"));
                     btnAudio.setSize(66, 66);
                     btnAudio.setIcon(new ImageIcon(btnIconAudio.getImage().getScaledInstance(btnAudio.getWidth(), btnAudio.getHeight(), Image.SCALE_SMOOTH)));
@@ -171,7 +182,7 @@ public class VistaInicio extends JFrame{
                 btnJugar.setBounds(getWidth()*1/2 - btnJugar.getWidth()/2,getHeight()*9/12 - btnJugar.getHeight()/2,btnJugar.getWidth(),btnJugar.getHeight());
             }
             if(e.getSource() == btnAudio){                
-                if (Musica){
+                if (estadoMusica){
                     ImageIcon btnIconAudio = new ImageIcon(getClass().getResource("/co/edu/univalle/miniproyecto2/images/AudioButton.png"));
                     btnAudio.setSize(50, 50);
                     btnAudio.setIcon(new ImageIcon(btnIconAudio.getImage().getScaledInstance(btnAudio.getWidth(), btnAudio.getHeight(), Image.SCALE_SMOOTH)));
@@ -187,12 +198,12 @@ public class VistaInicio extends JFrame{
 
         @Override
         public void mouseDragged(MouseEvent e) {
-            throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+//            throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
         }
 
         @Override
         public void mouseMoved(MouseEvent e) {
-            throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+//            throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
         }
         
     }
