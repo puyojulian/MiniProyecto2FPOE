@@ -51,16 +51,270 @@ public class Juego {
     }
     
     public int[][] respuestaAleatoria(int jugador) {
-        if (!matrizLlena()) {
-            while(true) {
-                int[] posAleatoria = posicionAleatoria();
-                if(posicion[posAleatoria[0]][posAleatoria[1]] == 0) {
-                    posicion[posAleatoria[0]][posAleatoria[1]] = jugador;
-                    cambioRealizado = true;
-                    return posicion;
+        if((jugador == 2) && (!matrizLlena())) {
+            if(posicion[0][0] == 1 && posicion[0][1] == 1 && posicion[0][2] == 0) {
+                posicion[0][2] = jugador;
+                cambioRealizado = true;
+                return posicion;
+            } 
+            else if(posicion[1][0] == 1 && posicion[1][1] == 1 && posicion[1][2] == 0) {
+                posicion[1][2] = jugador;
+                cambioRealizado = true;
+                return posicion;
+            }
+            else if(posicion[2][0] == 1 && posicion[2][1] == 1 && posicion[2][2] == 0) {
+                posicion[2][2] = jugador;
+                cambioRealizado = true;
+                return posicion;
+            }
+            else if(posicion[0][0] == 1 && posicion[1][0] == 1 && posicion[2][0] == 0) {
+                posicion[2][0] = jugador;
+                cambioRealizado = true;
+                return posicion;
+            }
+            else if(posicion[0][1] == 1 && posicion[1][1] == 1 && posicion[2][1] == 0) {
+                posicion[2][1] = jugador;
+                cambioRealizado = true;
+                return posicion;
+            }
+            else if(posicion[0][2] == 1 && posicion[1][2] == 1 && posicion[2][2] == 0) {
+                posicion[2][2] = jugador;
+                cambioRealizado = true;
+                return posicion;
+            }
+            else if(posicion[0][0] == 1 && posicion[1][1] == 1 && posicion[2][2] == 0) {
+                posicion[2][2] = jugador;
+                cambioRealizado = true;
+                return posicion;
+            }
+            else if(posicion[2][0] == 1 && posicion[1][1] == 1 && posicion[0][2] == 0) {
+                posicion[0][2] = jugador;
+                cambioRealizado = true;
+                return posicion;
+            }
+            else if(posicion[0][0] == 1 && posicion[0][1] == 0 && posicion[0][2] == 1) { //
+                posicion[0][1] = jugador;
+                cambioRealizado = true;
+                return posicion;
+            } 
+            else if(posicion[1][0] == 1 && posicion[1][1] == 0 && posicion[1][2] == 1) {
+                posicion[1][1] = jugador;
+                cambioRealizado = true;
+                return posicion;
+            }
+            else if(posicion[2][0] == 1 && posicion[2][1] == 0 && posicion[2][2] == 1) {
+                posicion[2][1] = jugador;
+                cambioRealizado = true;
+                return posicion;
+            }
+            else if(posicion[0][0] == 1 && posicion[1][0] == 0 && posicion[2][0] == 1) {
+                posicion[1][0] = jugador;
+                cambioRealizado = true;
+                return posicion;
+            }
+            else if(posicion[0][1] == 1 && posicion[1][1] == 0 && posicion[2][1] == 1) {
+                posicion[1][1] = jugador;
+                cambioRealizado = true;
+                return posicion;
+            }
+            else if(posicion[0][2] == 1 && posicion[1][2] == 0 && posicion[2][2] == 1) {
+                posicion[1][2] = jugador;
+                cambioRealizado = true;
+                return posicion;
+            }
+            else if(posicion[0][0] == 1 && posicion[1][1] == 0 && posicion[2][2] == 1) {
+                posicion[1][1] = jugador;
+                cambioRealizado = true;
+                return posicion;
+            }
+            else if(posicion[2][0] == 1 && posicion[1][1] == 0 && posicion[0][2] == 1) {
+                posicion[1][1] = jugador;
+                cambioRealizado = true;
+                return posicion;
+            }
+            else if(posicion[0][0] == 0 && posicion[0][1] == 1 && posicion[0][2] == 1) { //
+                posicion[0][0] = jugador;
+                cambioRealizado = true;
+                return posicion;
+            } 
+            else if(posicion[1][0] == 0 && posicion[1][1] == 1 && posicion[1][2] == 1) {
+                posicion[1][0] = jugador;
+                cambioRealizado = true;
+                return posicion;
+            }
+            else if(posicion[2][0] == 0 && posicion[2][1] == 1 && posicion[2][2] == 1) {
+                posicion[2][0] = jugador;
+                cambioRealizado = true;
+                return posicion;
+            }
+            else if(posicion[0][0] == 0 && posicion[1][0] == 1 && posicion[2][0] == 1) {
+                posicion[0][0] = jugador;
+                cambioRealizado = true;
+                return posicion;
+            }
+            else if(posicion[0][1] == 0 && posicion[1][1] == 1 && posicion[2][1] == 1) {
+                posicion[0][1] = jugador;
+                cambioRealizado = true;
+                return posicion;
+            }
+            else if(posicion[0][2] == 0 && posicion[1][2] == 1 && posicion[2][2] == 1) {
+                posicion[0][2] = jugador;
+                cambioRealizado = true;
+                return posicion;
+            }
+            else if(posicion[0][0] == 0 && posicion[1][1] == 1 && posicion[2][2] == 1) {
+                posicion[0][0] = jugador;
+                cambioRealizado = true;
+                return posicion;
+            }
+            else if(posicion[2][0] == 0 && posicion[1][1] == 1 && posicion[0][2] == 1) {
+                posicion[2][0] = jugador;
+                cambioRealizado = true;
+                return posicion;
+            }
+            else {
+                while(true) {
+                    int[] posAleatoria = posicionAleatoria();
+                    if(posicion[posAleatoria[0]][posAleatoria[1]] == 0) {
+                        posicion[posAleatoria[0]][posAleatoria[1]] = jugador;
+                        cambioRealizado = true;
+                        return posicion;
+                    }
                 }
             }
         }
+        else if((jugador == 1) && (!matrizLlena())) {
+            if(posicion[0][0] == 2 && posicion[0][1] == 2 && posicion[0][2] == 0) {
+                posicion[0][2] = jugador;
+                cambioRealizado = true;
+                return posicion;
+            } 
+            else if(posicion[1][0] == 2 && posicion[1][1] == 2 && posicion[1][2] == 0) {
+                posicion[1][2] = jugador;
+                cambioRealizado = true;
+                return posicion;
+            }
+            else if(posicion[2][0] == 2 && posicion[2][1] == 2 && posicion[2][2] == 0) {
+                posicion[2][2] = jugador;
+                cambioRealizado = true;
+                return posicion;
+            }
+            else if(posicion[0][0] == 2 && posicion[1][0] == 2 && posicion[2][0] == 0) {
+                posicion[2][0] = jugador;
+                cambioRealizado = true;
+                return posicion;
+            }
+            else if(posicion[0][1] == 2 && posicion[1][1] == 2 && posicion[2][1] == 0) {
+                posicion[2][1] = jugador;
+                cambioRealizado = true;
+                return posicion;
+            }
+            else if(posicion[0][2] == 2 && posicion[1][2] == 2 && posicion[2][2] == 0) {
+                posicion[2][2] = jugador;
+                cambioRealizado = true;
+                return posicion;
+            }
+            else if(posicion[0][0] == 2 && posicion[1][1] == 2 && posicion[2][2] == 0) {
+                posicion[2][2] = jugador;
+                cambioRealizado = true;
+                return posicion;
+            }
+            else if(posicion[2][0] == 2 && posicion[1][1] == 2 && posicion[0][2] == 0) {
+                posicion[0][2] = jugador;
+                cambioRealizado = true;
+                return posicion;
+            }
+            else if(posicion[0][0] == 2 && posicion[0][1] == 0 && posicion[0][2] == 2) { //
+                posicion[0][1] = jugador;
+                cambioRealizado = true;
+                return posicion;
+            } 
+            else if(posicion[1][0] == 2 && posicion[1][1] == 0 && posicion[1][2] == 2) {
+                posicion[1][1] = jugador;
+                cambioRealizado = true;
+                return posicion;
+            }
+            else if(posicion[2][0] == 2 && posicion[2][1] == 0 && posicion[2][2] == 2) {
+                posicion[2][1] = jugador;
+                cambioRealizado = true;
+                return posicion;
+            }
+            else if(posicion[0][0] == 2 && posicion[1][0] == 0 && posicion[2][0] == 2) {
+                posicion[1][0] = jugador;
+                cambioRealizado = true;
+                return posicion;
+            }
+            else if(posicion[0][1] == 2 && posicion[1][1] == 0 && posicion[2][1] == 2) {
+                posicion[1][1] = jugador;
+                cambioRealizado = true;
+                return posicion;
+            }
+            else if(posicion[0][2] == 2 && posicion[1][2] == 0 && posicion[2][2] == 2) {
+                posicion[1][2] = jugador;
+                cambioRealizado = true;
+                return posicion;
+            }
+            else if(posicion[0][0] == 2 && posicion[1][1] == 0 && posicion[2][2] == 2) {
+                posicion[1][1] = jugador;
+                cambioRealizado = true;
+                return posicion;
+            }
+            else if(posicion[2][0] == 2 && posicion[1][1] == 0 && posicion[0][2] == 2) {
+                posicion[1][1] = jugador;
+                cambioRealizado = true;
+                return posicion;
+            }
+            else if(posicion[0][0] == 0 && posicion[0][1] == 2 && posicion[0][2] == 2) { //
+                posicion[0][0] = jugador;
+                cambioRealizado = true;
+                return posicion;
+            } 
+            else if(posicion[1][0] == 0 && posicion[1][1] == 2 && posicion[1][2] == 2) {
+                posicion[1][0] = jugador;
+                cambioRealizado = true;
+                return posicion;
+            }
+            else if(posicion[2][0] == 0 && posicion[2][1] == 2 && posicion[2][2] == 2) {
+                posicion[2][0] = jugador;
+                cambioRealizado = true;
+                return posicion;
+            }
+            else if(posicion[0][0] == 0 && posicion[1][0] == 2 && posicion[2][0] == 2) {
+                posicion[0][0] = jugador;
+                cambioRealizado = true;
+                return posicion;
+            }
+            else if(posicion[0][1] == 0 && posicion[1][1] == 2 && posicion[2][1] == 2) {
+                posicion[0][1] = jugador;
+                cambioRealizado = true;
+                return posicion;
+            }
+            else if(posicion[0][2] == 0 && posicion[1][2] == 2 && posicion[2][2] == 2) {
+                posicion[0][2] = jugador;
+                cambioRealizado = true;
+                return posicion;
+            }
+            else if(posicion[0][0] == 0 && posicion[1][1] == 2 && posicion[2][2] == 2) {
+                posicion[0][0] = jugador;
+                cambioRealizado = true;
+                return posicion;
+            }
+            else if(posicion[2][0] == 0 && posicion[1][1] == 2 && posicion[0][2] == 2) {
+                posicion[2][0] = jugador;
+                cambioRealizado = true;
+                return posicion;
+            }
+            else {
+                while(true) {
+                    int[] posAleatoria = posicionAleatoria();
+                    if(posicion[posAleatoria[0]][posAleatoria[1]] == 0) {
+                        posicion[posAleatoria[0]][posAleatoria[1]] = jugador;
+                        cambioRealizado = true;
+                        return posicion;
+                    }
+                }
+            }
+        }    
         return posicion;
     }
 
