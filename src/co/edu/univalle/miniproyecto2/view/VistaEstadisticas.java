@@ -4,7 +4,6 @@
  */
 package co.edu.univalle.miniproyecto2.view;
 
-import co.edu.univalle.miniproyecto2.logic.Juego;
 import co.edu.univalle.miniproyecto2.sounds.Music;
 import java.awt.AWTException;
 
@@ -13,8 +12,6 @@ import java.awt.Font;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
@@ -26,7 +23,6 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import static javax.swing.SwingConstants.CENTER;
-import static javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE;
 
 /**
  *

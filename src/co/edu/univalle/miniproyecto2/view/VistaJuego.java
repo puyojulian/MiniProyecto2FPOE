@@ -8,8 +8,6 @@ import co.edu.univalle.miniproyecto2.logic.Juego;
 import co.edu.univalle.miniproyecto2.sounds.Music;
 import java.applet.AudioClip;
 import java.awt.AWTException;
-import java.awt.Color;
-import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.KeyEventDispatcher;
@@ -17,9 +15,7 @@ import java.awt.KeyboardFocusManager;
 import java.awt.Robot;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
@@ -31,7 +27,6 @@ import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JInternalFrame;
 import javax.swing.JLabel;
-import javax.swing.JLayeredPane;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JToggleButton;
@@ -108,8 +103,6 @@ public class VistaJuego extends JFrame {
         jpContenido = new JPanel();
         jpContenido.setLayout(null);
         jpContenido.setSize(getWidth(),getHeight());
-
-//        Robot robot = new Robot();
         
         ActionEventHandler manejadoraDeEventos = new ActionEventHandler(juego);
         
@@ -229,10 +222,6 @@ public class VistaJuego extends JFrame {
         jpPausa.add(btnPausaContinuar);
         jpPausa.add(btnPausaAudio);
         
-        pausa.add(jpPausa);
-        
-        add(pausa);
-        
         jpContenido.add(btnContadorJ1);
         jpContenido.add(btnContadorJ2);
         jpContenido.add(btnPausa);
@@ -240,6 +229,9 @@ public class VistaJuego extends JFrame {
         jpContenido.add(jpCuadricula);
         jpContenido.add(lblImagenDeFondo1);
         
+        pausa.add(jpPausa);
+        
+        add(pausa);
         add(jpContenido);
         
         pausa.dispose();
@@ -347,10 +339,10 @@ public class VistaJuego extends JFrame {
             }
             else if(e.getSource() == btnInfo) {
                 JOptionPane.showMessageDialog(null, "INSTRUCCIONES\n"+
-                        "Navega con el mouse o las flechas\n" +
-                        "de tu teclado para seleccionar\n el lugar de tu jugada.\n" + 
-                        "Presiona Click Izquierdo o la tecla ENTER\n" +
-                        "para cofirmar. ¡Y LISTO!\n ", "Instrucciones", JOptionPane.INFORMATION_MESSAGE);
+                        "Navega con el mouse o las flechas de tu teclado\n" +
+                        "para seleccionar el lugar de tu jugada.\n" + 
+                        "Presiona Click Izquierdo o la tecla ENTER para cofirmar. \n" +
+                        "¡Y LISTO!\n ", "Instrucciones", JOptionPane.INFORMATION_MESSAGE);
             }
             else if(e.getSource() == btnPausaContinuar) {
                 pausa.dispose();
@@ -508,7 +500,7 @@ public class VistaJuego extends JFrame {
                 ImageIcon btnIconLightPausa = new ImageIcon(getClass().getResource("/co/edu/univalle/miniproyecto2/images/PauseButtonLight.png"));
                 btnPausa.setSize(60,60);
                 btnPausa.setIcon(new ImageIcon(btnIconLightPausa.getImage().getScaledInstance(btnPausa.getWidth(), btnPausa.getHeight(), Image.SCALE_SMOOTH)));
-                btnPausa.setBounds(getWidth()*5/6 - btnPausa.getWidth()/2,getHeight()*1/12 - btnPausa.getHeight()/2,btnPausa.getWidth(),btnPausa.getHeight());
+                btnPausa.setBounds(getWidth()*5/6 - btnPausa.getWidth()/2, getHeight()*1/12 - btnPausa.getHeight()/2,btnPausa.getWidth(),btnPausa.getHeight());
             }
             if(e.getSource() == btnInfo) {
                 ImageIcon btnIconInformation = new ImageIcon(getClass().getResource("/co/edu/univalle/miniproyecto2/images/InformationButtonLight.png"));

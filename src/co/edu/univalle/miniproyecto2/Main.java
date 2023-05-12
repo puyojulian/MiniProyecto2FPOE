@@ -5,10 +5,7 @@
 package co.edu.univalle.miniproyecto2;
 
 import co.edu.univalle.miniproyecto2.sounds.Music;
-import co.edu.univalle.miniproyecto2.view.VistaEstadisticas;
 import co.edu.univalle.miniproyecto2.view.VistaInicio;
-import co.edu.univalle.miniproyecto2.view.VistaJuego;
-import co.edu.univalle.miniproyecto2.view.VistaOpciones;
 
 /**
  *
@@ -22,9 +19,6 @@ public class Main {
     public static void main(String[] args) {
         Music musica = new Music(true);
         VistaInicio vistaInicio = new VistaInicio(musica);
-//        VistaJuego vistaJuego = new VistaJuego();
-//        VistaEstadisticas vistaEstadisticas = new VistaEstadisticas();
-
     }
     
 }
