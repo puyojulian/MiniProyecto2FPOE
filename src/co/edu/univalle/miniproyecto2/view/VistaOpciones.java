@@ -192,16 +192,6 @@ public class VistaOpciones extends JFrame{
         btnConfirmar.addActionListener(manejadorEventos);
     }
     
-//    public void Musica(boolean Musica){
-//        AudioClip sonidoFondo;
-//        sonidoFondo = java.applet.Applet.newAudioClip(getClass().getResource("/co/edu/univalle/miniproyecto2/sounds/sonidoFondo.wav"));
-//        if (Musica){
-//            sonidoFondo.loop();
-//        } else {
-//            sonidoFondo.stop();
-//        }
-//    }
-    
     class ManejadorDeEventos implements ActionListener, KeyListener{
         @Override
         public void actionPerformed(ActionEvent evento){

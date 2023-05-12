@@ -98,18 +98,6 @@ public class VistaInicio extends JFrame{
         btnJugar.addMouseListener(mouseEventHandler);
         btnAudio.addMouseListener(mouseEventHandler);
     }
-
-//    public void Musica(boolean Musica){
-//        AudioClip sonidoFondo;
-//        sonidoFondo = java.applet.Applet.newAudioClip(getClass().getResource("/co/edu/univalle/miniproyecto2/sounds/sonidoFondo.wav"));
-//        if (Musica){
-//            sonidoFondo.loop();
-//            btnAudio.setIcon(new ImageIcon(btnIconAudio.getImage().getScaledInstance(btnAudio.getWidth(), btnAudio.getHeight(), Image.SCALE_SMOOTH)));
-//        } else {
-//            sonidoFondo.stop();
-//            btnAudio.setIcon(new ImageIcon(btnIconMute.getImage().getScaledInstance(btnAudio.getWidth(), btnAudio.getHeight(), Image.SCALE_SMOOTH)));
-//        }
-//    }
     
     public class MouseEventHandler implements MouseListener, MouseMotionListener {
         
