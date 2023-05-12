@@ -96,13 +96,24 @@ public class VistaEstadisticas extends JFrame{
         lblNombre.setBounds(jpContenido.getWidth()/2 - lblNombre.getWidth()/2, jpContenido.getHeight()*1/12, lblNombre.getWidth(), lblNombre.getHeight());
         
         
-        lblContadorJ1 = new JLabel("Jugador 1: " + contadorJ1,CENTER);
+        if(modoDeJuego.equals("JvsJ")) {
+            lblContadorJ1 = new JLabel("Jugador 1: " + contadorJ1,CENTER);
+        }
+        else if(modoDeJuego.equals("JvsPC")) {
+            lblContadorJ1 = new JLabel("Jugador: " + contadorJ1,CENTER);
+        }
         lblContadorJ1.setFont(new Font("Showcard Gothic", Font.PLAIN, 40));
         lblContadorJ1.setSize(jpContenido.getWidth(), 45);
         lblContadorJ1.setForeground(Color.YELLOW);
         lblContadorJ1.setBounds(jpContenido.getWidth()/2 - lblContadorJ1.getWidth()/2, jpContenido.getHeight()*3/8, lblContadorJ1.getWidth(), lblContadorJ1.getHeight());
         
-        lblContadorJ2 = new JLabel("Jugador 2: " + contadorJ2,CENTER);
+        if(modoDeJuego.equals("JvsJ")) {
+            lblContadorJ2 = new JLabel("Jugador 2: " + contadorJ2,CENTER);
+        }
+        else if(modoDeJuego.equals("JvsPC")) {
+            lblContadorJ2 = new JLabel("PC: " + contadorJ2,CENTER);
+        }
+        
         lblContadorJ2.setFont(new Font("Showcard Gothic", Font.PLAIN, 40));
         lblContadorJ2.setSize(jpContenido.getWidth(), 45);
         lblContadorJ2.setForeground(Color.YELLOW);
@@ -223,7 +234,7 @@ public class VistaEstadisticas extends JFrame{
 
         @Override
         public void mouseReleased(MouseEvent e) {
-            throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+//            throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
         }
 
         @Override
@@ -272,12 +283,12 @@ public class VistaEstadisticas extends JFrame{
 
         @Override
         public void mouseDragged(MouseEvent e) {
-            throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+//            throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
         }
 
         @Override
         public void mouseMoved(MouseEvent e) {
-            throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+//            throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
         }
         
     }
