@@ -468,7 +468,7 @@ public class VistaJuego extends JFrame {
                 ImageIcon btnIconNoShadowPausa = new ImageIcon(getClass().getResource("/co/edu/univalle/miniproyecto2/images/PlayButtonLight.png"));
                 btnPausaContinuar.setSize(100,100);
                 btnPausaContinuar.setIcon(new ImageIcon(btnIconNoShadowPausa.getImage().getScaledInstance(btnPausaContinuar.getWidth(), btnPausaContinuar.getHeight(), Image.SCALE_SMOOTH)));
-                btnPausaContinuar.setBounds(pausa.getWidth()/2 - btnPausaContinuar.getWidth()/2,pausa.getHeight()*1/4 - btnPausaContinuar.getHeight()/2,btnPausaContinuar.getWidth(),btnPausaReplay.getHeight());
+                btnPausaContinuar.setBounds(pausa.getWidth()/2 - btnPausaContinuar.getWidth()/2, (pausa.getHeight()*1/4 - btnPausaContinuar.getHeight()/2) + 8,btnPausaContinuar.getWidth(),btnPausaReplay.getHeight());
             }
             else if(e.getSource() == btnPausaReplay) {
                 ImageIcon btnIconLightPausa = new ImageIcon(getClass().getResource("/co/edu/univalle/miniproyecto2/images/ReplayButtonLight.png"));
@@ -512,7 +512,7 @@ public class VistaJuego extends JFrame {
                 ImageIcon btnIconNoShadowPausa = new ImageIcon(getClass().getResource("/co/edu/univalle/miniproyecto2/images/PlayButtonLight.png"));
                 btnPausaContinuar.setSize(100,100);
                 btnPausaContinuar.setIcon(new ImageIcon(btnIconNoShadowPausa.getImage().getScaledInstance(btnPausaContinuar.getWidth(), btnPausaContinuar.getHeight(), Image.SCALE_SMOOTH)));
-                btnPausaContinuar.setBounds(pausa.getWidth()/2 - btnPausaContinuar.getWidth()/2,pausa.getHeight()*1/4 - btnPausaContinuar.getHeight()/2,btnPausaContinuar.getWidth(),btnPausaReplay.getHeight());
+                btnPausaContinuar.setBounds(pausa.getWidth()/2 - btnPausaContinuar.getWidth()/2, (pausa.getHeight()*1/4 - btnPausaContinuar.getHeight()/2) + 8,btnPausaContinuar.getWidth(),btnPausaReplay.getHeight());
             }
             else if(e.getSource() == btnPausaReplay) {
                 ImageIcon btnIconLightPausa = new ImageIcon(getClass().getResource("/co/edu/univalle/miniproyecto2/images/ReplayButtonLight.png"));
@@ -628,7 +628,7 @@ public class VistaJuego extends JFrame {
                 }
             }
             switch (e.getID()) {
-                case KeyEvent.KEY_RELEASED -> {
+                case KeyEvent.KEY_PRESSED -> {
                     switch (e.getKeyCode()) {
                         case KeyEvent.VK_UP -> {
                             if(!seleccionado) {
