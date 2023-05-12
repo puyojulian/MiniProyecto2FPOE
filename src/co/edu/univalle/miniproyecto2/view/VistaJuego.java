@@ -19,6 +19,8 @@ import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.ImageIcon;
@@ -75,7 +77,7 @@ public class VistaJuego extends JFrame {
         setSize(544, 680);
         setLocationRelativeTo(null);
         setResizable(false);
-        setDefaultCloseOperation(EXIT_ON_CLOSE);
+        setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
         
         jugadorDeTurno = 1;
         ganador = 0;
@@ -235,8 +237,28 @@ public class VistaJuego extends JFrame {
         add(jpContenido);
         
         pausa.dispose();
+        
+        addWindowListener(new WindowAdapter() {
+             @Override
+            public void windowClosing(WindowEvent evt) {
+                cerrarJuego();
+            }
+        });
     }
     
+    private void cerrarJuego(){
+        int respuesta;
+
+        respuesta = JOptionPane.showConfirmDialog(
+                null,"¿Esta seguro que no desea terminar?", "Advertencia",
+                JOptionPane.YES_NO_OPTION, 
+                JOptionPane.WARNING_MESSAGE);
+
+        if(respuesta == JOptionPane.YES_OPTION){
+            System.exit(0);
+        }
+    }
+        
     public class ActionEventHandler implements ActionListener {
         
         private Juego juego;
