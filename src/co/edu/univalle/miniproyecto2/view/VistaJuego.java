@@ -291,7 +291,7 @@ public class VistaJuego extends JFrame {
                             }
                         }
                         else if (modoDeJuego == "JvsPC" && (btnPosicion[i][j].getText().equals("0") || btnPosicion[i][j].getText().equals(""))){
-                            System.out.println(":(");
+//                            System.out.println(":(");
                             boolean resultado = false;
                             ganador = 0;
                            
